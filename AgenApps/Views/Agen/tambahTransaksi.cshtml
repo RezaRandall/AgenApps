@@ -1,0 +1,906 @@
+﻿@{
+    ViewData["Title"] = "Transaksi";
+    Layout = "~/Views/Shared/_LayoutUserAgen.cshtml";
+}
+<style>
+    .box-layout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .box-container {
+        width: 500px;
+        padding: 9px;
+    }
+
+        .box-container .box-group.hide {
+            display: none;
+        }
+
+        .box-container .box-group {
+            border: 1px solid;
+            width: 500px;
+            padding: 9px;
+            border-radius: 5px;
+            box-shadow: 1px 1px lightgrey;
+            position: relative;
+            margin: 7px 0px 20px 0px;
+        }
+
+            .box-container .box-group .box-group-header {
+                position: absolute;
+                top: -11px;
+                background: white;
+                font-size: 13px;
+                font-weight: 700;
+                font-style: italic;
+            }
+
+            .box-container .box-group .box-group-container {
+            }
+
+                .box-container .box-group .box-group-container table {
+                    font-size: 11px;
+                }
+
+                .box-container .box-group .box-group-container .box-group-row {
+                    display: flex;
+                }
+
+                    .box-container .box-group .box-group-container .box-group-row .col-caption {
+                        width: 187px;
+                        font-size: 13px;
+                    }
+
+                    .box-container .box-group .box-group-container .box-group-row .col-separator {
+                        width: 10px;
+                        font-size: 13px;
+                    }
+
+    col-separator-sm {
+        width: 4px;
+        font-size: 13px;
+    }
+
+    .box-container .box-group .box-group-container .box-group-row input, .box-container .box-group .box-group-container .box-group-row button {
+        width: 100%;
+    }
+
+    .box-container .box-group .box-group-container .box-group-row button {
+        padding: 2px;
+        font-size: 13px;
+    }
+
+    .box-container .box-group .box-group-container .box-group-row .col-value {
+        width: 194px;
+        font-size: 13px;
+        font-size: 13px;
+        padding: 0px 2px;
+    }
+
+    .box-container .box-group .box-group-container .box-group-row .col-value2 {
+        width: 72px;
+        font-size: 13px;
+    }
+
+    .button-group-right {
+        text-align: right;
+        font-size: 13px;
+    }
+
+        .button-group-right button {
+            font-size: 13px;
+            padding: 5px;
+        }
+
+    .info {
+        font-size: 11px;
+        color: red;
+        font-style: italic;
+    }
+
+    .popupwindow.active {
+        display: flex;
+    }
+
+    .popupwindow {
+        position: absolute;
+        top: 1px;
+        width: 100%;
+        background: #6c757d8c;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .popup-box {
+        width: 505px;
+        background: white;
+        padding: 6px;
+        /* display: flex; */
+        box-shadow: 1px 1px 3px 2px grey;
+        border-radius: 3px;
+    }
+
+        .popup-box .popup-header {
+        }
+
+        .popup-box .popup-content {
+        }
+
+    .popup-row {
+        display: flex;
+        margin: 16px 1px;
+    }
+
+        .popup-row .row-image {
+            max-height: 119px;
+            min-height: 119px;
+            width: 30%;
+            text-align: center;
+        }
+
+            .popup-row .row-image img {
+                height: 100%;
+            }
+
+        .popup-row .row-desc {
+            width: 69%;
+            position: relative;
+        }
+
+        .popup-row .row-desc2 {
+            width: 50%;
+            position: relative;
+        }
+
+        .popup-row .row-desc-action {
+            width: 20%;
+            position: relative;
+            text-align: center;
+        }
+
+            .popup-row .row-desc-action .jumlah {
+                font-size: 13px;
+                font-weight: 700;
+            }
+
+            .popup-row .row-desc-action .jumlahtitle {
+                font-size: 11px;
+                color: blue;
+                margin-top: 4px;
+                font-weight: 700;
+                font-style: italic;
+            }
+
+            .popup-row .row-desc-action .inputjumlah {
+            }
+
+                .popup-row .row-desc-action .inputjumlah input {
+                    width: 100%;
+                    text-align: center;
+                }
+
+            .popup-row .row-desc-action .plusminus {
+            }
+
+                .popup-row .row-desc-action .plusminus button {
+                }
+
+                    .popup-row .row-desc-action .plusminus button.plus {
+                    }
+
+                    .popup-row .row-desc-action .plusminus button.minus {
+                    }
+
+        .popup-row .row-desc-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .popup-row .row-desc-desc {
+            font-size: 12px;
+            font-style: italic;
+            padding: 3px 7px;
+        }
+
+        .popup-row .row-desc-price {
+        }
+
+            .popup-row .row-desc-price .price {
+                font-size: 14px;
+                font-weight: 300;
+            }
+
+        .popup-row .row-desc-total {
+            width: 100%;
+            position: absolute;
+            background: var(--bs-info);
+            height: 29px;
+            width: 100%;
+            bottom: 0px;
+            padding: 0px;
+        }
+
+            .popup-row .row-desc-total .total {
+                position: absolute;
+                left: 7px;
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+            .popup-row .row-desc-total .pilih {
+                position: absolute;
+                right: 8px;
+            }
+
+                .popup-row .row-desc-total .pilih button {
+                    padding: 2px 9px;
+                    font-size: 13px;
+                }
+
+    .button-group-justify {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .btncheckout {
+        font-size: 13px;
+    }
+
+    .totalbelanja {
+    }
+
+    .box-container-header {
+        margin-bottom: 15px;
+    }
+
+        .box-container-header a {
+            font-size: 14px;
+        }
+
+   /*card inside modal boostrap*/
+    #overflowTest {
+        /*background-color: coral;*/
+        width: 200px;
+        height: 100px;
+        border: 1px solid black;
+        overflow: scroll;
+    }
+
+</style>
+<div class="box-layout">
+    <div class="box-container">
+        <div class="box-container-header">
+            <a class="fa fa-chevron-circle-left" href="/agen/Transaksi">Back</a>
+        </div>
+        <div class="box-group">
+            <div class="box-group-header">
+                Kode Pelanggan
+            </div>
+            <div class="box-group-container">
+                <div class="box-group-row">
+                    <div class="col-caption">Kode Pelanggan / NPSN</div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value"><input type="text" name="kode_pelanggan" id="kode_pelanggan" class="numberOnly" /></div>
+                    <div class="col-value2"><button class="btn btn-primary" onclick="getDataUserByUserCode()">Check</button> </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-group hide" id="datapelanggan">
+            <div class="box-group-header">
+                Data Pelanggan
+            </div>
+            <div class="box-group-container">
+                <div class="box-group-row">
+                    <div class="col-caption">Nama Pelanggan</div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value"><input type="text" name="nama_pelanggan" id="nama_pelanggan" /></div>
+
+                </div>
+                <div class="box-group-row">
+                    <div class="col-caption">Nama Instansi</div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value"><input type="text" name="nama_instansi" id="nama_instansi" /></div>
+
+                </div>
+                <div class="box-group-row">
+                    <div class="col-caption">Alamat Instansi</div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value"><input type="text" name="alamat" id="alamat" /></div>
+
+                </div>
+                <div class="box-group-row">
+                    <div class="col-caption"><label for="recipient-name" class="col-form-label">Jenjang :</label></div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value">
+                        <select style=" width: 191px; height:31px; font-size: 13px; font-size: 13px; padding: 0px 2px;" id="jenjang" name="jenjang">
+                            <option selected readonly>Plih Jenjang</option>
+                            <option value="Paud">Paud</option>
+                            <option value="TK">TK</option>
+                            <option value="SD">SD</option>
+                            <option value="SMP">SMP</option>
+                            <option value="SMA">SMA</option>
+                            <option value="SMK">SMK</option>
+                            <option value="Universitas">Universitas</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="box-group-row">
+                    <div class="col-caption">Telepon Instansi</div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value"><input type="text" name="telepon" id="telepon" /></div>
+
+                </div>
+                <div class="box-group-row">
+                    <div class="col-caption">email Instansi</div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value"><input type="email" name="email" id="email" /></div>
+
+                </div>
+                <div class="box-group-row">
+                    <div class="col-caption"></div>
+                    <div class="col-separator">:</div>
+                    <div class="col-value"><div class="info" id="status_pelanggan">*Pelanggan Lama</div></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="box-group hide" id="dataproduk">
+            <div class="box-group-header">
+                Produk Order
+            </div>
+            <div class="box-group-container">
+                <div class="button-group-right">
+                    <button class="btn btn-success" onclick="getAllPaketName()">Tambah Paket</button>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#addOnModal" class="btn btn-info btn-sm">Tambah Add On</a> 
+                </div>
+                <div class="produkdetail">
+
+                </div>
+            </div>
+        </div>
+        <div class="box-group hide" id="dataorder">
+            <div class="box-group-header">
+                Total Order
+            </div>
+            <div class="box-group-container">
+                <div class="button-group-justify">
+                    <div class="box-group-row">
+                        <div style="width:150px">Sub Total</div>
+                        <div class="col-separator">:</div>
+                        <div class="totalbelanja"></div>
+                    </div>
+                    <div>
+                        <input type="hidden" class="totalbelanjaHidden" id="hargaPaketTotalHidden" />
+                    </div>
+                    <div>
+                        <a class="btn btn-warning btncheckout" href="/agen/Transaksi">Batal</a>
+                        <button class="btn btn-success btncheckout" onclick="checkout()">Checkout</button>
+                    </div>
+                </div>
+                <div class="button-group-justify">
+                    <div class="box-group-row">
+                        <div style="width:150px">PPN</div>
+                        <div class="col-separator" ">:</div>
+                        <div class="ppn"></div>
+                    </div>
+                </div>
+                <div class="button-group-justify">
+                    <div class="box-group-row">
+                        <div style="width: 150px; font-weight: bold;" >Grand Total</div>
+                        <div class="col-separator" ">:</div>
+                        <div class="grandTotal" style="font-weight: bold;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popupwindow">
+    <div class="popup-box" id="popup-box">
+        <div class="popup-header"></div>
+        <div class="popup-content">
+            <div class="popup-row">
+                <div class="row-image">
+                    <img src="~/App_Asset/images/avatars/10l.png" />
+                </div>
+                <div class="row-desc">
+                    <div class="row-desc-title">
+                        Paket1
+                    </div>
+                    <div class="row-desc-desc">
+                        Paket 1
+                    </div>
+                    <div class="row-desc-price">
+                        <div class="price">Rp. 5.000.000 / Tahun</div>
+                        <div class="pilih">pilih</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Modal -->
+    <div class="modal fade " id="addOnModal" tabindex="-1" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add On</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modalBodyAddOn"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Ends -->
+
+    <script src="~/js/functions.js"></script>
+    <script>
+        $(document).ready(function () {
+            getAllDataAddOn();
+
+            document.addEventListener('click', function handleClickOutsideBox(event) {
+                const box = document.getElementById('popup-box');
+
+                if (!box.contains(event.target)) {
+                    $(".popupwindow").removeClass("active");
+                }
+            });
+
+
+
+        }); // END OF DOCUMENT READY FUNCTION 
+
+
+        // CALCULATE PPN
+        function calculatePPN() {
+            var totalBelanja = $('.totalbelanja').html();
+            var fixPrice = totalBelanja.replace('Rp&nbsp;', '');
+            var fixPriceInt = parseFloat(fixPrice.replace(/[^0-9,-]+/g, ""));
+            var tax = 1.11;
+            var totalPPN = tax * fixPriceInt;
+            var finalPPN = totalPPN - fixPriceInt;
+            $('.ppn').html(formatRP(finalPPN));
+            //console.log(totalPPN);
+            var grandTotal = fixPriceInt + finalPPN;
+            $('.grandTotal').html(formatRP(grandTotal));
+        }
+
+        //function diskon2() {
+        //    //$('#diskon').keyup(function () {
+        //    var price = $('#hargaPaketTotalHidden').val();
+        //    var fixPrice = price.replace('Rp&nbsp;', '');
+        //    var fixPriceInt = parseFloat(fixPrice.replace(/[^0-9,-]+/g, ""));
+        //    var disc = $('#diskon').val();
+        //    var dec = (disc / 100).toFixed(2);
+        //    var mult = fixPriceInt * dec;
+        //    var discont = fixPriceInt - mult;
+        //    $('.totalbelanja').html(formatRP(discont));
+        //    calculatePPN();
+        //    //});
+        //}
+        
+        function getAllDataAddOn() {
+            $.post("/Product/getProduct", {},
+                function (data, status) {
+                    dataProducts = data;
+                    var isi = "";
+                    $.each(data, function (i, item) {
+                        var imgUrl = "../../Content/ImgProduct/" + data[i].img_product;
+
+                        if (i % 3 == 0) {
+                            isi += `<div class="row">`;
+                        }
+                        // append rows
+                        isi += `
+                                 <div class="col-md-8 col-lg-4 pb-3">
+                                    <!-- Add a style="height: XYZpx" to div.card to limit the card height and display scrollbar instead -->
+                                    <div class="card card-custom bg-white border-white border-0" style="height: 450px">
+                                        <div class="card-custom-img">
+                                            <img src="` + imgUrl + `" class="card-img-top" alt="` + data[i].img_product + `">
+                                        </div>
+                                            <h5 class="card-title">`+ formatRP(data[i].harga) + `</h5>
+                                        <div class="card-body" style="overflow-y: auto">
+                                            <h5 class="card-title">`+ data[i].nama_product +`</h5>
+                                            <p>`+ data[i].description +`</p>
+                                        </div>
+                                        <div class="card-footer" style="background: inherit; border-color: inherit;">
+                                            <button class="btn btn-primary" onclick="pilihAddOn('` + item.id + `')">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                               `;
+                        //check if has remainder 2 
+                        if (i % 3 == 2 && (i != 0)) {
+                            isi += "</div>"; //close outer div
+                        }
+                    });
+                        $(".modalBodyAddOn").append(isi);
+                });
+        }
+
+
+        var datapaket = [];
+        var orderpaket = [];
+        function clearformpelanggan() {
+            $('#nama_pelanggan').val("");
+            $('#nama_instansi').val("");
+            $('#alamat').val("");
+            $('#telepon').val("");
+            $('#email').val("");
+            $("#status_pelanggan").html("");
+        }
+
+        function getDataUserByUserCode() {
+            var kode_pelanggan = $("#kode_pelanggan").val();
+            clearformpelanggan();
+            if (kode_pelanggan == "") {
+                swal("Kode Pelanggan Harus diisi", {
+                    buttons: false,
+                    timer: 3000,
+                    icon: "error",
+                });
+            } else {
+
+                $.post("/Agen/getDataUserExists", { kode_pelanggan: kode_pelanggan },
+                    function (data, status) {
+                        if (data.length >= 1) {
+                            $('#nama_pelanggan').val(data[0].nama_pelanggan);
+                            $('#nama_instansi').val(data[0].nama_instansi);
+                            $('#alamat').val(data[0].alamat);
+                            $('#telepon').val(data[0].telepon);
+                            $('#jenjang').val(data[0].jenjang);
+                            $('#email').val(data[0].email);
+                            $("#datapelanggan").removeClass("hide");
+                            $("#dataproduk").removeClass("hide");
+                            $("#dataorder").removeClass("hide");
+                            $("#status_pelanggan").html("*Pelanggan Lama");
+                        } else {
+                            $("#dataorder").removeClass("hide");
+                            $("#datapelanggan").removeClass("hide");
+                            $("#dataproduk").removeClass("hide");
+                            $("#status_pelanggan").html("*Pelanggan Baru Harap isi Data Pelanggan");
+                        }
+
+                    });
+            }
+
+        }
+        function getAllPaketName() {
+            $.post("/Agen/getPaketNames", {},
+                function (data, status) {
+                    datapaket = data;
+                    $(".popup-content").html('');
+                    var datas = "";
+                    $.each(data, function (i, item) {
+                        var imgUrl = "/Content/ImgProduct/" + item.img_paket;
+
+                        datas = '<div class="popup-row">' +
+                            '<div class="row-image" >' +
+                            '    <img src="' + imgUrl + '" />' +
+                            '</div>' +
+                            '<div class="row-desc"> ' +
+                            '<div class="row-desc-title">' +
+                            item.nama_paket +
+                            '</div> ' +
+                            '<div class="row-desc-desc"> ' +
+                            item.deskripsi +
+                            '</div>' +
+                            '<div class="row-desc-desc"> ' +
+                            "Diskon: " + item.diskon + " %" +
+                            '</div>' +
+                            '<div class="row-desc-total"> ' +
+                            '<div class="total">' + formatRP(item.harga_paket) + '/' + item.satuan_paket + '</div> ' +
+                            '<div class="pilih"><button class="btn btn-primary" onclick="pilihpaket(`' + item.id + '`)">Pilih</button></div> ' +
+                            '</div> ' +
+                            '</div> ' +
+                            '</div>';
+                        $(".popup-content").append(datas);
+                    });
+                    $(".popupwindow").addClass("active");
+                });
+        }
+
+        function pilihpaket(id_paket) {
+            var item = datapaket.find(function (s) { return s.id == id_paket });
+            //$(".produkdetail").html('');
+            if (item != undefined) {
+                var itemorder = orderpaket.find(function (s) { return s.id_paket == id_paket });
+                if (itemorder == undefined) {
+                    var imgUrl = "/Content/ImgProduct/" + item.img_paket;
+
+                    var konten = '<div class="popup-row popup-row' + id_paket + '">' +
+                        '<div class="row-image">' +
+                        '    <img src="' + imgUrl + '" />' +
+                        '</div >' +
+                        ' <div class="row-desc2"> ' +
+                        '<div class="row-desc-title"> ' +
+                        item.nama_paket +
+                        '</div> ' +
+                        '<div class="row-desc-desc"> ' +
+                        item.deskripsi +
+                        '</div> ' +
+                        '<div class="row-desc-desc" id="diskon"> ' +
+                        "Diskon: " + item.diskon + " %" +
+                        '</div> ' +
+                        '<div class="row-desc-total"> ' +
+                        '<div class="total" id="harga-' + id_paket + '">' + formatRP(item.harga_paket) + '/' + item.satuan_paket + '</div> ' +
+                        '<div class="pilih" > <button class="btn fa fa-trash" style="color:red;" id_paket="' + id_paket + '" onclick="removepaket(this)"></button></div> ' +
+                        '<input type="hidden" value="' + id_paket + '" id="idPaket" >' +
+                        '</div > ' +
+                        '</div > ' +
+                        '<div class="row-desc-action"> ' +
+                        '<div class="jumlah"> Jumlah</div> ' +
+                        '<div class="inputjumlah"> <input id="qty-' + id_paket + '" id_paket="' + id_paket + '" onchange="qtychange(this)" type="number" value="1" /></div > ' +
+                        '<div class="jumlahtitle">' + item.satuan_paket + '</div > ' +
+                        '<div class="plusminus"> ' +
+                        ' <button class="btn fa fa-minus minus" id_paket="' + id_paket + '" onclick="plusminus(this,-1)" ></button > ' +
+                        '<button class="btn fa fa-plus plus"  id_paket="' + id_paket + '" onclick="plusminus(this,1)"></button > ' +
+                        '</div> ' +
+                        '</div> ' +
+                        '</div> ';
+                    $(".produkdetail").append(konten);
+                    orderpaket.push({ id_paket: id_paket, qty: 1, total: item.harga_paket });
+                    sumtotal();
+                    //diskon2();
+                    calculatePPN();
+                }
+
+            }
+            $(".popupwindow").removeClass("active");
+
+        }
+
+        function sumtotal() {
+            var total = 0;
+            orderpaket.forEach(function (data) {
+                total = total + data.total;
+            });
+            $(".totalbelanja").html(formatRP(total));
+            $("#hargaPaketTotalHidden").val(formatRP(total));
+        }
+
+        var dataProducts = [];
+        function pilihAddOn(id_produk) {
+            var item = dataProducts.find(function (s) { return s.id == id_produk });
+            var addon = 1;
+
+            //$(".produkdetail").html('');
+            if (item != undefined) {
+                var itemorder = orderpaket.find(function (s) { return s.id_produk == id_produk });
+                if (itemorder == undefined) {
+                    var imgUrl = "/Content/ImgProduct/" + item.img_product;
+
+                    var konten = '<div class="popup-row popup-row' + id_produk + '">' +
+                        '<div class="row-image">' +
+                        '    <img src="' + imgUrl + '" />' +
+                        '</div >' +
+                        ' <div class="row-desc2"> ' +
+                        '<div class="row-desc-title"> ' +
+                        item.nama_product +
+                        '</div> ' +
+                        //'<div class="row-desc-title"> ' +
+                        '<input type="text" value=' + addon + ' class="addon" id="addon" name="addon" readonly />' +
+                        '<input type="text" value=' + item.jenis_sewa + ' class="jenis_sewa" id="jenis_sewa" name="jenis_sewa" readonly />' +
+                        //'</div> ' +
+                        '<div class="row-desc-total"> ' +
+                        '<div class="total" id="harga-' + id_produk + '">' + formatRP(item.harga) + '/' + item.satuan + '</div> ' +
+                        '<div class="pilih" > <button class="btn fa fa-trash" style="color:red;" id_produk="' + id_produk + '" onclick="removeProduk(this)"></button></div> ' +
+                        '<input type="hidden" value="' + id_produk + '" id="idProduk" >' +
+                        '</div > ' +
+                        '</div > ' +
+                        '<div class="row-desc-action"> ' +
+                        '<div class="jumlah"> Jumlah</div> ' +
+                        '<div class="inputjumlah"> <input id="qtyProduk-' + id_produk + '" id_produk="' + id_produk + '" onchange="qtychange(this)" type="number" value="1" /></div > ' +
+                        '<div class="jumlahtitle">' + item.satuan + '</div > ' +
+                        '<div class="plusminus"> ' +
+                        //<button class="btn fa fa-minus minus" id_produk="' + id_produk + '" onclick="plusMinusProduk(this,-1)" ></button > ' +
+                        //'<button class="btn fa fa-plus plus"  id_produk="' + id_produk + '" onclick="plusMinusProduk(this,1)"></button > ' +
+                        '<button class="btn fa fa-minus minus" id_produk="' + id_produk + '" onclick="plusminus(this,-1)" ></button > ' +
+                        '<button class="btn fa fa-plus plus"  id_produk="' + id_produk + '" onclick="plusminus(this,1)"></button > ' +
+                        '</div> ' +
+                        '</div> ' +
+                        '</div> ';
+                    $(".produkdetail").append(konten);
+                    orderpaket.push({ addon: addon, jenis_sewa: item.jenis_sewa, id_produk: id_produk, qty: 1, total: item.harga });
+                    sumtotal();
+                    //diskon2();
+                    calculatePPN();
+                }
+
+            }
+            //$(".popupwindow").removeClass("active");
+            $('#addOnModal').modal('hide');
+
+        }
+
+        function plusminus(t, q) {
+            var id_paket = $(t).attr("id_paket");
+            var qty = $("#qty-" + id_paket).val();
+
+            var id_produk = $(t).attr("id_produk");
+            var qtyProduk = $("#qtyProduk-" + id_produk).val();
+
+            var sqty = 0;
+
+            if (id_paket != null || id_paket != undefined) {
+                if ($.isNumeric(qty) && $.isNumeric(q)) {
+                    sqty = parseInt(qty) + parseInt(q);
+                    if (sqty > 0) {
+                        $("#qty-" + id_paket).val(sqty);
+                        var el = $("#qty-" + id_paket);
+                        //var elProduk = undefined;
+                        qtychange(el, elProduk);
+                    }
+                }
+                else {
+                    $("#qty-" + id_paket).val(1);
+                    var el = $("#qty-" + id_paket);
+                    //var elProduk = undefined;
+                    qtychange(el, elProduk);
+                }
+            } else {
+                if ($.isNumeric(qtyProduk) && $.isNumeric(q)) {
+                    sqty = parseInt(qtyProduk) + parseInt(q);
+                    if (sqty > 0) {
+                        $("#qtyProduk-" + id_produk).val(sqty);
+                        var elProduk = $("#qtyProduk-" + id_produk);
+                        //var el = undefined;
+                        qtychange(el, elProduk);
+                    }
+                }
+                else {
+                    $("#qtyPoduk-" + id_produk).val(1);
+                    var elProduk = $("#qtyProduk-" + id_produk);
+                    //var el = undefined;
+                    qtychange(el, elProduk);
+                }
+            }
+        }
+
+        function qtychange(el, elProduk) {
+            var id_paket = $(el).attr("id_paket");
+            var id_produk = $(elProduk).attr("id_produk");
+            var qty = 0;
+
+            if (id_paket != undefined) {
+                if ($.isNumeric($(el).val())) {
+                    qty = $(el).val();
+                } else {
+                    qty = 1;
+                    $(el).val(1);
+                }
+            }
+            else {
+                if ($.isNumeric($(elProduk).val())) {
+                    qty = $(elProduk).val();
+                } else {
+                    qty = 1;
+                    $(elProduk).val(1);
+                }
+            }
+            
+            if (qty >= 0) {
+                //$(el).attr("disabled", "disabled");
+                //$(elProduk).attr("disabled", "disabled");
+                $(".plus").attr("disabled", "disabled");
+                $(".minus").attr("disabled", "disabled");
+                $.get('/Paket/getharga', { id_paket: id_paket, id_produk: id_produk, qty: qty},
+                    function (data, status) {
+                        if (data.hasil) {
+                            //console.log(data.harga);
+                            var a = $(el).val(data.harga.qty);
+                            //$("#harga-" + id_paket).html(formatRP(data.harga.harga));
+                            console.log(a);
+                            var itemorder = orderpaket.find(function (s) { return s.id_paket == id_paket });
+                            itemorder.qty = data.harga.qty;
+                            itemorder.total = data.harga.harga;
+                            sumtotal();
+                            //diskon2();
+                            calculatePPN();
+                        }
+                        //$(el).removeAttr("disabled");
+                        //$(elProduk).removeAttr("disabled");
+                        $(".plus").removeAttr("disabled");
+                        $(".minus").removeAttr("disabled");
+                    });
+            }
+        }
+
+        function removepaket(t) {
+            var id_paket = $(t).attr("id_paket");
+            $(".popup-row" + id_paket).remove();
+            var forder = orderpaket.filter(function (s) { return s.id_paket != id_paket });
+            orderpaket = forder;
+            sumtotal();
+            calculatePPN();
+        }
+        
+        function removeProduk(t) {
+            var id_produk = $(t).attr("id_produk");
+            $(".popup-row" + id_produk).remove();
+            var forder = orderpaket.filter(function (s) { return s.id_produk != id_produk });
+            orderpaket = forder;
+            sumtotal();
+            calculatePPN();
+        }
+
+        function checkout() {
+            var kode_pelanggan = $("#kode_pelanggan").val();
+
+            var data = {
+                detailorder: orderpaket
+                , kode_pelanggan: kode_pelanggan
+                , nama_pelanggan: $('#nama_pelanggan').val()
+                , nama_instansi: $('#nama_instansi').val()
+                , alamat: $('#alamat').val()
+                , jenjang: $('select[name=jenjang] option').filter(':selected').val()
+                , telepon: $('#telepon').val()
+                , email: $('#email').val()
+                , idPaket: $('#idPaket').val()
+                //, idProduk: $('#idProduk').val()
+                //, addon: $('#addon').val()
+                //, jenis_sewa: $('#jenis_sewa').val()
+            };
+            $.post('/Paket/savetransaksi', data,
+                function (data, status) {
+                    if (status == 'success') {
+                        if (data.hasil) {
+                            window.location.href = "/Agen/invoice?kode_transaksi=" + data.kode_transaksi;
+                        } else {
+                            swal("Checkou Gagal!", "Klik Tombol OK!", {
+                                icon: "error",
+                            }).then(function () {
+                                //location.reload();
+                            })
+                        }
+
+                    }
+                })
+        }
+
+        // SET NUMBER ONLY
+        (function ($) {
+            $.fn.inputFilter = function (callback, errMsg) {
+                return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function (e) {
+                    if (callback(this.value)) {
+                        // Accepted value
+                        if (["keydown", "mousedown", "focusout"].indexOf(e.type) >= 0) {
+                            $(this).removeClass("input-error");
+                            this.setCustomValidity("");
+                        }
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                    } else if (this.hasOwnProperty("oldValue")) {
+                        // Rejected value - restore the previous one
+                        $(this).addClass("input-error");
+                        this.setCustomValidity(errMsg);
+                        this.reportValidity();
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                    } else {
+                        // Rejected value - nothing to restore
+                        this.value = "";
+                    }
+                });
+            };
+        }(jQuery));
+        $(".numberOnly").inputFilter(function (value) {
+            return /^-?\d*$/.test(value);
+        }, "Harus Berupa Angka");
+
+
+    </script>
+

@@ -1,0 +1,1486 @@
+﻿@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="~/App_Asset/images/icon.png">
+    <link rel="stylesheet" href="~/App_Asset/lprevisi/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/App_Asset/lprevisi/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/App_Asset/lprevisi/css/font-awesome.min.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="~/App_Asset/lprevisi/css/templatemo-style.css?v=0.1">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-200671285-1">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-200671285-1');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KGSVZBX');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '441648673571352');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=441648673571352&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <style>
+
+        @@media screen and (max-width: 767px) {
+
+            .gif_header {
+                width: 350px;
+            }
+
+            .montserratbold_title {
+                font-family: 'Montserrat';
+                font-weight: 900;
+                font-size: 28pt;
+                line-height: 1.2;
+                color: black
+            }
+
+            .montserratsemibold_space {
+                font-family: 'Montserrat';
+                font-weight: 500;
+                color: black;
+                letter-spacing: .8rem;
+                line-height: unset;
+                font-size: large
+            }
+
+            .modal.in .modal-dialog {
+                margin-top: 50% !important;
+            }
+        }
+
+        @@media (min-width:768px) {
+
+            .gif_header {
+                width: 650px;
+            }
+
+            .montserratbold_title {
+                font-family: 'Montserrat';
+                font-weight: 900;
+                font-size: 37.5pt;
+                line-height: 1.2;
+                color: black
+            }
+
+
+            .montserratsemibold_space {
+                font-family: 'Montserrat';
+                font-weight: 500;
+                color: black;
+                letter-spacing: .8rem;
+                line-height: unset;
+                font-size: x-large
+            }
+        }
+
+        body {
+            font-family: 'Montserrat';
+        }
+
+        .montserratbold {
+            font-family: 'Montserrat';
+            font-weight: 900;
+        }
+
+        .montserratregullar {
+            font-family: 'Montserrat';
+        }
+
+        .montserratsemibold {
+            font-family: 'Montserrat';
+            font-weight: 500;
+        }
+
+        .modal-dialog .nav-tabs > li.active > a, .modal-dialog .nav-tabs > li.active > a:hover, .modal-dialog .nav-tabs > li.active > a:focus, .modal-dialog .nav > li > a:focus, .modal-dialog .nav > li > a:hover {
+            color: #000000;
+        }
+
+        .modal .close {
+            color: #545454;
+        }
+
+        .modal-dialog form .form-control:hover, .modal-dialog form .form-control:focus {
+            border-color: #333;
+        }
+
+        .modal-dialog .modal-content {
+            background: #ffffff !important;
+        }
+
+        .button_modal_daftar {
+            background: #03a82e !important;
+            border: none !important;
+            color: white !important;
+            border-radius: 100px !important;
+        }
+
+        .modal-dialog form input[type="submit"] {
+            background: #03a82e !important;
+        }
+
+        .modal-dialog .modal-title {
+            margin-bottom: 0px !important;
+        }
+
+        .container-4 button.header-btn {
+            border-radius: 10px;
+            border: none;
+            background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%);
+            color: #ffff;
+        }
+
+        #smartbanner {
+            position: fixed !important;
+            left: 0px;
+            top: 0px;
+            border-bottom: 1px solid #e8e8e8;
+            width: 100%;
+            height: 67px;
+            font-family: 'Helvetica Neue',sans-serif;
+            box-shadow: 0 1px 2px rgb(202 202 202 / 50%);
+            z-index: 9998;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            -webkit-text-size-adjust: none;
+            background-color: white;
+        }
+
+            #smartbanner .sb-close {
+                display: inline-block;
+                float: left;
+                width: 24px;
+                margin-top: 35px;
+                text-align: center;
+                color: #000;
+                font-size: 18px;
+                position: relative;
+                top: 50%;
+                text-decoration: none;
+                transform: translateY(-50%);
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                z-index: 2;
+            }
+
+            #smartbanner .sb-icon {
+                position: absolute;
+                left: 28px;
+                top: 7px;
+                display: block;
+                width: 50px;
+                height: 50px;
+                background-size: cover;
+                border-radius: 10px;
+                box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+            }
+
+            #smartbanner .sb-info {
+                position: absolute;
+                left: 90px;
+                top: 13px;
+                width: 44%;
+                font-size: 11px;
+                line-height: 1.2em;
+                font-weight: bold;
+                color: #6a6a6a;
+                text-shadow: 0 1px 0 rgb(255 255 255 / 80%);
+            }
+
+        @@media (max-width: 576px) #smartbanner .sb-button {
+            right: 10px;
+        }
+
+        #smartbanner .sb-button {
+            position: absolute;
+            right: 20px;
+            top: 17px;
+            border: 1px solid #bfbfbf;
+            padding: 15px 10px;
+            height: 37px;
+            line-height: 8px;
+            min-width: 10%;
+            text-align: center;
+            color: #ffffff;
+            background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%);
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 6px;
+            box-shadow: 0 1px 0 rgb(255 255 255 / 60%), 0 1px 0 rgb(255 255 255 / 70%) inset;
+        }
+    </style>
+    <style>
+        .custom-navbar .nav li a:hover {
+            background: transparent;
+            color: #7CE0FC;
+        }
+
+        a:hover, a:active, a:focus {
+            color: #7CE0FC;
+            outline: none;
+        }
+
+        .overlay {
+            background: #00F260; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #001633, #001633); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #182633, #44d6fe); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            opacity: 0.7;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            left: 0;
+        }
+
+        .home-info span {
+            display: inline-block;
+            vertical-align: middle;
+            color: #f9f9f9;
+            font-weight: 500;
+            margin-left: 0;
+        }
+
+            .home-info span small {
+                display: block;
+            }
+
+        @@media screen and (max-width: 767px) {
+
+            .custom-navbar {
+                background: #001633;
+                -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+                -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+                padding: 10px 0;
+            }
+
+                .custom-navbar .nav li a {
+                    line-height: normal;
+                    padding: 5px;
+                }
+
+                .custom-navbar .navbar-brand,
+                .top-nav-collapse .navbar-brand {
+                    color: #ffffff;
+                    font-weight: 600;
+                }
+
+                .custom-navbar .nav li a,
+                .top-nav-collapse .nav li a {
+                    color: #ffffff;
+                }
+
+                .custom-navbar .navbar-nav.navbar-right li {
+                    display: inline-block;
+                }
+
+                .custom-navbar .section-btn {
+                    display: block !important;
+                    width: 50%;
+                    margin: 10px auto 10px auto;
+                    padding: 10px;
+                }
+
+                    .custom-navbar .section-btn a {
+                        color: #ffffff !important;
+                    }
+
+            .home-info span {
+                margin-top: 20px;
+            }
+
+            #about .about-info:first-child {
+                margin-right: 0;
+            }
+
+            .about-info {
+                margin: 40px 0 40px 0;
+            }
+
+            .google-map {
+                margin-top: 50px;
+            }
+
+            footer {
+                text-align: center;
+            }
+
+            .footer-info p,
+            .footer-bottom .phone-contact {
+                margin-right: 0;
+            }
+        }
+
+        .container-4 {
+            width: 300px;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+            .container-4 input#phone {
+                width: 300px;
+                height: 50px;
+                background: #fff;
+                border: none;
+                font-size: 10pt;
+                float: left;
+                color: #65737e;
+                padding-left: 15px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+            }
+
+                .container-4 input#phone::-webkit-input-placeholder {
+                    color: #65737e;
+                }
+
+                .container-4 input#phone:-moz-placeholder { /* Firefox 18- */
+                    color: #65737e;
+                }
+
+                .container-4 input#phone::-moz-placeholder { /* Firefox 19+ */
+                    color: #65737e;
+                }
+
+                .container-4 input#phone:-ms-input-placeholder {
+                    color: #65737e;
+                }
+
+            .container-4 button.icon {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border: none;
+                background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%);
+                height: 50px;
+                width: 100px;
+                color: #ffff;
+                font-size: 10pt;
+            }
+
+                .container-4 button.icon:hover {
+                    background-position: right center; /* change the direction of the change here */
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+        .btn-grad {
+            background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%)
+        }
+
+        .btn-grad {
+            padding: 10px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+            border: none;
+        }
+
+            .btn-grad:hover {
+                background-position: right center; /* change the direction of the change here */
+                color: #fff;
+                text-decoration: none;
+            }
+
+        .accordion_one .panel-group {
+            border: 1px solid #f1f1f1;
+        }
+
+        a:link {
+            text-decoration: none
+        }
+
+        .accordion_one .panel {
+            background-color: transparent;
+            box-shadow: none;
+            border-bottom: 0px solid transparent;
+            border-radius: 0;
+            margin: 0
+        }
+
+        .accordion_one .panel-default {
+            border: 0
+        }
+
+        .accordion-wrap .panel-heading {
+            padding: 0px;
+            border-radius: 0px
+        }
+
+        h4 {
+            font-size: 18px;
+            line-height: 24px
+        }
+
+        /*a[aria-expanded="true"] {
+            background-color: #42DCA3;
+        }*/
+
+        .accordion_one .panel .panel-heading a:hover {
+            background: #00F260; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #001633, #001633); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #182633, #44d6fe); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white !important;
+        }
+
+
+        .accordion_one .panel .panel-heading a.collapsed {
+            color: #999999;
+            display: block;
+            padding: 12px 10px;
+            border-top: 0px;
+        }
+
+        .accordion_one .panel .panel-heading a:not(.collapsed) {
+            display: block;
+            padding: 12px 10px;
+            background: #00F260; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #001633, #001633); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #182633, #44d6fe); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: white;
+            border-bottom: 1px solid #f1f1f1
+        }
+
+        .accordion-wrap .panel .panel-heading a {
+            font-size: 14px
+        }
+
+        .accordion_one .panel-group .panel-heading + .panel-collapse > .panel-body {
+            border-top: 0;
+            padding-top: 0;
+            padding: 25px 30px 30px 35px;
+            color: #999999
+        }
+
+        .accordion_one .panel .panel-heading a.collapsed:after {
+            content: "\2b";
+            color: #999999;
+            background: #f1f1f1
+        }
+
+        .accordion_one .panel .panel-heading a:not(.collapsed):after {
+            content: "\2a";
+            color: #999999;
+            background: #001633;
+        }
+
+        .accordion_one .panel .panel-heading a:after,
+        .accordion_one .panel .panel-heading a.collapsed:after {
+            font-family: 'FontAwesome';
+            font-size: 15px;
+            width: 36px;
+            line-height: 48px;
+            text-align: center;
+            background: #F1F1F1;
+            float: left;
+            margin-left: -31px;
+            margin-top: -12px;
+            margin-right: 15px
+        }
+
+        .accordion_one .panel .panel-heading a:after {
+            content: "\2212";
+        }
+
+        .accordion_one .panel .panel-heading a:after,
+        .accordion_one .panel .panel-heading a.collapsed:after {
+            font-family: 'FontAwesome';
+            font-size: 15px;
+            width: 36px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            background: #F1F1F1;
+            float: left;
+            margin-left: -31px;
+            margin-top: -12px;
+            margin-right: 15px;
+        }
+
+        .article {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+
+        @@media(min-width:768px) {
+            .custom-navbar {
+                border-bottom: 0;
+                background: 0 0;
+            }
+
+                .custom-navbar.top-nav-collapse {
+                    background: #001633;
+                    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+                    -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+                    padding: 12px 0;
+                }
+
+            .top-nav-collapse .navbar-brand {
+                color: #252525;
+            }
+
+            .top-nav-collapse .nav li a {
+                color: #ffffff;
+            }
+
+            .top-nav-collapse .nav .section-btn a {
+                color: #ffffff;
+            }
+        }
+        /*
+        li {
+            display: block;
+            transition-duration: 0.5s;
+        }
+
+            li:hover {
+                cursor: pointer;
+            }
+
+        ul li ul {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            transition: all 0.5s ease;
+            margin-top: 1rem;
+            left: 0;
+            display: none;
+        }
+
+            ul li:hover > ul,
+            ul li ul:hover {
+                visibility: visible;
+                opacity: 1;
+                display: block;
+            }
+
+            ul li ul li {
+                clear: both;
+                width: 100%;
+            }*/
+
+        .timeevent {
+            float: right;
+            font-size: 9pt;
+            letter-spacing: 2px;
+        }
+
+        .pulse-button {
+            border: none;
+            box-shadow: 0 0 0 0 #3bafda;
+            border-radius: 50%;
+            cursor: pointer;
+            -webkit-animation: pulse 1.75s infinite cubic-bezier(0.66, 0, 0, 1);
+            -moz-animation: pulse 1.75s infinite cubic-bezier(0.66, 0, 0, 1);
+            -ms-animation: pulse 1.75s infinite cubic-bezier(0.66, 0, 0, 1);
+            animation: pulse 1.75s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+
+            .pulse-button:hover {
+                -webkit-animation: none;
+                -moz-animation: none;
+                -ms-animation: none;
+                animation: none;
+            }
+
+        @@-webkit-keyframes pulse {
+            to {
+                box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+            }
+        }
+
+        @@-moz-keyframes pulse {
+            to {
+                box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+            }
+        }
+
+        @@-ms-keyframes pulse {
+            to {
+                box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+            }
+        }
+
+        @@keyframes pulse {
+            to {
+                box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);
+            }
+        }
+
+        .first_button {
+            animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both infinite;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        @@keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        @@keyframes zoominoutsinglefeatured {
+            0% {
+                transform: scale(1,1);
+            }
+
+            50% {
+                transform: scale(1.2,1.2);
+            }
+
+            100% {
+                transform: scale(1,1);
+            }
+        }
+
+        .zoom {
+            animation: zoominoutsinglefeatured 2s infinite;
+        }
+
+        .custom-navbar .navbar-toggle {
+            background-color: white;
+            margin-right: 10px;
+        }
+
+        .list-akun li {
+            background-color: #001633;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+
+                <!-- lOGO TEXT HERE -->
+                <a href="/"><img class="navbar-brand" style="width: 130px; height: auto" src="~/App_Asset/images/white logo.png" /></a>
+            </div>
+
+            <!-- MENU LINKS -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-nav-first">
+                    <li><a href="/index" class="smoothScroll">BERANDA</a></li>
+                    @*
+                        <li>
+                            <a>GABUNG MITRA <i class="fa fa-caret-down"></i></a>
+                            <ul class="dropdown" style="text-align:left">
+                                <li><a href="#">Guru Siaga</a></li>
+                                <li><a href="#">Content Creator</a></li>
+                                <li><a href="#">Mitra Sintesys</a></li>
+                            </ul>
+                        </li>*@
+                    <li><a href="~/App_Asset/Katalog.pdf" target="_blank" class="smoothScroll">PRODUK</a></li>
+                    @*<li><a href="https://ops.ruwindo.com/" target="_blank" class="smoothScroll">ARTIKEL</a></li>*@
+                    <li><a href="/index/artikel/" class="smoothScroll">ARTIKEL</a></li>
+                    <li><a href="/index/kontak" class="smoothScroll">KONTAK</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=ujian.ruwindo.com" target="_blank" class="smoothScroll">DOWNLOAD</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li onclick="location.href='/Akun/login';" class="section-btn" style="background-color: #00B8EC;"><a href="/Akun/login">Login Agen</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+
+    @RenderBody()
+    <a href="https://api.whatsapp.com/send?phone=6281335381783&text=Halo admin saya mau bertanya mengenai sintesys" telp="6281335381783" target="_blank" class="wacenter" id="floating-snap-btn-wrapper" style="display:none;position: fixed; transform: translate(-50%, -50%); right: -10px; bottom: -10px; width: 50px; height: 50px; border-radius: 50%; z-index: 1000;">
+        <div class="fab-btn" style="position: absolute; top: 0; left: 0; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; border-radius: 50%; background-color: #001633; color: white; z-index: 1000; box-shadow: 0px 2px 17px -1px rgba(0,0,0,0.3);padding-top: 22px;">
+            <i class="fa fa-whatsapp" style="font-size:3em;color: #04ec00;"></i>
+        </div>
+    </a>
+
+    <!-- FOOTER -->
+    <footer data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-12">
+                    <div class="footer-thumb footer-info">
+                        <h2>Sintesys</h2>
+                        <p>
+                            Platform digilitasi dunia pendidikan<br> guna mendukung percepatan peningkatan
+                            kualitas pendidikan era 4.0 untuk indonesia emas yang<br>berdaulat, maju, adil dan makmur.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-4">
+                    <div class="footer-thumb">
+                        <h2>Perusahaan</h2>
+                        <ul class="footer-link">
+                            <li><a href="https://ruwindo.com/" target="_blank">Tentang Kami</a></li>
+                            <li><a href="/Index/artikel" target="_blank">Artikel</a></li>
+                            @*<li><a href="https://ops.ruwindo.com/" target="_blank">Artikel</a></li>*@
+                            <li><a href="/index/kontak">Kontak Kami</a></li>
+                        </ul>
+                        <h2>Kontak</h2>
+                        <ul class="footer-link">
+                            <li><a href="tel:+623413901149" target="_blank">Telp. : 0341-3901149</a></li>
+                            <li><a href="https://api.whatsapp.com/send?phone=6281335381783&text=Halo admin saya mau bertanya mengenai sintesys" target="_blank">WA : (+62) 81335381783</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-4">
+                    <div class="footer-thumb">
+                        <h2>Layanan</h2>
+                        <ul class="footer-link">
+                            <li><a href="~/App_Asset/Katalog.pdf" target="_blank">Katalog</a></li>
+                            <li><a href="https://youtube.com/playlist?list=PLPIKbpqMIGIwb_LJbHXCRRloIzhnZ5L2C" target="_blank">Dokumentasi</a></li>
+                            <li><a href="https://api.whatsapp.com/send?phone=6281335381783&text=Halo admin saya mau bertanya mengenai sintesys" target="_blank">Bantuan</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-sm-4">
+                    <div class="footer-thumb">
+                        <h2>Lokasi</h2>
+                        <a target="_blank" href="https://www.google.com/maps?ll=-8.133352,112.581533&z=15&t=m&hl=id&gl=ID&mapclient=embed&cid=11182221008778777178"><img src="~/App_Asset/lprevisi/foto_maps.webp" /></a>
+                        @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.68666479663!2d112.57934381421404!3d-8.133347183677447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e789fae63221509%3A0x9b2f3ac2f42b525a!2sRuwindo%2C%20Rumah%20Wirausaha%20Indonesia!5e0!3m2!1sid!2sid!4v1624490057321!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy"></iframe>*@
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="footer-bottom">
+                        <div class="col-md-6 col-sm-5">
+                            <div class="copyright-text">
+                                <p>Copyright &copy; 2021 Sintesys</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-7">
+                            <div class="phone-contact">
+                                <p>Telp : <span>0341-3901149</span></p>
+                            </div>
+                            <ul class="social-icon">
+                                <li><a href="https://www.facebook.com/groups/1345153832237806/" target="_blank" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                <li><a href="https://twitter.com/rumah_wirausaha" target="_blank" class="fa fa-twitter"></a></li>
+                                <li><a href="https://www.instagram.com/cpns.sintesys/" target="_blank" class="fa fa-instagram"></a></li>
+                                <li><a href="https://www.youtube.com/c/RumahWirausahaIndonesia" target="_blank" class="fa fa-youtube-play"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+    <section class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content modal-popup">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-12 col-sm-12">
+                                <div class="modal-title">
+                                    @*<h2>Sintesys</h2>*@
+                                    <img class="cc" src="~/App_Asset/images/introapp/logo transparan.webp" style="width:35%; display: none" />
+                                    <img class="asn" src="~/App_Asset/images/logo sintesys cpns.webp" style="width:35%;" />
+                                    <p class="asn" style="padding-top:20px;">Kejar Impian Menjadi Insan ASN yang Beriman , Profesional dan Cerdas.</p>
+                                    <p class="cc" style="padding-top:20px; display:none">Dapatkan penghasilan tambahan, dengan gabung bersama kami.</p>
+                                </div>
+
+                                <!-- NAV TABS -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Daftar</a></li>
+                                    <li><a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab">Login</a></li>
+                                </ul>
+
+                                <!-- TAB PANES -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
+                                        <form id="formlogin" method="post">
+                                            <input type="text" class="form-control" name="name" placeholder="Name" id="name" required>
+                                            <input type="email" class="form-control" name="email" placeholder="Email" id="email" required>
+                                            <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                                            <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" id="confirmpassword" required>
+                                            <select class="form-control" name="pengguna_jenis" id="pengguna_jenis">
+                                                <option class="asn" value="p3k">PPPK</option>
+                                                <option class="asn" value="cpns">CPNS</option>
+                                                <option class="cc" value="content creator">Content Creator</option>
+                                            </select>
+                                            <input type="button" class="form-control button_modal_daftar" name="submit" value="Daftar" onclick="cek_email_terdaftar()">
+                                        </form>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane fade in" id="sign_in">
+                                        <form id="formloginbaru">
+                                            <input type="email" class="form-control" name="email" placeholder="Email" id="txtemail" required>
+                                            <input type="password" class="form-control" name="password" placeholder="Password" id="txtpassword" required>
+                                            <input type="button" class="form-control button_modal_daftar" name="submit" value="Login" onclick="login('')">
+                                            <a href="/Home/lupa_password">Lupa Password?</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="modal fade" id="comingsoon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content modal-popup">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-12 col-sm-12">
+                                <div class="modal-title">
+                                    @*<h2>Sintesys</h2>*@
+                                    <img src="~/App_Asset/images/introapp/logo transparan.webp" style="width:35%;" />
+                                    <p style="padding-top:20px;">Opening Soon</p>
+                                    <h1 id="timercomingsoon"></h1>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="pilihdemo" aria-hidden="true" style="overflow-y: auto;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="margin-top: 10%;  width: 90%;">
+            <div class="modal-content" style="padding: 2em;border-radius: 40px;">
+                <img src="~/frontend/images/pc.webp" style="position: absolute;top: -65px;right: -35px;width: 150px;" />
+                <img src="~/frontend/images/jam.webp" style="position: absolute;top: 15px;left: -70px;width: 150px;" />
+                <img src="~/frontend/images/kaktus.webp" style="position: absolute;bottom: -40px;right: 18%;width: 125px;" />
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 style="font-weight: bold;">Pilih Akun Demo</h4>
+                            <span>coba aplikasi sintesys sesuai dengan kebutuhan anda</span>
+                        </div>
+                        <div class="col-sm-12 col-md-4" onclick="dologin('sekolah')">
+                            <img src="~/frontend/images/Group-4.webp" style="width:100%; height:301px" class="demo demo-sekolah" />
+                        </div>
+                        <div class="col-sm-12 col-md-4" onclick="openlist('guru')" style="text-align:center">
+                            <img src="~/frontend/images/Group 5.webp" style="width:100%; height:301px" class="demo demo-guru" />
+                        </div>
+                        <div class="col-sm-12 col-md-4" onclick="openlist('siswa')">
+                            <img src="~/frontend/images/Group 6.webp" style="width:100%; height:301px" class="demo demo-siswa" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ModalListSiswa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document" style="margin-top: 18%;">
+            <div class="modal-content" style="padding: 2em;border-radius: 40px;">
+                <img src="~/frontend/images/siswa icon.png" style="position: absolute;top: -80px;right: -45px;width: 90px;" />
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 style="font-weight: bold;">Pilih Akun Siswa</h4>
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="list-akun" style="padding-left: 0px;">
+                                <li onclick="dologin('siswa','siswa a')">Siswa A</li>
+                                <li onclick="dologin('siswa','siswa b')">Siswa B</li>
+                                <li onclick="dologin('siswa','siswa c')">Siswa C</li>
+                                <li onclick="dologin('siswa','siswa d')">Siswa D</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ModalListGuru" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document" style="margin-top: 18%;">
+            <div class="modal-content" style="padding: 2em;border-radius: 40px;">
+                <img src="~/frontend/images/guru.png" style="position: absolute;top: -80px;right: -45px;width: 90px;" />
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 style="font-weight: bold;">Pilih Akun Guru</h4>
+                            @*<span>coba aplikasi sintesys sesuai dengan kebutuhan anda</span>*@
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="list-akun">
+                                <li onclick="dologin('guru','guru a')">Guru A</li>
+                                <li onclick="dologin('guru','guru b')">Guru B</li>
+                                <li onclick="dologin('guru','guru c')">Guru C</li>
+                                <li onclick="dologin('guru','guru d')">Guru D</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ModalTamu" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document" style="margin-top: 13%;">
+            <div class="modal-content" style="padding: 2em;border-radius: 40px; position: absolute;">
+                <img src="~/frontend/images/pc.png" style="position: absolute;top: -40px;right: -20px;width: 90px;" />
+                <div class="modal-body">
+                    <div class="row-custom">
+                        <div class="col-md-12 text-center">
+                            <h4 style="font-weight: bold;">Buku Tamu</h4>
+                            <span>lengkapi buku tamu untuk mencoba aplikasi sintesys secara gratis</span>
+                        </div>
+                    </div>
+                    <form id="buku-tamu">
+                        <div class="row-custom justify-content-sm-center form-buku-tamu mt-5">
+
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="email_tamu" required="required" />
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12" style="margin-top:1em">
+                                <label>No. Telepon</label>
+                                <input type="text" class="form-control InputNumber" name="telp_tamu" required="required" />
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <button type="submit" class="ybtn ybtn-header-color btn-coba-gratis" style="width: 100%;margin: 10px 0px;">Lanjut</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- SCRIPTS -->
+    <script src="~/App_Asset/lprevisi/js/jquery.js"></script>
+    <script src="~/App_Asset/lprevisi/js/bootstrap.min.js"></script>
+    <script src="~/App_Asset/lprevisi/js/jquery.stellar.min.js"></script>
+    <script src="~/App_Asset/lprevisi/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/App_Asset/lprevisi/js/smoothscroll.js"></script>
+    <script src="~/App_Asset/lprevisi/js/custom.js"></script>
+    <script src="~/App_Asset/scripts/smartbanner_lp.js?v=01"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    @*
+        <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+        <script src="~/Scripts/firebaseinit.js?v=0.4"></script>*@
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGSVZBX"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+</body>
+</html>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    //var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    //(function () {
+    //    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    //    s1.async = true;
+    //    s1.src = 'https://embed.tawk.to/5fc45a2aa1d54c18d8eea9b5/default';
+    //    s1.charset = 'UTF-8';
+    //    s1.setAttribute('crossorigin', '*');
+    //    s0.parentNode.insertBefore(s1, s0);
+    //})();
+</script>
+<script>
+    $(document).ready(function () {
+        var fabElement = document.getElementById("floating-snap-btn-wrapper");
+        fabElement.style.display = "block";
+        var oldPositionX,
+            oldPositionY;
+
+        var move = function (e) {
+            if (!fabElement.classList.contains("fab-active")) {
+                if (e.type === "touchmove") {
+                    fabElement.style.top = e.touches[0].clientY + "px";
+                    fabElement.style.left = e.touches[0].clientX + "px";
+                } else {
+                    fabElement.style.top = e.clientY + "px";
+                    fabElement.style.left = e.clientX + "px";
+                }
+
+            }
+        };
+
+        var mouseDown = function (e) {
+            console.log("mouse down ");
+            oldPositionY = fabElement.style.top;
+            oldPositionX = fabElement.style.left;
+            if (e.type === "mousedown") {
+                window.addEventListener("mousemove", move);
+            } else {
+                window.addEventListener("touchmove", move);
+            }
+
+            fabElement.style.transition = "none";
+        };
+
+        var mouseUp = function (e) {
+            console.log("mouse up");
+            if (e.type === "mouseup") {
+                window.removeEventListener("mousemove", move);
+            } else {
+                window.removeEventListener("touchmove", move);
+            }
+            fabElement.style.transition = "0.3s ease-in-out left";
+        };
+
+        fabElement.addEventListener("mousedown", mouseDown);
+
+        fabElement.addEventListener("mouseup", mouseUp);
+
+        fabElement.addEventListener("touchstart", mouseDown);
+
+        fabElement.addEventListener("touchend", mouseUp);
+    });
+</script>
+<!--End of Tawk.to Script-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var countDownDate = new Date("July 27, 2021 15:37:25").getTime();
+
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timercomingsoon").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timercomingsoon").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+
+        $("#kontak_form").submit(function (event) {
+            var data = $("#kontak_form").serialize();
+            //alert("Handler for .submit() called.");
+            event.preventDefault();
+            postdata("/Index/emailsender_php", data, function (data) {
+                swal("Sukses", "Terimakasih telah mengirimi pesan, kami akan segera membalas pesannya", "success");
+            }, function (err) {
+                swal("Error", err, "error");
+            });
+        });
+
+        //var width = $(window).width();
+        //var vid = document.getElementById("myvideo");
+        //if (width >= 1024) {
+        //    vid.width = 650;
+        //    vid.height = 350;
+        //    //mo.style.width = '100%';
+        //}
+        //else if (width <= 1024) {
+        //    vid.width = 450;
+        //    vid.height = 250;
+        //    //mo.style.width = '30%';
+        //}
+
+        //$(".ibacor_fi").focusout(function () {
+        //    if ($("#phone").val() == "+62") {
+        //        $("#phone").val("");
+        //    }
+        //});
+        //$(".ibacor_fi").focus(function () {
+        //    var a = $(this).data("prefix"), ibacor_currentId = $(this).attr('id'), ibacor_val = $(this).val();
+        //    if (ibacor_val == '') {
+        //        $(this).val(a)
+        //    }
+        //    ibacor_fi(a.replace('ibacorat', ''), ibacor_currentId);
+        //    return false
+        //});
+
+        //function ibacor_fi(d, e) {
+        //    $('#' + e).keydown(function (c) {
+        //        setTimeout(function () {
+        //            var a = bcr_riplis($('#' + e).val()), qq = bcr_riplis(d), ibacor_jumlah = qq.length, ibacor_cek = a.substring(0, ibacor_jumlah);
+        //            if (a.match(new RegExp(qq)) && ibacor_cek == qq) {
+        //                $('#' + e).val(bcr_unriplis(a))
+        //            } else {
+        //                if (c.key == 'Control' || c.key == 'Backspace' || c.key == 'Del') {
+        //                    $('#' + e).val(bcr_unriplis(qq))
+        //                } else {
+        //                    var b = bcr_unriplis(qq) + c.key; $('#' + e).val(b.replace("undefined", ""))
+        //                }
+        //            }
+        //        }, 50)
+        //    })
+        //}
+
+        //function bcr_riplis(a) {
+        //    var f = ['+', '$', '^', '*', '?'];
+        //    var r = ['ibacorat', 'ibacordolar', 'ibacorhalis', 'ibacorkali', 'ibacortanya'];
+        //    $.each(f, function (i, v) {
+        //        a = a.replace(f[i], r[i])
+        //    });
+        //    return a
+        //}
+
+        //function bcr_unriplis(a) {
+        //    var f = ['+', '$', '^', '*', '?'];
+        //    var r = ['ibacorat', 'ibacordolar', 'ibacorhalis', 'ibacorkali', 'ibacortanya'];
+        //    $.each(f, function (i, v) {
+        //        a = a.replace(r[i], f[i])
+        //    });
+        //    return a
+        //}
+    });
+
+    function bimbel_cpns_pppk(jenisuser) {
+        if (jenisuser == "p3k" || jenisuser == "cpns") {
+            $(".cc").hide();
+            $(".asn").show();
+        } else {
+            $(".asn").hide();
+            $(".cc").show();
+        }
+        $("#pengguna_jenis").val(jenisuser);
+        $('#modal-form').modal('show');
+    }
+
+    function trial_program_sintesys() {
+
+    }
+
+    function hanyaAngka(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+    function send_wa() {
+        var phone = document.getElementById("phone").value;
+
+        if (phone != "" && phone != "+62" && phone.length > 12) {
+
+            //var walink = 'https://web.whatsapp.com/send',
+            //    phone = '6281335381783',
+            //    walink2 = 'Halo admin saya mau gabung sintesys, berikut datanya :',
+            //    text_yes = 'Terkirim.',
+            //    text_no = 'Isi semua Formulir lalu klik Send.';
+
+            //if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            //    var walink = 'whatsapp://send';
+            //}
+
+            //var blanter_whatsapp = walink + '?phone=' + phone + '&text=' + walink2 + '%0A%0A' +
+            //    '*No telp* : ' + phone + '%0A';
+
+            //window.open(blanter_whatsapp, '_blank');
+            $('#modal-form').modal('show');
+        } else {
+            swal("Gagal", "Harap masukkan no telp yang valid", "error");
+        }
+    }
+
+    function cek_email_terdaftar() {
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var confirmpassword = $("#confirmpassword").val();
+        var e = document.getElementById("pengguna_jenis");
+        var pengguna_jenis = e.options[e.selectedIndex].value;
+
+        var testEmail = /^[A-Z0-9._%+-]+@@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+        if (testEmail.test(email) == false) {
+            swal("Gagal", "Email tidak valid", "error");
+        }
+
+
+        if (name == "" || email == "" || password == "" || confirmpassword == "") {
+            swal("Gagal", "Harap lengkapi semua data", "error");
+        } else {
+            if (password != confirmpassword) {
+                swal("Gagal", "Password dan konfirmasi password tidak sama", "error");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/cek_email",
+                    dataType: "JSON",
+                    data: {
+                        email: email,
+                        name: name,
+                        jenis_user: pengguna_jenis,
+                        password: password,
+                    },
+                    success: function (data) {
+                        if (data == "1") {
+                            swal("Gagal", "Email telah terdaftar silahkan gunakan email lain, atau login ke aplikasi", "error");
+                        } else {
+                            //alert(data.Data.url)
+                            window.location = data.Data.url;
+                            //alert(data.Data.url)
+                        }
+                    },
+                    error: function (e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
+            }
+        }
+    }
+
+    function login(sekolah) {
+        if ($("#txtemail").val() == "") {
+            swal("Gagal", "Username tidak boleh kosong", "error");
+        } else if ($("#txtpassword").val() == "") {
+            swal("Gagal", "Password tidak boleh kosong", "error");
+        } else {
+            var data = $("#formloginbaru").serialize();
+            postdata("/Home/DoLogin", data, function (data) {
+                var hasil = data;
+                if (hasil.sekolah_cabang != null && hasil.sekolah_cabang.length > 1) {
+                    sekolah_cabang = data.sekolah_cabang;
+                }
+
+                if (hasil.hasil == false) {
+                    swal("Gagal", hasil.keterangan, "error");
+                    return false;
+                }
+                //$("#preloader").addClass('preloader-hide');
+                if (hasil.hasil == true && (hasil.jenis_akses.length <= 1 || pilih_akses != '')) {
+                    window.location.href = hasil.url;
+                    if (typeof webkit !== 'undefined') {
+                        webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify({
+                            "data": "datauser",
+                            "user": $("#txtemail").val(),
+                            "pwd": $("#txtpassword").val(),
+                            "nama_pengguna": $("#txtemail").val(),
+                            "key": data.token
+                        }));
+                    }
+
+                } else if (hasil.hasil == true && hasil.jenis_akses.length > 1 && pilih_akses == "") {
+                    openlist_akses(hasil.jenis_akses);
+                } else if (hasil.keterangan == "pilih_sekolah" && hasil.sekolah_cabang.length > 1) {
+                    openlist_sekolah(hasil.sekolah_cabang);
+                } else {
+                    $(".boxed-text-login").text(hasil.keterangan);
+                    $('#menu-warning-sendotp').showMenu();
+                }
+
+            }, function (err) {
+                console.log(err);
+                $("#preloader").addClass('preloader-hide');
+                $(".boxed-text-login").text(err);
+                $('#menu-warning-sendotp').showMenu();
+            });
+        }
+
+    }
+
+    function openmodal() {
+        $('#modal-form').modal('show');
+    }
+
+    function dologin(jenis, akun) {
+        var username = '';
+        var pwd = '';
+
+        $("#ModalListGuru").modal("hide");
+        $("#ModalListSiswa").modal("hide");
+
+        $.ajax({
+            type: "POST",
+            url: '/home/akun_demo',
+            cache: false,
+            data: { jenis: jenis, akun: akun },
+            dataType: 'json', timeout: 100000,
+            beforeSend: function () {
+                $(".ImageLoding").show();
+            },
+            success: function (msg) {
+                $(".ImageLoding").hide();
+                if (msg.hasil) {
+                    location.href = msg.url;
+                } else {
+                    toastr["error"]('Username dan Password Salah !');
+                }
+            },
+            error: function (xmlhttprequest, textstatus, message) {
+                $(".ImageLoding").hide();
+                if (textstatus === "timeout") {
+                    toastr["error"]('Koneksi Timeout, Silahkan di coba kembali !');
+                } else if (navigator.onLine == false) {
+                    toastr["error"]('Koneksi Internet Tidak Tersedia !');
+                } else {
+                    toastr["error"](message);
+                }
+                console.log("ERROR : ", message);
+
+            }
+        });
+    }
+    function openlist(jenis) {
+        $("#exampleModalCenter").modal("hide");
+        if (jenis == 'guru') {
+            $("#ModalListGuru").modal("show");
+
+        } else if (jenis == 'siswa') {
+            $("#ModalListSiswa").modal("show");
+        }
+    }
+    $("#buku-tamu").submit(function (e) {
+        $.ajax({
+            type: "POST",
+            url: '/users/simpan_buku_tamu',
+            cache: false,
+            data: $("#buku-tamu").serialize(),
+            dataType: 'json', timeout: 100000,
+            beforeSend: function () {
+                $(".ImageLoding").show();
+            },
+            success: function (msg) {
+                $(".ImageLoding").hide();
+
+                if (msg.hasil) {
+                    $("#ModalTamu").modal('hide');
+                    $("#exampleModalCenter").modal('show');
+                } else {
+                    toastr["error"](msg.keterangan);
+                }
+            },
+            error: function (xmlhttprequest, textstatus, message) {
+                $(".ImageLoding").hide();
+                if (textstatus === "timeout") {
+                    toastr["error"]('Koneksi Timeout, Silahkan di coba kembali !');
+                } else if (navigator.onLine == false) {
+                    toastr["error"]('Koneksi Internet Tidak Tersedia !');
+                } else {
+                    toastr["error"](message);
+                }
+                console.log("ERROR : ", message);
+
+            }
+        });
+        return false;
+    });
+</script>
+<!-- Facebook Pixel Code -->
+<script>
+    !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '244290120403054');
+    fbq('track', 'PageView');
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=244290120403054&ev=PageView&noscript=1" />
+</noscript>
+<!-- End Facebook Pixel Code -->

@@ -1,0 +1,610 @@
+﻿@{ 
+    ViewData["Title"] = "Sintesys";
+    Layout = "~/Views/Shared/_Layout_lpnew.cshtml";
+}
+    
+
+<style>
+    @@media only screen and (max-width: 768px) {
+        .desktop {
+            display: none;
+        }
+    }
+
+    @@media only screen and (min-width: 769px) {
+        .mobile {
+            display: none;
+        }
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="~/frontend/css/style.css?v=0.12">
+<!-- HOME -->
+<section id="home" class="home_desktop" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+                <div class="home-info">
+                    <h1 class="montserratbold">
+                        Smart Integrated <br />
+                        Education System
+                    </h1>
+                    <h1 style="font-size: 11.5pt" class="montserratregullar">
+                        Aplikasi sistem informasi yang Smart & Terintegrasi <br />
+                        untuk mendukung performa layanan Pendidikan <br />
+                        di era 4.0 dengan SDM Unggul Menuju Indonesia Emas
+                    </h1>
+
+                    <div class="box">
+                        <div class="container-4" style="width:100%;">
+                            <div class="row desktop">
+                                <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top:5px;">
+                                    <button class="btn btn-md btn-block header-btn pulse-button" style="height:50px;" onclick="bimbel_cpns_pppk('p3k')"><b>Bimbel CPNS/PPPK Gratis !</b></button>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top:5px;">
+                                    <button class="btn btn-md btn-block header-btn" style="height: 50px; background: #00F260; /* fallback for old browsers */ background: -webkit-linear-gradient(to right, #001633, #001633); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #182633, #44d6fe); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */" data-toggle="modal" data-target="#ModalTamu"><b>Trial Program Sintesys</b></button>
+                                </div>
+                            </div>
+                            <div class="mobile">
+                                <div class="col-xs-12 col-sm-12">
+                                    <button class="btn btn-md btn-block header-btn pulse-button" style="height:50px;" onclick="bimbel_cpns_pppk('p3k')"><b>Bimbel CPNS/PPPK Gratis !</b></button>
+                                </div>
+                                <div class="col-xs-12 col-sm-12" style="margin-top: 25px;">
+                                    <button class="btn btn-md btn-block header-btn" style="height: 50px; background: #00F260; /* fallback for old browsers */ background: -webkit-linear-gradient(to right, #001633, #001633); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #182633, #44d6fe); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */" data-toggle="modal" data-target="#ModalTamu"><b>Trial Program Sintesys</b></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding:10px 0px 10px 0px">
+                <img src="~/App_Asset/images/gif-jadi.gif" alt="this slowpoke moves" class="gif_header" />
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="about" style="background: #f0f0f0; padding-top:40px; padding-bottom:40px;" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+            <a href="https://play.google.com/store/apps/details?id=ujian.ruwindo.com" target="_blank"><img style="width:100%" src="~/App_Asset/lprevisi/images/banner-to.webp" /></a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background: #f0f0f0; padding-top:0px;" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="about-info">
+                    <div class="section-title">
+                        <h2 class="montserratsemibold_space">MERDEKA BELAJAR</h2>
+                        <span class="line-bar">...</span>
+                    </div>
+                    <p class="montserratbold_title">
+                        Sintesys, Inovasi Pendukung <br />
+                        Performa Layanan Pendidikan 4.0
+                    </p>
+                    <p style="color: black">
+                        Ditengah cobaan pandemi saat ini, diperlukan revolusi inovasi layanan Pendidikan <br />
+                        agar tetap berlangsung dengan nyaman, aman dan berkualitas.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="media blog-thumb">
+                    <div class="media-object media-left">
+                        <img src="~/App_Asset/lprevisi/Sukses ASN.webp" class="img-responsive" />
+                    </div>
+                    <div class="media-body blog-info" style="padding: 20px 25px;">
+                        <h3><a href="#">Sukses ASN</a></h3>
+                        <p>
+                            Menjadi seorang Abdi Negara merupakan tugas mulia, seorang ASN dituntut Cerdas & Profesional. Ikuti Program Sukses CPNS & CPPPK
+                        </p>
+                        <h3>
+                            <a href="#" style="background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%);
+                            padding: 5px 12px 5px 12px;
+                            transition: 0.5s;
+                            color: white;
+                            box-shadow: 0 0 20px #eee;
+                            border-radius: 10px;
+                            font-size: 12pt;
+                            border: none;" onclick="bimbel_cpns_pppk('p3k')">Ikut Program</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="media blog-thumb">
+                    <div class="media-object media-left">
+                        <img src="~/App_Asset/lprevisi/Siswa Cerdas Mandiri.webp" class="img-responsive" />
+                    </div>
+                    <div class="media-body blog-info" style="padding: 20px 25px;">
+                        <h3><a href="#">Siswa Cerdas Mandiri</a></h3>
+                        <p style="font-size: 10pt">
+                            Lebih Cerdas, Lebih Mandiri dengan mempelajari puluhan ribu soal lengkap dengan pembahasannya. Belajar interaktif dengan mengikuti kelas kelas tutor professional.
+                        </p>
+                        <h3><a href="#ModalListSiswa" data-toggle="modal">Coba Gratis</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="media blog-thumb">
+                    <div class="media-object media-left">
+                        <img src="~/App_Asset/lprevisi/Guru Siaga.webp" class="img-responsive" />
+                    </div>
+                    <div class="media-body blog-info" style="padding: 20px 25px;">
+                        <h3><a href="#">Guru Siaga</a></h3>
+                        <p>
+                            Bergabung untuk menjadi tutor kelas-kelas online dengan ribuan siswa di Seluruh Indonesia dari Sabang-Merauke. Mari turut mencerdaskan bangsa dan negara.
+                        </p>
+                        <h3><a href="#comingsoon" data-toggle="modal">Daftar Guru Siaga</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="media blog-thumb">
+                    <div class="media-object media-left">
+                        <img src="~/App_Asset/lprevisi/Smart School new.webp" class="img-responsive" />
+                    </div>
+                    <div class="media-body blog-info" style="padding: 20px 25px;">
+                        <h3><a href="#">Smart School</a></h3>
+                        <p>
+                            Dengan aplikasi e-learning, e-administrasi, e-ujian, e-absensi, dan e-library siap meningkatkan performa layanan Pendidikan yang lebih efektif dan efisien.
+                        </p>
+                        <h3><a href="~/App_Asset/Katalog.pdf" target="_blank">Selengkapnya</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="media blog-thumb">
+                    <div class="media-object media-left">
+                        <img src="~/App_Asset/lprevisi/content creator.webp" class="img-responsive" />
+                    </div>
+                    <div class="media-body blog-info" style="padding: 20px 25px;">
+                        <h3><a href="#">Content Creator</a></h3>
+                        <p>
+                            Berjiwa kreatif? Ahli edit video maupun desain grafis ? Berjiwa tutor dan suka berbagi ? dapatkan pundi pundi rupiah !
+                        </p>
+                        <h3><a href="#" onclick="bimbel_cpns_pppk('content creator')">Daftar Mitra Sintesys</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="media blog-thumb">
+                    <div class="media-object media-left">
+                        <img src="~/App_Asset/lprevisi/Jagoan Informatika.webp" class="img-responsive" />
+                    </div>
+                    <div class="media-body blog-info" style="padding: 20px 25px;">
+                        <h3><a href="#">Jagoan Informatika</a></h3>
+                        <p>
+                            Perubahan dunia makin pesat, jangan tertinggal dengan yang lain. Ikuti berbagai kursus Teknologi Informasi dari para professional dengan harga terjangkau.
+                        </p>
+                        <h3><a href="#comingsoon" data-toggle="modal">Daftar !</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" data-stellar-background-ratio="0.5" style="padding-top:20px; text-align: right;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12" style="padding-bottom: 20px;">
+                <div class="about-info">
+                    <div class="section-title">
+                        <h2 class="montserratsemibold_space">SUKSES ASN</h2>
+                        <span class="line-bar">...</span>
+                    </div>
+                    <p class="montserratbold_title">
+                        Perjuangan Menjadi<br />
+                        Terdepan untuk<br />
+                        Bangsa & Negara
+                    </p>
+                    <p style="color: black">
+                        Program Intensif untuk mensukseskan keinginan anda untuk menjadi CPNS dan <br /> CPPPK
+                        yang Cerdas & Profesional
+                    </p>
+                    <p align="right">
+                        <input type="button" class="btn-grad" value="DAFTAR" onclick="bimbel_cpns_pppk('p3k')" />
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12" style="padding-top:30px; padding-bottom: 20px;">
+                <div class="about-image">
+                    <img src="~/App_Asset/lprevisi/963763_720.webp" class="img-responsive" alt="" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="about" class="desktop" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="about-info">
+                    <div class="section-title">
+                        <h2 class="montserratsemibold_space">PROGRAM INTENSIF</h2>
+                        <span class="line-bar">...</span>
+                    </div>
+                    <p class="montserratbold_title">
+                        SUKSES CPNS & PPPK
+                    </p>
+                    <p style="color: black">
+                        Jadwal Estafet Tryout Nasional dan Bimbingan intensif Sukses CPNS <br />dan CPPPK tahun 2021
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" aria-expanded="false" class="collapsed">
+                                    Program Intensif CPNS Batch 1 <span class="timeevent" style="float: right; font-size: 9pt; letter-spacing: 2px;">4 April '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeft-1" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPPPK Batch 1 <span class="timeevent">2-3 Juli '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeft-2" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" aria-expanded="false" class="collapsed">
+                                    Program Intensif CPPPK Batch 1 <span class="timeevent">4 April '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeft-3" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeft-4" aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPNS Batch 2 <span class="timeevent">23-24 Juli '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeft-4" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <p>
+                                        Tes Online Serentak : 23-24 Juli 2021 <br />
+                                        Materi Tes TIU, TWK, & TKP <br />
+                                        via Aplikasi Sintesys.
+                                    <p>Pendaftaran : 16-23 Juli (Rp 50.000)</p>
+                                    <p>Fasilitas :</p>
+                                    <p style=" margin-left: 0.3in;">
+                                        - Free Akses Soal & Pembahasan <br />
+                                        - Tryout tanpa limit waktu.<br />
+                                        - File Soal & Kunci<br />
+                                        - Analisa Jawaban<br />
+                                        - E-Sertifikat<br />
+                                        - Gratis bimbingan pembahasan soal<br />
+                                    </p>
+                                    <p align="right">
+                                        <input type="button" class="btn-grad" value="DAFTAR" onclick="bimbel_cpns_pppk('cpns')" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPNS Batch 1 <span class="timeevent">27 Mei '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeft-5" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeft-6" aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPPPK Batch 2 <span class="timeevent">1 Agu '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeft-6" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Coming Soon</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="mobile" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12">
+                <div class="about-info">
+                    <div class="section-title">
+                        <h2 class="montserratsemibold_space">PROGRAM INTENSIF</h2>
+                        <span class="line-bar">...</span>
+                    </div>
+                    <p class="montserratbold_title">
+                        SUKSES CPNS & PPPK
+                    </p>
+                    <p style="color: black">
+                        Jadwal Estafet Tryout Nasional dan Bimbingan intensif Sukses CPNS <br />dan CPPPK tahun 2021
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" aria-expanded="false" class="collapsed">
+                                    Program Intensif CPNS Batch 1 <span class="timeevent" style="float: right; font-size: 9pt; letter-spacing: 2px;">4 April '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeftmobile-1" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" aria-expanded="false" class="collapsed">
+                                    Program Intensif CPPPK Batch 1 <span class="timeevent">4 April '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeftmobile-3" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPNS Batch 1 <span class="timeevent">27 Mei '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeftmobile-5" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPPPK Batch 1 <span class="timeevent">2-3 Juli '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeftmobile-2" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Expired</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftmobile-4" aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPNS Batch 2 <span class="timeevent">23 Juli '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeftmobile-4" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <p>
+                                        Tes Online Serentak : 23-24 Juli 2021 <br />
+                                        Materi Tes TIU TWK, & TKP <br />
+                                        via Aplikasi Sintesys.
+                                    <p>Pendaftaran : 16-23 Juli (Rp 50.000)</p>
+                                    <p>Fasilitas :</p>
+                                    <p style=" margin-left: 0.3in;">
+                                        - Free Akses Soal & Pembahasan <br />
+                                        - Tryout tanpa limit waktu.<br />
+                                        - File Soal & Kunci<br />
+                                        - Analisa Jawaban<br />
+                                        - E-Sertifikat<br />
+                                        - Gratis bimbingan pembahasan soal<br />
+                                    </p>
+                                    <p align="right">
+                                        <input type="button" class="btn-grad" value="DAFTAR" onclick="openmodal()" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accordion_one">
+                <div class="panel-group" id="accordionFourLeft">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftmobile-6" aria-expanded="false" class="collapsed">
+                                    Try Out Nasional CPPPK Batch 2 <span class="timeevent">1 Agu '21</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFiveLeftmobile-6" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                            <div class="panel-body">
+                                <div class="text-accordion">
+                                    <ul>
+                                        <li>Coming Soon</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" data-stellar-background-ratio="0.5" style="padding-top:20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12" style="padding-top:30px; padding-bottom: 20px;">
+                <div class="about-image">
+                    <img src="~/App_Asset/lprevisi/Image 19.webp" class="img-responsive" alt="" />
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12" style="padding-bottom: 20px;">
+                <div class="about-info">
+                    <div class="section-title">
+                        <h2 class="montserratsemibold_space">TUMBUH BERKARYA</h2>
+                        <span class="line-bar">...</span>
+                    </div>
+                    <p class="montserratbold_title">
+                        Hidup adalah <br />
+                        Sebuah Perjuangan <br />
+                        & Ibadah
+                    </p>
+                    <p style="color: black">
+                        Meningkatkan kualitas diri agar terus bermanfaat bagi orang lain dan berjuang untuk kesejahteraan keluarga
+                    </p>
+                    <button class="btn-grad" onclick="bimbel_cpns_pppk('content creator')">GABUNG CONTENT CREATOR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="article" style="margin-top:100px; margin-bottom: 100px;">
+    <img src="~/App_Asset/lprevisi/quote.webp" style="width: 80%" />
+</div>

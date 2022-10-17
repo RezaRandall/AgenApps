@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgenApps", "AgenApps\AgenApps.csproj", "{FBE71060-8790-490C-A006-F38DB2DEA612}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBE71060-8790-490C-A006-F38DB2DEA612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE71060-8790-490C-A006-F38DB2DEA612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE71060-8790-490C-A006-F38DB2DEA612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE71060-8790-490C-A006-F38DB2DEA612}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9EC38ED-AE7C-4157-BCA5-41DC49D744D6}
+	EndGlobalSection
+EndGlobal

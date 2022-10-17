@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Transaksi";
+    Layout = "~/Views/Shared/_LayoutUserAgen.cshtml";
+    string kode_transaksi = ViewBag.kode_transaksi;
+}
+<style>
+    .box-layout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .box-container {
+        
+        padding: 9px;
+    }
+
+        .box-container .box-group.hide {
+            display: none;
+        }
+
+        .box-container .box-group {
+            border: 1px solid;
+            
+            padding: 9px;
+            border-radius: 5px;
+            box-shadow: 1px 1px lightgrey;
+            position: relative;
+            margin: 7px 0px 20px 0px;
+        }
+
+            .box-container .box-group .box-group-header {
+                position: absolute;
+                top: -11px;
+                background: white;
+                font-size: 13px;
+                font-weight: 700;
+                font-style: italic;
+            }
+
+            .box-container .box-group .box-group-container {
+            }
+
+                .box-container .box-group .box-group-container table {
+                    font-size: 11px;
+                }
+
+                .box-container .box-group .box-group-container .box-group-row {
+                    display: flex;
+                }
+
+                    .box-container .box-group .box-group-container .box-group-row .col-caption {
+                        width: 187px;
+                        font-size: 13px;
+                    }
+
+                    .box-container .box-group .box-group-container .box-group-row .col-separator {
+                        width: 10px;
+                        font-size: 13px;
+                    }
+
+                    .box-container .box-group .box-group-container .box-group-row input, .box-container .box-group .box-group-container .box-group-row button {
+                        width: 100%;
+                    }
+
+                    .box-container .box-group .box-group-container .box-group-row button {
+                        padding: 2px;
+                        font-size: 13px;
+                    }
+
+                    .box-container .box-group .box-group-container .box-group-row .col-value {
+                        width: 194px;
+                        font-size: 13px;
+                        font-size: 13px;
+                        padding: 0px 2px;
+                    }
+
+                    .box-container .box-group .box-group-container .box-group-row .col-value2 {
+                        width: 72px;
+                        font-size: 13px;
+                    }
+
+    .button-group-right {
+        text-align: right;
+        font-size: 13px;
+    }
+
+        .button-group-right button {
+            font-size: 13px;
+            padding: 5px;
+        }
+
+    .info {
+        font-size: 11px;
+        color: red;
+        font-style: italic;
+    }
+
+   
+
+</style>
+<div class="box-layout">
+    <div class="box-container">
+        <div class="box-container-header">
+            <a class="fa fa-chevron-circle-left" href="/agen/Transaksi">Back</a>
+        </div>
+        <div class="box-container-header" style="text-align:right">
+            <a class="fa fa-download" href="/paket/downloadinvoice?kode_transaksi=@kode_transaksi">Download</a>
+        </div>
+        <div class="box-group">
+            <div class="box-group-header">
+                Invoice
+            </div>
+            <div class="box-group-container">
+                <img src="/paket/getinvoice?kode_transaksi=@kode_transaksi"/>
+                @*<iframe src="/paket/getinvoice?kode_transaksi=@kode_transaksi" type="text/html" style=" width: 100%; height: 100vh;"></iframe>*@
+            </div>
+        </div>
+
+    </div>
+</div>

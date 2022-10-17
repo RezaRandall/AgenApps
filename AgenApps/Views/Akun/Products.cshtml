@@ -1,0 +1,502 @@
+﻿
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_LayoutAgen.cshtml";
+}
+
+<div class="container-fluid ">
+    <div class="col-lg-14 text-left ">
+        <div class="container pt-3 pb-3">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="txtSearchListProduct">
+                        <button class="btn btn-outline-success" type="button" id="searchProdukBtn">Search</button>
+                    </form>
+                </div>
+                <div class="col-md-6 col-sm-12" style="margin-top: 9px;">
+                    <button style="float:right" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#tambahModalProduct" onclick="clearforminsert();">Tambah Product</button>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="tambahModalProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Data Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form id="dataInsertProduct" method="POST">
+                        <div class="modal-body row">
+
+                            <div class="row">
+                                <div class="col ms-auto">
+                                    <label for="recipient-name" class="col-form-label">ID Product :</label>
+                                    <input type="text" class="form-control" id="id_product" name="id_product">
+                                </div>
+                                <div class="col ms-auto">
+                                    <label for="recipient-name" class="col-form-label">Nama :</label>
+                                    <input type="text" class="form-control" id="nama_product" name="nama_product">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col ms-auto">
+                                    <label for="recipient-name" class="col-form-label">URL App :</label>
+                                    <input type="text" class="form-control" id="url_product" name="url_product">
+                                </div>
+                                <div class="col ms-auto">
+                                    <label for="recipient-name" class="col-form-label">Harga :</label>
+                                    <input type="text" class="form-control numberOnly" id="harga" name="harga"> @*currency*@
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col ms-auto">
+                                    <label for="recipient-name" class="col-form-label">Satuan :</label>
+                                    <select class="form-select" aria-label="Default select example" name="satuan" id="satuan">
+                                        <option selected>Pilih Satuan</option>
+                                        <option value="Piece">Piece</option>
+                                        <option value="Siswa">Siswa</option>
+                                    </select>
+                                </div>
+                                <div class="col ms-auto">
+                                    @*<label for="recipient-name" class="col-form-label">Jenis Sewa :</label>
+                                    <select class="form-select" aria-label="Default select example" name="jenis_sewa" id="jenis_sewa">
+                                        <option selected>Pilih Waktu</option>
+                                        <option value="tahun">Sewa Tahunan</option>
+                                        <option value="hakmilik">Hak Milik</option>
+                                    </select>*@
+                                    <label for="recipient-name" class="col-form-label">Deskripsi :</label>
+                                    <textarea class="form-control" id="description" name="description" ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col ms-auto">
+                                    <label for="Image" class="form-label">Gambar :</label>
+                                    <div class="input-group mb-3">
+                                        <input class="form-control" type="file" id="img_product" name="img" onchange="preview()" accept="image/png, image/jpeg, image/gif" data-max-file-size="2MB">
+                                        <button class="btn btn-outline-secondary" id="clear">Clear</button>
+                                        @*<input class="btn btn-outline-secondary" type="button" id="clear" value="Clear">*@
+                                    </div>
+
+                                    <div class="border rounded-lg text-center p-3">
+                                        <img id="frame" src="" class="img-fluid dropify" data-height="auto" />
+                                    </div>
+                                </div>
+                                <div class="col ms-auto">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="command" id="command" value="insert" />
+                            <input type="hidden" name="id" id="id" value="" />
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="saveproduct()">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-striped table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>ID Product</th>
+                    <th>Nama</th>
+                    <th>URL App</th>
+                    @*<th>Harga</th>*@
+                    <th>Deskripsi</th>
+                    <th width="15%">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyListProduct"></tbody>
+        </table>
+    </div>
+</div>
+<script src="~/js/functions.js"></script>
+
+
+<script type="text/javascript">
+    var dataProducts = [];
+    var produkArray = [];
+
+    var produkArrTransaction = [];
+    var produkArrAll = [];
+    $(document).ready(function () {
+        $('.dropify').dropify();
+        //$('.currency').maskMoney();
+
+        //$.post("/SuperAdmin/getIdProduk",
+        //    function (datas, status) {
+        //        $.each(datas, function (i, item) {
+        //            produkArrTransaction.push(datas[i].id_produk);
+        //        })
+        //    });
+
+        getAllProductList({});
+        clearImage();
+        showEditProduct(id);
+
+        // SEARCH PRODUCT FUNCTION
+        $("#searchProdukBtn").on('click', function (e) {
+            e.preventDefault();
+
+            var txtInputSearchProduct = $("#txtSearchListProduct").val();
+            getAllProductList({ param: txtInputSearchProduct });
+
+        });
+
+        // ONLY IMAGE FILE TO BE INPUT
+        $("#img_product").change(function () {
+            var val = $(this).val();
+
+            switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+                case 'gif': case 'jpg': case 'jpeg': case 'png':
+
+                    break;
+                default:
+                    $(this).val('');
+                    swal("Masukan file extensi jpg, jpeg, png, gif");
+                    break
+            }
+        });
+
+        $("textarea").keydown(function (e) {
+            if (e.keyCode === 9) { // tab was pressed
+                // get caret position/selection
+                var start = this.selectionStart;
+                end = this.selectionEnd;
+
+                var $this = $(this);
+
+                // set textarea value to: text before caret + tab + text after caret
+                $this.val($this.val().substring(0, start)
+                    + "\t"
+                    + $this.val().substring(end));
+
+                // put caret at right position again
+                this.selectionStart = this.selectionEnd = start + 1;
+
+                // prevent the focus lose
+                return false;
+            }
+        });
+        
+        $("#descriptionProduk").keydown(function (e) {
+            if (e.keyCode === 9) { // tab was pressed
+                // get caret position/selection
+                var start = this.selectionStart;
+                end = this.selectionEnd;
+
+                var $this = $(this);
+
+                // set textarea value to: text before caret + tab + text after caret
+                $this.val($this.val().substring(0, start)
+                    + "\t"
+                    + $this.val().substring(end));
+
+                // put caret at right position again
+                this.selectionStart = this.selectionEnd = start + 1;
+
+                // prevent the focus lose
+                return false;
+            }
+        });
+    });
+
+    function saveproduct() {
+        var idProduct = $("#id_product").val();
+        var namaProduct = $("#nama_product").val();
+        var urlProduct = $("#url_product").val();
+        var price = $("#harga").val();
+        //var img_product = $("#img_product").val();
+
+        if (idProduct == "" || namaProduct == "" || urlProduct == "" || price == "") {
+            swal('Form Tidak Boleh Kosong !', "Klik Tombol OK!", "success");
+        } else {
+            var form = $("#dataInsertProduct")[0];
+            var data = new FormData(form);
+            //form encoded data
+            //var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+            //var data = $('form').serialize();
+            showloading("Please Wait");
+            $.ajax({
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                url: '/Product/saveProduct',
+                data: data,
+                processData: false,
+                //contentType: dataType,
+                contentType: false,
+                cache: false,
+                //dataType: 'json',
+                success: function (result) {
+                    console.log('Data received: ');
+                    console.log(result);
+                    if (result.hasil == true) {
+                        swal("Tambah Product Berhasil!", "Klik Tombol OK!", "success").then(function () {
+                            $("#tambahModalProduct").modal("hide");
+                            clearforminsert();
+                            location.reload();
+                        });
+                    } else {
+                        swal("Tambah Product Gagal! " + result.keterangan, "Klik Tombol OK!", "error").then(function () {
+                        });
+                    }
+                    closeloading();
+                },
+                error: function (error) {
+                    swal("Tambah Product Gagal! ", "Klik Tombol OK!", "error").then(function () {
+                    });
+                    closeloading();
+                }
+            });
+        }
+    }
+    function getAllProductList(param) {
+        //var searchParamProduk = $('#txtSearchListProduct').val();
+        //$.LoadingOverlay("show");
+
+        $.post("/Product/getProduct", param,
+            function (data, status) {
+                document.getElementById('tbodyListProduct').innerHTML = "";
+                var isi = "";
+                $.each(data, function (i, item) {
+                    dataProducts = data;
+                    produkArrAll.push(data[i].id_product);
+
+
+                    //let idProd = $.inArray(produkArrAll, produkArrTransaction) < -1;
+
+                    //if (idProd == true) {
+                    //    $('.btnDel').prop('disabled', true)
+                    //}
+                    //else {
+                    //    $('.btnDel').prop('disabled', false);
+                    //}
+
+                    $.grep(produkArrTransaction, function (element) {
+                        if ($.inArray(element, produkArrAll) !== -1) {
+                            $('.btnDel').prop('disabled', true);
+                        }
+                        else {
+                            $('.btnDel').prop('disabled', false);
+                        }
+                    });
+                    
+                    isi += `<tr>
+                                <td>`+ (i + 1) + `</td>
+                                <td>`+ data[i].id_product + `</td>
+                                <td>`+ data[i].nama_product + `</td>
+                                <td>`+ data[i].url_product + `</td>
+
+                                <td id="descriptionProduk">`+ data[i].description + `</td>
+                                <td style='text-align:center'>
+                                    <button type='button' class='btn' onclick='showEditProduct("` + data[i].id + `")'>
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                        ||
+                                    <button type='button' onclick='deleteProduct("` + data[i].id + `", "` + data[i].img_product + `")' class='btnDel'>
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </td>
+                            </tr>`;
+                    //<td id="number">`+ harga + `</td>
+                })
+                if (data != "") {
+
+                    document.getElementById('tbodyListProduct').innerHTML += isi;
+                } else {
+                    document.getElementById('tbodyListProduct').innerHTML += "<tr><td colspan='8' class='center'>Belum Ada Data Product</td></tr>";
+                }
+                //disableDelete();
+                //$.LoadingOverlay("hide");
+            });
+
+    }
+
+    //function disableDelete() {
+    //    //var produkArrTransaction = [];
+    //    //var produkArrAll = [];
+    //    //for (var i = 0; i < produkArrAll.length; i++) {
+
+    //    //    if ($.inArray(produkArrAll[i], produkArrTransaction) > -1) {
+    //    //        $('.btnDel').prop('disabled', true);
+    //    //    }
+    //    //    else {
+    //    //        $('.btnDel').prop('disabled', false);
+    //    //    }
+    //    //}
+
+    //    $.grep(produkArrTransaction, function (element) {
+    //        if ($.inArray(element, produkArrAll) !== -1) {
+    //            $('.btnDel').prop('disabled', true);
+    //        }
+    //        else {
+    //            $('.btnDel').prop('disabled', false);
+    //        }
+    //    });
+    //}
+
+    function deleteProduct(id, img) {
+        swal({
+            title: "Anda Yakin Akan Menghapus Produk ini?",
+            text: "Data yang telah dihapus tidak bisa dikembalikan!",
+            icon: 'warning',
+            dangerMode: true,
+            buttons: {
+                cancel: 'Tidak!',
+                delete: 'Ya'
+            }
+        }).then(function (willDelete) {
+            if (willDelete) {
+                $.post('/Product/deleteProduct', { id: id, img: img },
+                    function (data, status) {
+                        if (status == 'success') {
+                            swal("Delete Product Berhasil!", "Klik Tombol OK!", {
+                                icon: "success",
+                            }).then(function () {
+                                location.reload();
+                            })
+                        }
+                    })
+            }
+            else {
+                swal("Delete Product Gagal! " + result.keterangan, "Klik Tombol OK!", "error").then(function () {
+                });
+            }
+        })
+    }
+
+    function showEditProduct(id) {
+        var d = dataProducts.find(function (s) { return s.id == id });
+        
+        if (d != undefined) {
+            $("#id").val(d.id);
+            $("#id_product").val(d.id_product);
+            $("#nama_product").val(d.nama_product);
+            $("#url_product").val(d.url_product);
+            $("#harga").val(d.harga);
+            $("#description").val(d.description);
+            $("#jenis_sewa").val(d.jenis_sewa);
+            $("#satuan").val(d.satuan);
+            var idProduk = d.id_product;
+
+            var imgUrl = "../../Content/ImgProduct/" + d.img_product;
+            var drEvent = $('#frame').dropify({
+                defaultFile: imgUrl
+            });
+            drEvent = drEvent.data('dropify');
+            drEvent.resetPreview();
+            drEvent.clearElement();
+            drEvent.settings.defaultFile = imgUrl;
+            drEvent.destroy();
+            drEvent.init();
+
+            $("#command").val("update");
+            
+            // readonly id product when the product's already have in transaction 
+            var idProdukArray = [];
+            produkArray = idProdukArray
+            $.post("/SuperAdmin/getIdProduk",
+                function (data, status) {
+                    $.each(data, function (i, item) {
+                        idProdukArray.push(item.id_produk);
+
+                        let idProduks = $.inArray(idProduk, idProdukArray) > -1;
+
+                        if (idProduks == true) {
+                            $('#id_product').attr('readonly', true);
+                            /*$('.btn').attr('disabled', true);*/
+                        }
+                        else {
+                            $('#id_product').attr('readonly', false);
+                            //$('.btn').attr('disabled', false);
+                        }
+                    })
+                });
+            $("#tambahModalProduct").modal("show");
+        }
+    }
+
+    function clearforminsert() {
+        var e = document.querySelectorAll("#dataInsertProduct input");
+        for (var i = 0; i < e.length; i++) { e[i].value = ""; }
+
+        var el = document.getElementsByTagName('textarea');
+        for (var i = 0; i < el.length; i++) { el[i].value = ""; }
+
+        $('.dropify-clear').click();
+        $('#id_product').attr('readonly', false);
+
+        $("#command").val("insert");
+    }
+
+    function preview() {
+        frame.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    function clearImage() {
+        $("#clear").on('click', function () {
+            $('#formFileImg').val('');
+            frame.src = "";
+        });
+    }
+
+
+    // set number only
+    (function ($) {
+        $.fn.inputFilter = function (callback, errMsg) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function (e) {
+                if (callback(this.value)) {
+                    // Accepted value
+                    if (["keydown", "mousedown", "focusout"].indexOf(e.type) >= 0) {
+                        $(this).removeClass("input-error");
+                        this.setCustomValidity("");
+                    }
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    // Rejected value - restore the previous one
+                    $(this).addClass("input-error");
+                    this.setCustomValidity(errMsg);
+                    this.reportValidity();
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    // Rejected value - nothing to restore
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+    $(".numberOnly").inputFilter(function (value) {
+        return /^-?\d*$/.test(value);
+    }, "Harus Berupa Angka");
+
+
+    //function onTestChange() {
+    //    var key = window.event.keyCode;
+
+    //    // If the user has pressed enter
+    //    if (key === 13) {
+    //        document.getElementById("description").value = document.getElementById("description").value + "\n*";
+    //        return false;
+    //    }
+    //    else {
+    //        return true;
+    //    }
+    //}
+
+
+</script>

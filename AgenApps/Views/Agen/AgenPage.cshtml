@@ -1,0 +1,529 @@
+﻿
+@{
+    ViewData["Title"] = "AgenPage";
+    Layout = "~/Views/Shared/_LayoutUserAgen.cshtml";
+}
+
+@*<div class="container-fluid">*@
+
+<!-- Start Featured Product -->
+@*<header>
+        <div>
+            <section class="bg-light">
+                <div class="container py-8">
+
+                    <div class="row text-center py-3">
+                        <div class="col-lg-6 m-auto">
+                            <h1 class="h1">Featured Product</h1>
+                            <p>
+                                Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row" id="featureHeader"></div>
+                </div>
+            </section>
+        </div>
+    </header>*@
+
+<!--Main-->
+@*<div>
+    <section style="background-color: #eee;">
+        <div class="container-fluid py-4">
+
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Lebih Hemat dengan Promo Dari Ruwindo</h1>
+                    <h6>
+                        Nikmati berbagai penawaran terbaik dari layanan-layanan Paket Ruwindo yang sesuai dengan kebutuhan Anda
+                    </h6>
+                </div>
+            </div>
+
+            <div class="row" id="featurePaket">
+            </div>
+        </div>*@
+
+<!-- Modal Detail Product Paket-->
+@*<div class="modal fade" id="detailsPacketModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title modalTitleDetailProdukPaket" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modalBodyDetailProductPakets" id="modalBodyDetailProductPakets">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<!--Modal Transaksi-->
+<!-- Full screen modal -->
+@*<div class="modal fade" id="transaksiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title " id="exampleModalLabel">Isi Data Pelanggan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modalBodyDetailPelanggan" id="modalBodyDetailPelanggan">
+                <form id="dataInsert">
+                    <div class="modal-body row">
+                        <div class="row">
+                            <div class="col ms-auto">
+                                <label for="recipient-name" class="col-form-label">Nama Pelanggan :</label>
+                                <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan">
+                            </div>
+                            <div class="col ms-auto">
+                                <label for="recipient-name" class="col-form-label">Nama Instansi :</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col ms-auto">
+                                <label for="recipient-name" class="col-form-label">Alamat :</label>
+                                <input type="text" class="form-control" id="alamat" name="alamat">
+                            </div>
+                            <div class="col ms-auto">
+                                <label for="recipient-name" class="col-form-label">No Tlpn :</label>
+                                <input type="text" class="form-control" id="telepon" name="telepon">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col ms-auto">
+                                <label for="message-text" class="col-form-label">Email :</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="hidden" name="command" id="command" value="insert" />
+                        <input type="hidden" name="id" id="id" value="" />
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" onclick="submitOrder()" id="simpan" class="btn btn-primary">Save changes</button>
+                    </div>
+
+                </form>
+            </div>*@
+@*<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>*@
+@*</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>*@
+
+<header>
+    <div>
+        <section class="bg-light">
+            <div class="container py-8">
+                <div class="row text-center py-3">
+                    <div class="col-lg-6 m-auto">
+                        <h1 class="h1">Smart Integrated Education System.</h1>
+                        <h3>Featured Product</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row pt-5 m-auto" id="row"></div>
+</div>
+
+
+<script src="~/js/functions.js"></script>
+<script>
+    $(document).ready(function () {
+        var dataPaket = [];
+        getAllProductList();
+        getAllPaketList();
+        //submitOrder();
+        //setFormatCurrency();
+
+    });
+
+    //function submitOrder(id) {
+    //    clearforminsert();
+    //    var d = dataPaket.find(function (s) { return s.id == id });
+    //    console.log(d);
+
+    //    if (nama_pelanggan = "" || last_name == "" || alamat == "" || telepon == "")
+    //    {
+    //        swal('Form Tidak Boleh Kosong !');
+    //    }
+
+
+    //}
+
+    function getAllProductList() {
+        $.post("/Product/getProduct", {},
+            function (data, status) {
+                $.each(data, function (i, item) {
+                    var imgUrl = "../../Content/ImgProduct/" + data[i].img_product;
+                    dataPaket = data;
+                    $('#row').append(`
+                            <div class="col-md-8 col-lg-4 pb-3">
+                                <!-- Add a style="height: XYZpx" to div.card to limit the card height and display scrollbar instead -->
+                                <div class="card card-custom bg-white border-white border-0" style="height: 450px">
+                                    <div class="card-custom-img" style="background-image: url(`+ imgUrl + `" alt="` + data[i].img_product + `);"></div>
+                                        <h4 class="card-title">`+ data[i].nama_product + `</h4>
+                                        <h5 class="card-title">`+ formatRP(data[i].harga) + `</h5>
+                                    <div class="card-body" style="overflow-y: auto">
+                                        <p>`+ data[i].description + `</p>
+                                    </div>
+                                </div>
+                            </div>
+                                    `);
+
+                    //$('#featureHeader').append(`
+                    //        <div class="col-12 col-md-4 mb-4">
+                    //            <div class="card h-100">
+                    //                    <img width="auto" src="`+ imgUrl + `" alt="` + data[i].img_product + `">
+                    //                <div class="card-body">
+                    //                    <ul class="list-unstyled d-flex justify-content-between">
+                    //                        <li>
+                    //                            <i class="text-warning fa fa-star"></i>
+                    //                            <i class="text-warning fa fa-star"></i>
+                    //                            <i class="text-warning fa fa-star"></i>
+                    //                            <i class="text-muted fa fa-star"></i>
+                    //                            <i class="text-muted fa fa-star"></i>
+                    //                        </li>
+                    //                        <li class="text-muted text-right">Rp.  `+ data[i].harga + `</li>
+                    //                    </ul>
+                    //                    <a href="#" class="h2 text-decoration-none text-dark">`+ data[i].nama_product + `</a>
+                    //                    <p class="card-text">
+                    //                        `+ data[i].description + `
+                    //                    </p>
+                    //                    <p class="text-muted">Reviews (24)</p>
+                    //                </div>
+                    //            </div>
+                    //        </div>
+                    //    `);
+                });
+            });
+    }
+
+    // GET ALL PAKET
+    function getAllPaketList() {
+        $.post("/Paket/getPaket", {},
+            function (data, status) {
+                //document.getElementById('tbodyListPaket').innerHTML = "";
+                //var isi = "";
+                $.each(data, function (i, item) {
+                    dataPaket = data;
+                    $('#featurePaket').append(`
+                            <div class="col-md-8 col-lg-6 col-xl-4 py-3">
+                                <div class="card text-black">
+                                    <div class="card-header rounded-top bg-info text-dark">
+                                        <h3 class="text-center" id="kode_paket">` + data[i].nama_paket + `</h3>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <h5 class="card-title">`+ data[i].kode_paket + `</h5>
+                                            <h4 class="text-muted mb-4">`+ data[i].deskripsi + `</h4>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center pb-2 mb-1 detailPaketItem" id="detailPaketItem">
+                                            <button type="button" class="btn btn-primary " onclick='showDetailPakets("` + data[i].id + `")' >
+                                                <i class="fa-solid fa-circle-info"></i>
+                                                See details
+                                            </button>
+                                        </div>
+                                        <div class="d-flex justify-content-between total font-weight-bold mt-4">
+                                            <span></span><span><h4>Rp. `+ data[i].harga_paket + `</h4></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    `);
+                });
+                //$.LoadingOverlay("hide");
+            });
+    }
+
+    // SHOW DETAIL PAKETS
+    function showDetailPakets(id) {
+        clearforminsertdetail();
+        $("#detailsPacketModal").modal("show");
+        var d = dataPaket.find(function (s) { return s.id == id });
+        //var kodePaket = $("#kode_paket").val(d.kode_paket).val();
+        //var idPaket = d.id;
+
+        $.post('/Paket/getDetailPaket', { id_paket: id },
+            function (data, status) {
+                $.each(data, function (i, item) {
+                    var imgUrl = "../../Content/ImgProduct/" + data[i].img_product;
+                    dataPaket = data;
+
+                    $('.modalTitleDetailProdukPaket').html(`<span>"` + data[i].nama_paket + `"</span>`);
+
+                    $('#modalBodyDetailProductPakets').append(`
+                        <section style="background-color: #eee;">
+                            <div class="container py-2">
+                                <div class="row justify-content-center mb-3">
+                                    <div class="col-md-12 col-xl-10">
+                                        <div class="card shadow-0 border rounded-3">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                                        <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                                            <img src="`+ imgUrl + `" class="w-100" />
+                                                            <a href="#!">
+                                                                <div class="hover-overlay">
+                                                                  <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-xl-6">
+                                                        <h5>`+ data[i].nama_product + `</h5>
+                                                        <div class="d-flex flex-row">
+                                                            <div class="text-danger mb-1 me-2">
+                                                                <i class="fa fa-star fa-beat" style="--fa-beat-scale: 1.0;"></i>
+                                                                <i class="fa fa-star fa-beat" style="--fa-beat-scale: 1.5;"></i>
+                                                                <i class="fa fa-star fa-beat" style="--fa-beat-scale: 2.0;"></i>
+                                                                <i class="fa fa-star fa-beat" style="--fa-beat-scale: 2.5;"></i>
+                                                            </div>
+                                                            <span>` + data[i].id_product + `</span>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 text-muted small">
+                                                          <span>`+ data[i].qty + ` ` + data[i].satuan + `</span>
+                                                          <span class="text-primary"> • </span>
+                                                          <span>Produk Terlaris</span>
+                                                          <span class="text-primary"> • </span>
+                                                          <span>Mudah Digunakan<br /></span>
+                                                        </div>
+                                                        <div class="mb-2 text-muted small">
+                                                          <span><a href="`+ data[i].url_product + `">` + data[i].url_product + `</a></span>
+                                                        </div>
+                                                        <h4 class="text-truncate mb-4 mb-md-0">Rp. ` + data[i].harga + `</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <section>
+                    `);
+                });
+            });
+    }
+
+    function transaksi() {
+        $("#transaksiModal").modal("show");
+
+    }
+
+    function clearforminsert() {
+        var e = document.querySelectorAll("#dataInsert input");
+        for (var i = 0; i < e.length; i++) { e[i].value = ""; }
+        $("#command").val("insert");
+    }
+
+    function clearforminsertdetail() {
+        $(".modal").on("hidden.bs.modal", function () {
+            $(".modalBodyDetailProductPakets").html("");
+        });
+    }
+</script>
+
+
+<style>
+    .card-custom {
+        overflow: hidden;
+        min-height: 450px;
+        box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+    }
+
+    .card-custom-img {
+        height: 200px;
+        min-height: 200px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-color: inherit;
+    }
+
+    /*css 2*/
+    @@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    /** {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif
+    }*/
+
+    /*body {
+        margin-top: 30px;
+        background-color:#eee;
+    }
+
+    .container {
+        min-height: 100vh;
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }*/
+
+    /*p {
+        margin: 0px
+    }*/
+
+    .card {
+        /*width: 280px;*/
+        /*height: 520px;*/
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        background: #fff;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        user-select: none;
+        z-index: 10;
+        overflow: hidden
+    }
+
+        .card .backgroundEffect {
+            bottom: 0;
+            height: 0px;
+            width: 100%
+        }
+
+        .card:hover {
+            color: #000;
+            transform: scale(1.025);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px
+        }
+
+            .card:hover .backgroundEffect {
+                bottom: 0;
+                height: 320px;
+                width: 100%;
+                position: absolute;
+                z-index: -1;
+                background: #1b9ce3;
+                animation: popBackground 0.3s ease-in
+            }
+
+    @@keyframes popBackground {
+        0% {
+            height: 20px;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%
+        }
+
+        50% {
+            height: 80px;
+            border-top-left-radius: 75%;
+            border-top-right-radius: 75%
+        }
+
+        75% {
+            height: 160px;
+            border-top-left-radius: 85%;
+            border-top-right-radius: 85%
+        }
+
+        100% {
+            height: 320px;
+            border-top-left-radius: 100%;
+            border-top-right-radius: 100%
+        }
+    }
+
+    /*.card .pic {
+        position: relative
+    }
+
+    .card .pic img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover
+    }
+
+    .card .date {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 70px;
+        background-color: #1b9ce3;
+        color: white;
+        position: absolute;
+        bottom: 0px;
+        transition: all ease
+    }
+
+    .card .date .day {
+        font-size: 14px;
+        font-weight: 600
+    }
+
+    .card .date .month,
+    .card .date .year {
+        font-size: 10px
+    }
+
+    .card .text-muted {
+        font-size: 12px
+    }*/
+
+    /*.card:hover .text-muted {
+        color: #fff !important
+    }*/
+
+    /*.card .content {
+        padding: 0 20px
+    }*/
+
+    .card .content .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        background-color: #1b9ce3;
+        border-radius: 25px;
+        font-size: 12px;
+        border: none
+    }
+
+    .card:hover .content .btn {
+        background: #fff;
+        color: #1b9ce3;
+        box-shadow: #0000001a 0px 3px 5px
+    }
+
+    /*.card .content .btn .fas {
+        font-size: 10px;
+        padding-left: 5px
+    }*/
+
+    .card .content .foot .admin {
+        color: #1b9ce3;
+        font-size: 12px
+    }
+
+    /*.card:hover .content .foot .admin {
+        color: #fff
+    }*/
+
+    /*.card .content .foot .icon {
+        font-size: 12px
+    }*/
+</style>

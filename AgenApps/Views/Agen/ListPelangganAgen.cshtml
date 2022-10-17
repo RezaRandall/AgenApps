@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "ListPelangganAgen";
+    Layout = "~/Views/Shared/_LayoutUserAgen.cshtml";
+}
+
+<div class="container-fluid ">
+    <div class="col-lg-14 text-left ">
+        <div class="container pt-3 pb-3">
+            <table class="table">
+                <tr>
+                    <th scope="col" class="w-75">
+                        <h1>List Pelanggan</h1>
+                    </th>
+                    <th scope="col" class="text-end">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="inputSearchPelanggan">
+                            <button class="btn btn-outline-success" id="searchPelangganBtn">Search</button>
+                        </form>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+
+    <div class="container">
+        <table class="table table-striped table table-bordered" id="table_agen">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>Telepon</th>
+                    <th>Email</th>
+                    <th>Nama Instansi</th>
+                    <th>Paket</th>
+                    <th>Tanggal Transaksi</th>
+                    <th width="10%">Status</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyListPelanggan"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        getListPelangganByAgen();
+
+        // SEARCH LIST PELANGGAN FROM AGEN PAGE
+        $("#searchPelangganBtn").on('click', function (e) {
+            e.preventDefault();
+
+            var cari = $("#inputSearchPelanggan").val();
+            getListPelangganByAgen({ param: cari });
+
+        });
+
+
+    });
+
+    function getListPelangganByAgen(param) {
+        //var id_agen = $(this).val();
+
+        $.post("/Agen/getListPelangganByAgen", param,
+            function (data, status) {
+                document.getElementById('tbodyListPelanggan').innerHTML = "";
+                var isi = "";
+                $.each(data, function (i, item) {
+                    dataTransactions = data;
+
+                    isi += `<tr>
+                             <td>`+ (i + 1) + `</td>
+                             <td>`+ data[i].nama_pelanggan + `</td>
+                             <td>`+ data[i].alamat + `</td>
+                             <td>`+ data[i].telepon + `</td>
+                             <td>`+ data[i].email + `</td>
+                             <td>`+ data[i].nama_instansi + `</td>
+                             <td>`+ data[i].nama_paket + `</td>
+                             <td>`+ data[i].tanggal_transaksi + `</td>
+                             <td>`+ data[i].status_sewa + `</td>
+                          </tr>`;
+                });
+                if (data != "") {
+                    document.getElementById('tbodyListPelanggan').innerHTML += isi;
+                } else {
+                    document.getElementById('tbodyListPelanggan').innerHTML += "<tr><td colspan='8' class='center'>Belum Ada Data Pelanggan</td></tr>";
+                }
+                //$.LoadingOverlay("hide");
+            });
+    }
+
+
+
+</script>

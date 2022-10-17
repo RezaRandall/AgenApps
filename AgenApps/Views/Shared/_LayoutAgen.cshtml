@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Super User - AgenApps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/07befcf964.js" crossorigin="anonymous"></script>
+
+    <!--SWAL-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+
+    <!--DROPIFY-->
+    <script src="../../app-assest/vendors/dropify/js/dropify.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../app-assest/vendors/dropify/css/dropify.min.css">
+
+    <!--EXTERNAL CSS-->
+    <link href="~/Content/loading.css" />
+
+    <!--EXTERNAL JS-->
+    <script type="text/javascript" src="../../app-assest/external/js/listTransaksiForSuperUser.js"></script>
+    <script type="text/javascript" src="../../js/functions.js"></script>
+    <script src="~/Content/loading.js"></script>
+
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @@media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+    <style>
+        .navbar {
+            background: #0d273d;
+        }
+
+        .navbar-brand {
+        }
+
+            .navbar-brand img {
+                width: 143px;
+            }
+
+        footer {
+            background: #0d273d;
+        }
+
+        .parentdiv {
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="~/Content/Image/white logo.png" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="~/Akun/ListAgen">List Agen</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/Akun/Products">Products</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="~/Akun/Packets">Packets</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link navChange" href="~/Akun/ListTransaksiSuperUser">List Transaksi</a>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="logout()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"></path>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"></path>
+                    </svg>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="parentdiv">
+        @RenderBody()
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".parentdiv").css("min-height", screen.height - 50);
+
+            /* Code for changing active link on clicking */
+            $("body").on("click", ".nav-item a", function () {
+                $('li.active').removeClass('active').removeAttr('aria-current');
+                $('a[href="' + location.pathname + '"]').closest('li').addClass('active').attr('aria-current', 'page');
+            });
+           
+
+        });
+
+        function logout() {
+            $.post("/Akun/doLogout", {},
+                function (data, status) {
+                    console.log(status);
+                    window.location.reload();
+                });
+        }
+    </script>
+
+    <footer class="container-fluid text-center">
+        <div class="container">
+            &copy; 2022 - AgenApps - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+</body>
+</html>

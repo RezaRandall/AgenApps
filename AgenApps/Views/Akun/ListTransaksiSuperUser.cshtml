@@ -1,0 +1,139 @@
+﻿@{
+    ViewData["Title"] = "ListTransaksiSuperUser";
+    Layout = "~/Views/Shared/_LayoutAgen.cshtml";
+}
+
+<div class="container-fluid ">
+    <div class="col-lg-14 text-left ">
+        <section class="bg-light">
+
+            <div class="container-fluid py-1">
+                <div class="m-4">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="nav-item">
+                            <a href="#home" class="nav-link active" data-bs-toggle="tab">Semua Transaksi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#profile" class="nav-link" data-bs-toggle="tab">Transaksi Terbayar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#messages" class="nav-link" data-bs-toggle="tab">Transaksi Kadaluarsa</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="home">
+                            <div class="row">
+                                <div class="col" style='float: left; padding: 0px 0px 0px 25px'>
+                                    <h4 class="mt-2">Semua Transaksi</h4>
+                                </div>
+                                <div class="col" style='text-align: right; padding: 10px 25px 0px 0px'>
+                                    <form class="d-flex">
+                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="txtSearchListPelangganAll" autocomplete="off">
+                                        <button class="btn btn-outline-success" type="button" id="searchAllPelangganBtn">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Alamat</th>
+                                        <th>Telepon</th>
+                                        <th>Email</th>
+                                        <th>Nama Instansi</th>
+                                        <th>Paket</th>
+                                        <th>Tanggal Transaksi</th>
+                                        <th width="5%">Status</th>
+                                        <th width="5%">Lisensi</th>
+                                        <th>Total Harga</th>
+                                        <th>Nama Agen</th>
+                                        <th width="15%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyAllDtPelanggan">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="profile">
+                            <div class="row">
+                                <div class="col" style='float: left; padding: 0px 0px 0px 25px'>
+                                    <h4 class="mt-2">Pelanggan Sudah Bayar</h4>
+                                </div>
+                                <div class="col" style='text-align: right; padding: 10px 25px 0px 0px'>
+                                    <form class="d-flex">
+                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="txtSearchListPelangganPaid" autocomplete="off">
+                                        <button class="btn btn-outline-success" type="button" id="searchPaidPelangganBtn">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Alamat</th>
+                                        <th>Telepon</th>
+                                        <th>Email</th>
+                                        <th>Nama Instansi</th>
+                                        <th>Paket</th>
+                                        <th>Tanggal Transaksi</th>
+                                        <th width="5%">Status</th>
+                                        <th width="5%">Lisensi</th>
+                                        <th>Total Harga</th>
+                                        <th>Nama Agen</th>
+                                        <th width="15%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyAllDtPelangganPaid">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="messages">
+                            <div class="row">
+                                <div class="col" style='float: left; padding: 0px 0px 0px 25px'>
+                                    <h4 class="mt-2">Pelanggan Belum Bayar</h4>
+                                </div>
+                                <div class="col" style='text-align: right; padding: 10px 25px 0px 0px'>
+                                    <form class="d-flex">
+                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="txtSearchListPelangganExpired" autocomplete="off">
+                                        <button class="btn btn-outline-success" type="button" id="searchExpiredPelangganBtn">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Alamat</th>
+                                        <th>Telepon</th>
+                                        <th>Email</th>
+                                        <th>Nama Instansi</th>
+                                        <th>Paket</th>
+                                        <th>Tanggal Transaksi</th>
+                                        <th width="5%">Status</th>
+                                        <th width="5%">Lisensi</th>
+                                        <th>Total Harga</th>
+                                        <th>Nama Agen</th>
+                                        <th width="15%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyAllDtPelangganExp">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+<!--FLATPICKER-->
+<link rel='stylesheet' id='flatpickr-style-css' href='https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css?ver=5.2.4' type='text/css' media='all' />
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/flatpickr?ver=5.2.4'></script>
+
+<!--SWAL-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.2.6/dist/sweetalert2.all.min.js" integrity="sha256-Ry2q7Rf2s2TWPC2ddAg7eLmm7Am6S52743VTZRx9ENw=" crossorigin="anonymous"></script>
+

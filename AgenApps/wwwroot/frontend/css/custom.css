@@ -1,0 +1,186 @@
+/*---------------------------------------
+ *                                      *
+ *       Add Your Custom CSS Here       *
+ *                                      *
+ ---------------------------------------*/
+.grecaptcha-badge {
+    display: none;
+}
+.text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100% !important;
+    display: block !important;
+    overflow: hidden
+}
+.form-text {
+    margin-bottom: 10px;
+}
+.form-text input, .signin-signup-form .form-text .dropdown-toggle.btn-default {
+    width: 100%;
+    padding: 8px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    background-color: #f0f4fd;
+    font-size: 13px;
+    color: #526489;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+    .table input, .signin-signup-form .form-text .dropdown-toggle.btn-default {
+        width: 100%;
+        padding: 8px 20px;
+        text-align: left;
+        border: 0;
+        outline: 0;
+        border-radius: 8px;
+        background-color: #f0f4fd;
+        font-size: 13px;
+        color: #526489;
+        -webkit-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+    }
+.form-text textarea, .signin-signup-form .form-text .dropdown-toggle.btn-default {
+    width: 100%;
+    padding: 8px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    background-color: #f0f4fd;
+    font-size: 13px;
+    color: #526489;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.table textarea, .signin-signup-form .form-text .dropdown-toggle.btn-default {
+    width: 100%;
+    padding: 8px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    background-color: #f0f4fd;
+    font-size: 13px;
+    color: #526489;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+.mybox-price {
+    position: absolute;
+    right: 15px;
+}
+textarea {
+    resize: none;
+}
+
+select {
+    width: 100%;
+    padding: 8px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    background-color: #f0f4fd;
+    font-size: 13px;
+    color: #526489;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+.icon-fa {
+    background-color: #332f5c;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+}
+#contact-info .info-box:hover .icon-fa {
+    background-color: #3195ff;
+}
+
+
+.onoffswitch {
+    position: relative;
+    width: 100px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #D4D4D4;
+    border-radius: 20px;
+}
+
+.onoffswitch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+
+    .onoffswitch-inner:before, .onoffswitch-inner:after {
+        display: block;
+        float: left;
+        width: 50%;
+        height: 25px;
+        padding: 0;
+        line-height: 25px;
+        font-size: 14px;
+        color: white;
+        font-family: Trebuchet, Arial, sans-serif;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    .onoffswitch-inner:before {
+        content: "Berbayar";
+        padding-left: 10px;
+        background-color: #3195ff;
+        color: #FFFFFF;
+    }
+
+    .onoffswitch-inner:after {
+        content: "Gratis";
+        padding-right: 10px;
+        background-color: #EEEEEE;
+        color: #828282;
+        text-align: right;
+    }
+
+.onoffswitch-switch {
+    display: block;
+    width: 16px;
+    margin: 4.5px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 61px;
+    border: 2px solid #D4D4D4;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+/*@media only screen and (max-width: 991px) {
+    #box-price {
+        position: relative;
+        display:block;
+    }
+}*/
