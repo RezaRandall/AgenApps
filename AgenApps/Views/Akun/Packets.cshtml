@@ -565,14 +565,6 @@
                         }
                     });
                     sumPriceEachRow();
-
-                    //var totalPrice = 0;
-                    //detailpaket.forEach(function (data) {
-                    //    totalPrice += parseInt(data.harga);
-                    //    //$(".allTotalPrice").html(formatRP(totalPrice));
-                    //    $(".subtotal").html(formatRP(totalPrice));
-                    //    diskon2();
-                    //});
                 });
 
             $("#command").val("update");
@@ -708,10 +700,7 @@
         
         detailpaket.splice(idx, 1);
         sumPriceEachRow();
-        //if (idx == 0) {
-        //    $("#subTotal").html(0);
-        //    $("#harga_paket").html("");
-        //}
+
         if (idx == null || idx == undefined) {
             $("#subTotal").html(0);
             $("#harga_paket").html("");

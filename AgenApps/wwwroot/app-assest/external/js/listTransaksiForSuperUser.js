@@ -189,8 +189,6 @@ function getListExpTransaksiSuperUser(param) {
 }
 
 function updateStatusSewa(statusSewa, kodeTransaksi, idPaket) {
-    //let flatpickrInstances
-    //let flatpickr
 
     if (statusSewa == "paid") {
         Swal.fire({
@@ -303,19 +301,3 @@ function updateStatusSewa(statusSewa, kodeTransaksi, idPaket) {
 
 
 }
-
-//function formatRPid(num) {
-//    return new Intl.NumberFormat(`id-ID`, {
-//        currency: `IDR`,
-//        style: 'currency',
-//    }).format(num);
-//}
-
-
-
-
-    //    $.post("/SuperAdmin/updateStatusSewa", { status_sewa: statusSewa, kode_transaksi: kodeTransaksi, waktu_sewa: waktuSewa, satuan_paket: satuanPaket, tanggal_bayar: date },
-    //        function (data, status) {
-
-    //            window.location.reload();
-    //        });

@@ -70,12 +70,7 @@ namespace AgenApps.Controllers
         {
             List<UOM> v_var;
 
-            //string str1 = "";
-            //if (param != null)
-            //    str1 += "WHERE id_product LIKE '%" + param + "%' OR url_product LIKE '%" + param + "%' OR harga LIKE '%" + param + "%' OR nama_product LIKE '%" + param + "%'";
             string sql = @"SELECT * FROM DB_AGEN.dbo.jenis_satuan ORDER BY id_satuan ASC";
-
-            //return new JsonResult(sql);
 
             v_var = db.Database.SqlQuery<UOM>(sql).ToList();
             return Json(v_var);

@@ -14,10 +14,6 @@ namespace AgenApps.Controllers
         {
             List<User> v_var;
 
-            //string sql = @"SELECT * FROM users WHERE id_jenis_user = 2  ORDER BY create_at ASC";
-
-            //string sql = @"SELECT * FROM users WHERE id_jenis_user = 2 AND user_name LIKE '%kimet%' OR alamat LIKE '%kimet%' OR mobile_phone LIKE '%kimet%' OR kabupaten LIKE '%kimet%'  ORDER BY create_at ASC";
-
             string str1 = "";
 
             if (param != null)
@@ -93,18 +89,6 @@ namespace AgenApps.Controllers
             return Json(v_var);
         }
 
-        //public JsonResult getSearchAgen(string param)
-        //{
-        //    List<User> v_var;
-
-        //    string q = @"SELECT * FROM users WHERE id_jenis_user = 2 AND user_name LIKE '%" + param + "%' OR alamat LIKE '%" + param + "%' OR mobile_phone LIKE '%" + param + "%' OR kabupaten LIKE '%" + param + "%'  ORDER BY create_at ASC";
-
-        //    v_var = db.Database.SqlQuery<User>(q).ToList();
-        //    return Json(v_var);
-        //}
-
-
-
         public JsonResult getJenisUser()
         {
             List<JenisUser> v_var;
@@ -117,9 +101,6 @@ namespace AgenApps.Controllers
         public IActionResult simpanagen([FromForm] User data)
         {
             reponse res = new reponse();
-            //List<JenisUser> v_var;
-            //string s = @"SELECT * FROM users where user_name='" + data.user_name + "'";
-            //v_var = db.Database.SqlQuery<JenisUser>(s).ToList();
 
             var firstName = data.first_name.Replace( "'", "''");
             var lastName = data.last_name.Replace( "'", "''");
