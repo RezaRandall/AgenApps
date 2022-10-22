@@ -87,7 +87,7 @@ namespace pkmcore.Models
         public string deskripsi_produk { get; set; }
         public string nama_paket { get; set; }
         public int? qty { get; set; }
-        public int qty_paket { get; set; }
+        public int? qty_paket { get; set; }
         public string satuan { get; set; }
         public string satuan_paket { get; set; }
         public Int64 total_harga { get; set; }
@@ -298,6 +298,8 @@ namespace pkmcore.Models
         public string satuan_paket { get; set; }
         public string id_produk { get; set; }
         public string jenjang { get; set; }
+        public string pengguna_email { get; set; }
+        public string pengguna_password { get; set; }
     }
 
     public class Sekolah
@@ -404,213 +406,213 @@ namespace pkmcore.Models
             }
         }
 
-        public List<akun> gethakakses(string nama, string level)
-        {
-            try
-            {
-                string where = "";
-                if (nama != "" & nama != null)
-                {
-                    nama = " and aset.[customer] like '%" + nama + "%'";
-                }
-                if (level != "" & level != null)
-                {
-                    level = " and akun.[level] = '" + level + "'";
-                }
-                where = nama + level;
-                if (where.Length > 0)
-                {
-                    where = " where " + where.Substring(4);
-                }
+        //        public List<akun> gethakakses(string nama, string level)
+        //        {
+        //            try
+        //            {
+        //                string where = "";
+        //                if (nama != "" & nama != null)
+        //                {
+        //                    nama = " and aset.[customer] like '%" + nama + "%'";
+        //                }
+        //                if (level != "" & level != null)
+        //                {
+        //                    level = " and akun.[level] = '" + level + "'";
+        //                }
+        //                where = nama + level;
+        //                if (where.Length > 0)
+        //                {
+        //                    where = " where " + where.Substring(4);
+        //                }
 
-                string sql = @"SELECT akun.[username]
-      ,akun.[password]
-      ,akun.[groupid]
-,isnull(akun.[bidang],0) as bidang
-,tbidang.nama as namabidang
-      ,akun.[level]
-,isnull(pokmas.jumlah,0) + isnull(pokmas_kec.jumlah,0) + isnull(tbidang.jumlah,0) as jumlah_pokmas
-  FROM [bappeda].[dbo].[akun] 
- left join ( select user_pkm,count(pokmas.id_pokmas) as jumlah from pokmas group by user_pkm) pokmas on pokmas.user_pkm=akun.username and akun.level=2
-  left join ( select pokmas.kecamatan,count(pokmas.id_pokmas) as jumlah from pokmas group by kecamatan) pokmas_kec on pokmas_kec.kecamatan=akun.groupid and akun.level=1
-        left join (select b.bidang_id,b.nama,count(pokmas.id_pokmas) as jumlah 
-        from bidang b
-        left join jenis_usaha ju on b.bidang_id=ju.bidang_id
-        left join pokmas on ju.jenis_usaha_id=pokmas.jenis_usaha_id
-        group by b.bidang_id,b.nama
-        ) 
-        tbidang on tbidang.bidang_id=akun.bidang and akun.level=3
-" + where + "" +
-" order by akun.username asc";
-                var d = context.Database.SqlQuery<akun>(sql).ToList();
-                return d;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-
-
-        }
-      
-        public response setanggota_pkm(string userid, List<string> pokmas)
-        {
-            response hasil = new response();
-            try
-            {
-                // datapost.total = datapost.qty * datapost.harga;
-                string sql = "";
-                foreach (string s in pokmas)
-                {
-                    sql = sql + @"UPDATE [dbo].[pokmas]
-   SET [user_pkm] = '" + userid + "'" +
-     " WHERE [id_pokmas] = '" + s + "'";
-                }
-
-                var d = context.Database.ExecuteSqlCommand(sql);
-                hasil.hasil = true;
-                return hasil;
-            }
-            catch (Exception ex)
-            {
-                hasil.keterangan = ex.Message;
-                return hasil;
-            }
+        //                string sql = @"SELECT akun.[username]
+        //      ,akun.[password]
+        //      ,akun.[groupid]
+        //,isnull(akun.[bidang],0) as bidang
+        //,tbidang.nama as namabidang
+        //      ,akun.[level]
+        //,isnull(pokmas.jumlah,0) + isnull(pokmas_kec.jumlah,0) + isnull(tbidang.jumlah,0) as jumlah_pokmas
+        //  FROM [bappeda].[dbo].[akun] 
+        // left join ( select user_pkm,count(pokmas.id_pokmas) as jumlah from pokmas group by user_pkm) pokmas on pokmas.user_pkm=akun.username and akun.level=2
+        //  left join ( select pokmas.kecamatan,count(pokmas.id_pokmas) as jumlah from pokmas group by kecamatan) pokmas_kec on pokmas_kec.kecamatan=akun.groupid and akun.level=1
+        //        left join (select b.bidang_id,b.nama,count(pokmas.id_pokmas) as jumlah 
+        //        from bidang b
+        //        left join jenis_usaha ju on b.bidang_id=ju.bidang_id
+        //        left join pokmas on ju.jenis_usaha_id=pokmas.jenis_usaha_id
+        //        group by b.bidang_id,b.nama
+        //        ) 
+        //        tbidang on tbidang.bidang_id=akun.bidang and akun.level=3
+        //" + where + "" +
+        //" order by akun.username asc";
+        //                var d = context.Database.SqlQuery<akun>(sql).ToList();
+        //                return d;
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                return null;
+        //            }
 
 
-        }
-        public response resetanggota_pkm(string userid)
-        {
-            response hasil = new response();
-            try
-            {
-                // datapost.total = datapost.qty * datapost.harga;
-                string sql = "";
-                sql = @"UPDATE [dbo].[pokmas]
-   SET [user_pkm] = ''" +
-     " WHERE [user_pkm] = '" + userid + "'";
+        //        }
 
-                var d = context.Database.ExecuteSqlCommand(sql);
-                hasil.hasil = true;
-                return hasil;
-            }
-            catch (Exception ex)
-            {
-                hasil.keterangan = ex.Message;
-                return hasil;
-            }
+        //     public response setanggota_pkm(string userid, List<string> pokmas)
+        //     {
+        //         response hasil = new response();
+        //         try
+        //         {
+        //             // datapost.total = datapost.qty * datapost.harga;
+        //             string sql = "";
+        //             foreach (string s in pokmas)
+        //             {
+        //                 sql = sql + @"UPDATE [dbo].[pokmas]
+        //SET [user_pkm] = '" + userid + "'" +
+        //  " WHERE [id_pokmas] = '" + s + "'";
+        //             }
 
-
-        }
-        public response hapusanggota_pkm(List<string> pokmas)
-        {
-            response hasil = new response();
-            try
-            {
-                // datapost.total = datapost.qty * datapost.harga;
-                string sql = "";
-                foreach (string s in pokmas)
-                {
-                    sql = sql + @"UPDATE [dbo].[pokmas]
-   SET [user_pkm] = ''" +
-     " WHERE [id_pokmas] = '" + s + "'";
-                }
-
-                var d = context.Database.ExecuteSqlCommand(sql);
-                hasil.hasil = true;
-                return hasil;
-            }
-            catch (Exception ex)
-            {
-                hasil.keterangan = ex.Message;
-                return hasil;
-            }
+        //             var d = context.Database.ExecuteSqlCommand(sql);
+        //             hasil.hasil = true;
+        //             return hasil;
+        //         }
+        //         catch (Exception ex)
+        //         {
+        //             hasil.keterangan = ex.Message;
+        //             return hasil;
+        //         }
 
 
-        }
-        public response inserthakakses(akun datapost)
-        {
-            response hasil = new response();
-            try
-            {
+        //     }
+        //     public response resetanggota_pkm(string userid)
+        //     {
+        //         response hasil = new response();
+        //         try
+        //         {
+        //             // datapost.total = datapost.qty * datapost.harga;
+        //             string sql = "";
+        //             sql = @"UPDATE [dbo].[pokmas]
+        //SET [user_pkm] = ''" +
+        //  " WHERE [user_pkm] = '" + userid + "'";
 
-                if (datapost.username == "" || datapost.username == null)
-                {
-                    hasil.keterangan = "Data Tidak Lengkap";
-                    return hasil;
-                }
-                else
-                {
-
-                    string sql = @"INSERT INTO [dbo].[akun]
-           ([username]
-           ,[password]
-           ,[groupid]
-           ,[level],bidang)
-     VALUES
-           ('" +datapost.username + "'"+
-           ",'" +datapost.password + "'" +
-           ",'" + datapost.groupid + "'" +
-           ",'" + datapost.level + "','" + datapost.bidang + "')";
-                    var d = context.Database.ExecuteSqlCommand(sql);
-                    hasil.hasil = true;
-                    return hasil;
-                }
+        //             var d = context.Database.ExecuteSqlCommand(sql);
+        //             hasil.hasil = true;
+        //             return hasil;
+        //         }
+        //         catch (Exception ex)
+        //         {
+        //             hasil.keterangan = ex.Message;
+        //             return hasil;
+        //         }
 
 
-            }
-            catch (Exception ex)
-            {
-                hasil.keterangan = ex.Message;
-                return hasil;
-            }
+        //     }
+        //     public response hapusanggota_pkm(List<string> pokmas)
+        //     {
+        //         response hasil = new response();
+        //         try
+        //         {
+        //             // datapost.total = datapost.qty * datapost.harga;
+        //             string sql = "";
+        //             foreach (string s in pokmas)
+        //             {
+        //                 sql = sql + @"UPDATE [dbo].[pokmas]
+        //SET [user_pkm] = ''" +
+        //  " WHERE [id_pokmas] = '" + s + "'";
+        //             }
+
+        //             var d = context.Database.ExecuteSqlCommand(sql);
+        //             hasil.hasil = true;
+        //             return hasil;
+        //         }
+        //         catch (Exception ex)
+        //         {
+        //             hasil.keterangan = ex.Message;
+        //             return hasil;
+        //         }
 
 
-        }
-        public response updatehakakses(akun datapost)
-        {
-            response hasil = new response();
-            try
-            {
-                // datapost.total = datapost.qty * datapost.harga;
-                string sql = @"UPDATE [dbo].[akun]
-   SET [username] = '" + datapost.username + "'" +
-      ",[password] = '" + datapost.password + "'" +
-      ",[groupid] = '" + datapost.groupid + "'" +
-      ",[bidang] = '" + datapost.bidang + "'" +
-      ",[level] = '" + datapost.level + "'" +
- " WHERE [username] = '" + datapost.username_key + "'";
-                var d = context.Database.ExecuteSqlCommand(sql);
-                hasil.hasil = true;
-                return hasil;
-            }
-            catch (Exception ex)
-            {
-                hasil.keterangan = ex.Message;
-                return hasil;
-            }
+        //     }
+        //   public response inserthakakses(akun datapost)
+        //   {
+        //       response hasil = new response();
+        //       try
+        //       {
+
+        //           if (datapost.username == "" || datapost.username == null)
+        //           {
+        //               hasil.keterangan = "Data Tidak Lengkap";
+        //               return hasil;
+        //           }
+        //           else
+        //           {
+
+        //               string sql = @"INSERT INTO [dbo].[akun]
+        //      ([username]
+        //      ,[password]
+        //      ,[groupid]
+        //      ,[level],bidang)
+        //VALUES
+        //      ('" +datapost.username + "'"+
+        //      ",'" +datapost.password + "'" +
+        //      ",'" + datapost.groupid + "'" +
+        //      ",'" + datapost.level + "','" + datapost.bidang + "')";
+        //               var d = context.Database.ExecuteSqlCommand(sql);
+        //               hasil.hasil = true;
+        //               return hasil;
+        //           }
 
 
-        }
-        public response deletehakakses(akun datapost)
-        {
-            response hasil = new response();
-            try
-            {
-
-                string sql = @"DELETE FROM [dbo].[akun]  WHERE [username] = '" + datapost.username_key + "'";
-                var d = context.Database.ExecuteSqlCommand(sql);
-                hasil.hasil = true;
-                return hasil;
-            }
-            catch (Exception ex)
-            {
-                hasil.keterangan = ex.Message;
-                return hasil;
-            }
+        //       }
+        //       catch (Exception ex)
+        //       {
+        //           hasil.keterangan = ex.Message;
+        //           return hasil;
+        //       }
 
 
-        }
+        //   }
+        //       public response updatehakakses(akun datapost)
+        //       {
+        //           response hasil = new response();
+        //           try
+        //           {
+        //               // datapost.total = datapost.qty * datapost.harga;
+        //               string sql = @"UPDATE [dbo].[akun]
+        //  SET [username] = '" + datapost.username + "'" +
+        //     ",[password] = '" + datapost.password + "'" +
+        //     ",[groupid] = '" + datapost.groupid + "'" +
+        //     ",[bidang] = '" + datapost.bidang + "'" +
+        //     ",[level] = '" + datapost.level + "'" +
+        //" WHERE [username] = '" + datapost.username_key + "'";
+        //               var d = context.Database.ExecuteSqlCommand(sql);
+        //               hasil.hasil = true;
+        //               return hasil;
+        //           }
+        //           catch (Exception ex)
+        //           {
+        //               hasil.keterangan = ex.Message;
+        //               return hasil;
+        //           }
+
+
+        //       }
+        //public response deletehakakses(akun datapost)
+        //{
+        //    response hasil = new response();
+        //    try
+        //    {
+
+        //        string sql = @"DELETE FROM [dbo].[akun]  WHERE [username] = '" + datapost.username_key + "'";
+        //        var d = context.Database.ExecuteSqlCommand(sql);
+        //        hasil.hasil = true;
+        //        return hasil;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        hasil.keterangan = ex.Message;
+        //        return hasil;
+        //    }
+
+
+        //}
         public void Dispose()
         {
             context.Dispose();

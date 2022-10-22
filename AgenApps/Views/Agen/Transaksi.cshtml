@@ -121,7 +121,8 @@
                                                             <div class="group-row">
                                                                 <div class="caption"></div>
                                                                 <div class="separator"></div>
-                                                                <div class="value"><button>Get Admin Akun</button></div>
+                                                                @*<div class="value" id="btnSubmit" ><button>Get Admin Akun</button></div>*@
+                                                                <div class="value" id="btnGetAdminAccount" ><button type="button" class="btn btn-primary btn-sm">Get Admin Akun</button></div>
 
                                                             </div>
                                                         </div>
@@ -133,6 +134,7 @@
                                                                         <th>Nama Produk</th>
                                                                         @*<th>Deskripsi</th>*@
                                                                         <th>Qty</th>
+                                                                        <th>Diskon</th>
                                                                         <th>Satuan</th>
                                                                         <th>Harga</th>
 
@@ -164,7 +166,7 @@
                                                             @*<input type="text" name="id" id="id" value="" />*@
                                                             @*<button type="button" class="btn" id="btnToggleCancel" data-bs-dismiss="modal">Batal</button>*@
                                                             @*<button type="button" id="btnToggleCancel" class="btn btn-secondary">Cancel</button>*@
-                                                            <button type="button" class="btn btn-primary">OK</button>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -275,7 +277,6 @@
 
         });
 
-
         // SEARCH EXPIRED TRANSACTION TAB
         $("#searchPelangganBtn").on('click', function (e) {
             e.preventDefault();
@@ -285,9 +286,29 @@
 
         });
 
-
-
+        $("#btnGetAdminAccount").click(function () {
+            getAdminAccount();
+        });
     });
+
+    function getAdminAccount() {
+        var kodePel = $('#kode_pelanggan').html();
+        $.get("/Paket/getAdminAccount", { kodePel: kodePel },
+            function (data, status) {
+                if (data.length == 0) {
+                    alert('Silahkan Hubungi Pembeli Untuk Melakukan Pembayaran');
+                }
+                $.each(data, function (i, item) {
+                    var penggunaEmail = data[0].pengguna_email;
+                    var penggunaPass = data[0].pengguna_password;
+
+                    $('#admin_user').html(data[0].pengguna_email);
+                    $('#admin_password').html(data[0].pengguna_password);
+
+                });
+            });
+    }
+
     function opendetail(kode_transaksi) {
         $.get("/paket/detailTransaksi?kode_transaksi=" + kode_transaksi, {},
             function (data, status) {
@@ -298,12 +319,15 @@
                     $("#nama_pelanggan").html(data[0].nama_pelanggan + '</br> Instansi : ' + data[0].nama_instansi);
                     $("#status_sewa").html(data[0].status_sewa);
                     $("#tbodyListPilihPaket").html('');
+                    $('#admin_user').html("");
+                    $('#admin_password').html("");
                     var total = 0;
                     var ppn = 0;
                     $.each(data, function (index, item) {
                         var tr = "<tr>" +
                             "<td>" + item.deskripsi_produk + "</td>" +
                             "<td>" + item.qty_paket + "</td>" +
+                            "<td>" + item.diskon + "%</td>" +
                             "<td>" + item.satuan_paket + "</td>" +
                             "<td>" + formatRP(item.total_harga) + "</td>";
                         $("#tbodyListPilihPaket").append(tr);
@@ -411,5 +435,38 @@
                 //$.LoadingOverlay("hide");
             });
     }
+
+    // CANCELLED TRANSACTION BY TRANSACTION NUMBER
+    function batal(trnNumber) {
+        swal({
+            title: "Anda Yakin Akan Membatalkan Transaksi ini?",
+            text: "Data yang telah dibatalkan tidak bisa dikembalikan!",
+            icon: 'warning',
+            dangerMode: true,
+            buttons: {
+                cancel: 'Tidak!',
+                delete: 'Ya'
+            }
+        }).then(function (willDelete) {
+            if (willDelete) {
+                $.post("/Paket/deleteTransaksi", { trnNumber: trnNumber },
+                    function (data, status) {
+                        if (status == 'success') {
+                            swal("Transaksi Berhasil Dibatalkan!", "Click Button OK!", {
+                                icon: "success",
+                            }).then(function () {
+                                location.reload();
+                            });
+                        }
+                    }
+                )
+            }
+        });
+
+        //$.post("/Agen/getAllDataTransactionExp", trnNumber, )
+    }
+
+
+
 </script>
 

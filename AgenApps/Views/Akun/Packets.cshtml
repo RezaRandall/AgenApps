@@ -167,7 +167,7 @@
                                                 <td class="borderNone"></td>
                                                 <td style="border-bottom: 3pt solid rgba(0, 0, 0, 0.05); ">Discount</td>
                                                 <td style="border-bottom: 3pt solid rgba(0, 0, 0, 0.05);">
-                                                    <input type="text" class="form-control" id="diskon" name="diskon" style="width:50%" />
+                                                    <input type="text" class="form-control numberOnly" id="diskon" name="diskon" style="width:50%" />
                                                 </td>
                                                 <td class="borderNone"></td>
                                                 <td class="borderNone"></td>
@@ -507,7 +507,7 @@
                                      <td class="allQty">`+ data[i].qty + `</td>
                                      <td class="allQtyMax">`+ data[i].qty_max + `</td>
                                      <td>
-                                        <input type="text" class="form-control kuantitas numberOnly" id="kuantitas" idxx="`+ $('.input-row').length + `" value=` + data[i].kuantitas + ` name="produk[` + i + `].kuantitas" value="` + data[i].kuantitas + `" />
+                                        <input type="text" field="kuantitas" class="form-control kuantitas numberOnly" id="kuantitas" idxx="`+ $('.input-row').length + `" value=` + data[i].kuantitas + ` name="produk[` + i + `].kuantitas" value="` + data[i].kuantitas + `" />
                                      </td>
                                      <td class="price">`+ formatRP(data[i].harga) + `</td>
                                      <td class="amount">`+ formatRP(amount) + `</td>
@@ -539,7 +539,7 @@
                                      <td class="allQty">`+ data[i].qty + `</td>
                                      <td class="allQtyMax">`+ data[i].qty_max + `</td>
                                      <td>
-                                        <input type="text" class="form-control kuantitas numberOnly" id="kuantitas" idxx="`+ $('.input-row').length + `" disabled/>
+                                        <input type="text" field="kuantitas" class="form-control kuantitas numberOnly" id="kuantitas" idxx="`+ $('.input-row').length + `" disabled/>
                                      </td>
                                      <td class="price">`+ formatRP(data[i].harga) + `</td>
                                      <td class="amount">`+ formatRP(data[i].harga) + `</td>
@@ -708,7 +708,11 @@
         
         detailpaket.splice(idx, 1);
         sumPriceEachRow();
-        if (idx == 0) {
+        //if (idx == 0) {
+        //    $("#subTotal").html(0);
+        //    $("#harga_paket").html("");
+        //}
+        if (idx == null || idx == undefined) {
             $("#subTotal").html(0);
             $("#harga_paket").html("");
         }

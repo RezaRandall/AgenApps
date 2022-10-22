@@ -44,9 +44,6 @@
     });
 });
 
-
-
-
 // GET ALL DATA TRANSACTION
 function getAllDataTransaction() {
     $.post("/Agen/getAllDataTransaction", {},
@@ -270,25 +267,25 @@ function addproduk() {
     var waktu_sewa = $('#waktu_sewa').val();
     var jangka_sewa = $('#jangka_sewa').val();
     $('#tbodyListPilihPaket').append(`
-                                                <tr class="input-row" id-row` + ($('.input-row').length + 1) + `">
-                                                    <td id="id_produk" class="id_produk">`+ namaProduk + `</td>
-                                                    <td class='allSatuan'>`+ satuan + `</td>
-                                                    <td class="allQty">`+ qty + `</td>
-                                                    <td class="price">`+ harga + `</td>
-                                                    <td class="">`+ jangka_sewa + `</td>
-                                                    <td class="">`+ waktu_sewa + `</td>
-                                                    <td>
-                                                        <button type='button' id="btnDel removeItem-` + ($('.input-row').length + 1) + `" class='btnDel remove-row' >
-                                                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash' viewBox='0 0 16 16'><path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z'></path><path fill-rule='evenodd' d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'></path></svg>
-                                                        </button>
-                                                    </td>
-                                                    <input type="hidden" field="id_product" name="produk[`+ ($('.input-row').length + 0) + `].id_product" value=` + idProduk + ` readonly />
-                                                    <input type="hidden" field="satuan" name="produk[`+ ($('.input-row').length + 0) + `].satuan" value=` + satuan + ` readonly />
-                                                    <input type="hidden" field="jumlah_satuan" name="produk[`+ ($('.input-row').length + 0) + `].jumlah_satuan" value=` + qty + ` readonly />
-                                                    <input type="hidden" field="harga" name="produk[`+ ($('.input-row').length + 0) + `].harga" value=` + harga + ` readonly />
-                                                    <input type="hidden" field="waktu_sewa" name="produk[`+ ($('.input-row').length + 0) + `].waktu_sewa" value=` + waktu_sewa + ` readonly />
-                                                    <input type="hidden" field="jangka_sewa" name="produk[`+ ($('.input-row').length + 0) + `].jangka_sewa" value=` + jangka_sewa + ` readonly />
-                                                </tr>`);
+          <tr class="input-row" id-row` + ($('.input-row').length + 1) + `">
+              <td id="id_produk" class="id_produk">`+ namaProduk + `</td>
+              <td class='allSatuan'>`+ satuan + `</td>
+              <td class="allQty">`+ qty + `</td>
+              <td class="price">`+ harga + `</td>
+              <td class="">`+ jangka_sewa + `</td>
+              <td class="">`+ waktu_sewa + `</td>
+              <td>
+                  <button type='button' id="btnDel removeItem-` + ($('.input-row').length + 1) + `" class='btnDel remove-row' >
+                      <svgxmln  http:www.w3.org/2000svg'width='16'height='16'fill='currentColor'class='bibitrash'viewBox='001616'><pathd='M5.55.5A.5.6v6a.5.5001-10V6a.5.1 .5-.5zm2.50a.5.5001 .5.5v6.5.5001-1Va .5.5001 .5.5m3 .5a.5.5- 10v6a.5.50000V6z'><path><pathfillrule='evenodd'd='M14.5 3a1  0 0 1-11H13v9a2 2001-2H5a22001-2-2V4h-.5a11001-1-1V2a10011-1H6a11  011-1h2 0  111h3.5a1 00  11 1v1zM4.118 4 44.059V13a1 1 00011h6a 001-1V4.059L11.8824H4.118zM2.53V2h11v1h-11z'><path><svg>
+                  </button>
+              </td>
+              <input type="hidden" field="id_product" name="produk[`+ ($('.input-row').length + 0) + `].id_product" value=` + idProduk + ` readonly />
+              <input type="hidden" field="satuan" name="produk[`+ ($('.input-row').length + 0) + `].satuan" value=` + satuan + ` readonly />
+              <input type="hidden" field="jumlah_satuan" name="produk[`+ ($('.input-row').length + 0) + `].jumlah_satuan" value=` + qty + ` readonly />
+              <input type="hidden" field="harga" name="produk[`+ ($('.input-row').length + 0) + `].harga" value=` + harga + ` readonly />
+              <input type="hidden" field="waktu_sewa" name="produk[`+ ($('.input-row').length + 0) + `].waktu_sewa" value=` + waktu_sewa + ` readonly />
+              <input type="hidden" field="jangka_sewa" name="produk[`+ ($('.input-row').length + 0) + `].jangka_sewa" value=` + jangka_sewa + ` readonly />
+          </tr>`);
     //x += 1;
     $('#tipeProduk').val('');
     $('#satuan').val('');

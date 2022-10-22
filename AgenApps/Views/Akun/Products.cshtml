@@ -63,12 +63,12 @@
                                     </select>
                                 </div>
                                 <div class="col ms-auto">
-                                    @*<label for="recipient-name" class="col-form-label">Jenis Sewa :</label>
+                                    <label for="recipient-name" class="col-form-label">Jenis Sewa :</label>
                                     <select class="form-select" aria-label="Default select example" name="jenis_sewa" id="jenis_sewa">
-                                        <option selected>Pilih Waktu</option>
+                                        <option selected>Kategori Jenis Sewa</option>
                                         <option value="tahun">Sewa Tahunan</option>
                                         <option value="hakmilik">Hak Milik</option>
-                                    </select>*@
+                                    </select>
                                     <label for="recipient-name" class="col-form-label">Deskripsi :</label>
                                     <textarea class="form-control" id="description" name="description" ></textarea>
                                 </div>
@@ -127,24 +127,40 @@
 
 <script type="text/javascript">
     var dataProducts = [];
-    var produkArray = [];
+    console.log(dataProducts);
+    //var produkArray = [];
+    //console.log(produkArray);
+    //console.log(dataProducts);
 
-    var produkArrTransaction = [];
-    var produkArrAll = [];
+    var allProducts = [];
+    console.log(allProducts);
+
+    var productHaveTransaction = [];
+    console.log(productHaveTransaction);
+
+    //var produkArrAll = [];
+    //console.log(produkArrAll);
     $(document).ready(function () {
         $('.dropify').dropify();
-        //$('.currency').maskMoney();
 
-        //$.post("/SuperAdmin/getIdProduk",
-        //    function (datas, status) {
-        //        $.each(datas, function (i, item) {
-        //            produkArrTransaction.push(datas[i].id_produk);
-        //        })
-        //    });
+        $.post("/Product/getIdProdukFromTransaction",
+            function (datas, status) {
+                $.each(datas, function (i, item) {
+                    productHaveTransaction.push(datas[i].id_produk);
+                })
+            });
+
+        $.post("/Product/getProduct",
+            function (datas, status) {
+                $.each(datas, function (i, item) {
+                    allProducts.push(datas[i].id_produk);
+                })
+            });
 
         getAllProductList({});
         clearImage();
         showEditProduct(id);
+        //disableDelete();
 
         // SEARCH PRODUCT FUNCTION
         $("#searchProdukBtn").on('click', function (e) {
@@ -170,47 +186,8 @@
             }
         });
 
-        $("textarea").keydown(function (e) {
-            if (e.keyCode === 9) { // tab was pressed
-                // get caret position/selection
-                var start = this.selectionStart;
-                end = this.selectionEnd;
 
-                var $this = $(this);
 
-                // set textarea value to: text before caret + tab + text after caret
-                $this.val($this.val().substring(0, start)
-                    + "\t"
-                    + $this.val().substring(end));
-
-                // put caret at right position again
-                this.selectionStart = this.selectionEnd = start + 1;
-
-                // prevent the focus lose
-                return false;
-            }
-        });
-        
-        $("#descriptionProduk").keydown(function (e) {
-            if (e.keyCode === 9) { // tab was pressed
-                // get caret position/selection
-                var start = this.selectionStart;
-                end = this.selectionEnd;
-
-                var $this = $(this);
-
-                // set textarea value to: text before caret + tab + text after caret
-                $this.val($this.val().substring(0, start)
-                    + "\t"
-                    + $this.val().substring(end));
-
-                // put caret at right position again
-                this.selectionStart = this.selectionEnd = start + 1;
-
-                // prevent the focus lose
-                return false;
-            }
-        });
     });
 
     function saveproduct() {
@@ -272,26 +249,36 @@
                 var isi = "";
                 $.each(data, function (i, item) {
                     dataProducts = data;
-                    produkArrAll.push(data[i].id_product);
+                    //allProducts.push(data[i].id_product);
 
 
-                    //let idProd = $.inArray(produkArrAll, produkArrTransaction) < -1;
+                    //let idProd = $.inArray(allProducts, productHaveTransaction) < -1;
+                    let idProd = $.inArray(data[i].id_product, productHaveTransaction) !== -1;
 
-                    //if (idProd == true) {
-                    //    $('.btnDel').prop('disabled', true)
-                    //}
-                    //else {
-                    //    $('.btnDel').prop('disabled', false);
-                    //}
+                    if (idProd == true) {
+                        $('#btnDisabled').attr('disabled', true);
+                    }
+                    else {
+                        $('#btnDisabled').attr('disabled', false);
+                    }
 
-                    $.grep(produkArrTransaction, function (element) {
-                        if ($.inArray(element, produkArrAll) !== -1) {
-                            $('.btnDel').prop('disabled', true);
-                        }
-                        else {
-                            $('.btnDel').prop('disabled', false);
-                        }
-                    });
+                    //$.grep(produkArrTransaction, function (element) {
+                    //    if ($.inArray(element, produkArrAll) !== -1) {
+                    //        $('.btnDel').attr('disabled', true);
+                    //    }
+                    //    else {
+                    //        $('.btnDel').attr('disabled', false);
+                    //    }
+                    //});
+
+                    //$.grep(productAlredyHaveTransaction, function (e) {
+                    //    if ($.inArray(e, allProducts) !== -1) {
+                    //        $('#btnDisabled').removeAttr('disabled', true);
+                    //    }
+                    //    else {
+                    //        $('#btnDisabled').removeAttr('disabled', false);
+                    //    }
+                    //});
                     
                     isi += `<tr>
                                 <td>`+ (i + 1) + `</td>
@@ -301,12 +288,12 @@
 
                                 <td id="descriptionProduk">`+ data[i].description + `</td>
                                 <td style='text-align:center'>
-                                    <button type='button' class='btn' onclick='showEditProduct("` + data[i].id + `")'>
+                                    <button type='button' class='btn btnDisabled' id="btnDisabled" onclick='showEditProduct("` + data[i].id + `") '>
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                         ||
-                                    <button type='button' onclick='deleteProduct("` + data[i].id + `", "` + data[i].img_product + `")' class='btnDel'>
-                                        <i class="fa-solid fa-trash-can"></i>
+                                    <button type='button' class="btn btnDisabled" id="btnDisabled" onclick='deleteProduct("` + data[i].id + `", "` + data[i].img_product + `") '>
+                                        <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </td>
                             </tr>`;
@@ -325,26 +312,47 @@
     }
 
     //function disableDelete() {
-    //    //var produkArrTransaction = [];
-    //    //var produkArrAll = [];
-    //    //for (var i = 0; i < produkArrAll.length; i++) {
 
-    //    //    if ($.inArray(produkArrAll[i], produkArrTransaction) > -1) {
-    //    //        $('.btnDel').prop('disabled', true);
-    //    //    }
-    //    //    else {
-    //    //        $('.btnDel').prop('disabled', false);
-    //    //    }
-    //    //}
-
-    //    $.grep(produkArrTransaction, function (element) {
-    //        if ($.inArray(element, produkArrAll) !== -1) {
-    //            $('.btnDel').prop('disabled', true);
-    //        }
-    //        else {
-    //            $('.btnDel').prop('disabled', false);
-    //        }
+    //    var array3 = allProducts.filter(function (obj) {
+    //        return productAlredyHaveTransaction.indexOf(obj) !== -1;
     //    });
+    //    console.log(array3);
+
+        //$.each(allProducts, function (key, value) {
+        //    var index = $.inArray(value, productAlredyHaveTransaction);
+        //    if (index != -1) {
+        //        console.log(index);
+        //    }
+        //});
+
+        //function arraysAreIdentical(arr1, arr2) {
+        //if (allProducts.length !== productAlredyHaveTransaction.length) return false;
+        //for (var i = 0, len = allProducts.length; i < len; i++) {
+        //    if (allProducts[i] !== productAlredyHaveTransaction[i]) {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+
+        //let intersection = productAlredyHaveTransaction.filter(x => allProducts.includes(x));
+        //for (i = 0; intersection.length; i++) {
+        //    $('.btnDisabled').attr('disabled', true);
+        //}
+
+        //$.grep(productAlredyHaveTransaction, function (e) {
+        //    if ($.inArray(e, allProducts) !== -1) {
+        //        $('#btnDisabled').attr('disabled', true);
+        //    }
+        //    else {
+        //        $('#btnDisabled').attr('disabled', false);
+        //    }
+        //});
+        //var allProducts = [];
+        //console.log(allProducts);
+
+        //var productAlredyHaveTransaction = [];
+        //console.log(productAlredyHaveTransaction);
+
     //}
 
     function deleteProduct(id, img) {
@@ -412,7 +420,8 @@
                     $.each(data, function (i, item) {
                         idProdukArray.push(item.id_produk);
 
-                        let idProduks = $.inArray(idProduk, idProdukArray) > -1;
+                        var idProduks = $.inArray(idProduk, idProdukArray) > -1;
+                        console.log("idProduks " + idProduks);
 
                         if (idProduks == true) {
                             $('#id_product').attr('readonly', true);

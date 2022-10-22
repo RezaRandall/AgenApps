@@ -37,7 +37,15 @@ namespace AgenApps.Controllers
             v_var = db.Database.SqlQuery<Product>(sql).ToList();
             return Json(v_var);
         }
-        
+
+        public JsonResult getIdProdukFromTransaction()
+        {
+            List<Pelanggan> v_var;
+            string id_produk = " SELECT DISTINCT id_produk FROM DB_AGEN.dbo.detail_transaksi ";
+            v_var = db.Database.SqlQuery<Pelanggan>(id_produk).ToList();
+            return Json(v_var);
+        }
+
         public JsonResult getAllProductAddOn()
         {
             List<Product> v_var;
@@ -66,11 +74,20 @@ namespace AgenApps.Controllers
             reponse res = new reponse();
             string str1 = null;
 
+            // ESCAPE CHARACTER
+            var idProduct = data.id_product.Replace("'", "''");
+            var urlProduct = data.url_product.Replace("'", "''");
+            var namaProduct = data.nama_product.Replace("'", "''");
+            var description = data.description.Replace("'", "''");
+            var satuan = data.satuan.Replace("'", "''");
+            var jenisSewa = data.jenis_sewa.Replace("'", "''");
+
+
             if (img != null)
             {
                 //GET FILE NAME 
                 string fileName = Path.GetFileName(img.FileName);
-                str1 = fileName;
+                str1 = fileName; // escape character
                 // INITIAL PATH
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 var path = webRootPath + "\\Content\\ImgProduct\\";
@@ -88,9 +105,9 @@ namespace AgenApps.Controllers
             {
                 if (data.command == "insert")
                 {
-                    string sqlQuery = @"INSERT INTO product (id, id_product, url_product, harga, nama_product, create_at, description, img_product, satuan) 
-                                        VALUES (NEWID(), '"+data.id_product+"','"+data.url_product+"','"+data.harga+"','"+data.nama_product+@"',
-                                                GETDATE(),'"+data.description+"','"+str1+"','"+data.satuan+ "')";
+                    string sqlQuery = @"INSERT INTO product (id, id_product, url_product, harga, nama_product, create_at, description, img_product, satuan, jenis_sewa) 
+                                        VALUES (NEWID(), '"+ idProduct + "','"+ urlProduct + "','"+data.harga+"','"+ namaProduct + @"',
+                                                GETDATE(),'"+ description + "','"+str1+"','"+ satuan + "', '"+ jenisSewa + "')";
                     db.Database.ExecuteSqlCommand(sqlQuery);
                 }
                 else 
@@ -99,10 +116,10 @@ namespace AgenApps.Controllers
                     {
                         string sqlQuery = @"UPDATE product 
                                         SET 
-                                        id_product = '" + data.id_product + @"', url_product = '" + data.url_product + @"',
-                                        harga = '" + data.harga + @"', nama_product = '" + data.nama_product + @"',
-                                        update_at = GETDATE(), description = '" + data.description + @"',
-                                        satuan = '"+data.satuan+ @"'
+                                        id_product = '" + idProduct + @"', url_product = '" + urlProduct + @"',
+                                        harga = '" + data.harga + @"', nama_product = '" + namaProduct + @"',
+                                        update_at = GETDATE(), description = '" + description + @"',
+                                        satuan = '"+ satuan + @"', jenis_sewa = '"+ jenisSewa + @"'
                                         WHERE id = '" + data.id + @"'
                                     ";
                         db.Database.ExecuteSqlCommand(sqlQuery);
@@ -110,10 +127,10 @@ namespace AgenApps.Controllers
                     else { 
                     string sqlQuery = @"UPDATE product 
                                         SET 
-                                        id_product = '" + data.id_product + @"', url_product = '" + data.url_product + @"',
-                                        harga = '" + data.harga + @"', nama_product = '" + data.nama_product + @"',
-                                        update_at = GETDATE(), description = '"+data.description+"', img_product = '" + str1 + @"',
-                                        satuan = '"+data.satuan + @"'
+                                        id_product = '" + idProduct + @"', url_product = '" + urlProduct + @"',
+                                        harga = '" + data.harga + @"', nama_product = '" + namaProduct + @"',
+                                        update_at = GETDATE(), description = '"+description+"', img_product = '" + str1 + @"',
+                                        satuan = '"+ satuan + @"', '"+ jenisSewa + @"'
                                         WHERE id = '" + data.id + @"'
                                     ";
                     db.Database.ExecuteSqlCommand(sqlQuery);
@@ -157,7 +174,7 @@ namespace AgenApps.Controllers
             }
 
 
-            string s = @"DELETE FROM product 
+            string s = @"DELETE FROM DB_AGEN.dbo.product 
                                 WHERE id = '" + id + "'";
             return db.Database.ExecuteSqlCommand(s);
         }

@@ -103,13 +103,7 @@ namespace admsapi_core.Controllers
             }
         }
         [HttpPost]
-        //public JsonResult doLogout()
-        //{
-        //    response hasil = new response();
-        //    umum.Session(HttpContext, "username", "");
-        //    hasil.hasil = true;
-        //    return Json(hasil);
-        //}        
+      
         public JsonResult doLogout()
         {
             response hasil = new response();

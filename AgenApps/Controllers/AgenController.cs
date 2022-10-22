@@ -160,7 +160,7 @@ namespace AgenApps.Controllers
         {
             //string sql = @"SELECT * FROM pelanggan WHERE kode_pelanggan = '" + kode_pelanggan + "'";
             string sql = @"SELECT pel.*, sekolah.jenjang 
-                            FROM pelanggan AS pel
+                            FROM DB_AGEN.dbo.pelanggan AS pel
                             INNER JOIN ujianonline.master.sekolah AS sekolah ON pel.kode_pelanggan = sekolah.npsn
                             WHERE kode_pelanggan = '" + kode_pelanggan + "'";
 
@@ -173,8 +173,8 @@ namespace AgenApps.Controllers
             //List<Paket> v_var;
 
             string sql = @"SELECT p.*, dp.jangka_sewa, dp.waktu_sewa 
-                            FROM paket AS p 
-                            INNER JOIN detail_paket AS dp ON p.id = dp.id_paket
+                            FROM DB_AGEN.dbo.paket AS p 
+                            INNER JOIN DB_AGEN.dbo.detail_paket AS dp ON p.id = dp.id_paket
                             WHERE p.id = '" + id + "'";
 
              var v_var = db.Database.SqlQuery<Paket>(sql);
@@ -193,8 +193,8 @@ namespace AgenApps.Controllers
 
             string sql = @"SELECT plgn.nama_pelanggan, plgn.alamat, plgn.telepon, plgn.email, plgn.nama_instansi, dtrans.nama_paket,    trans.tanggal_transaksi, trans.status_sewa
                         FROM pelanggan AS plgn 
-                        INNER JOIN transaksi AS trans ON plgn.id = trans.id_pelanggan
-                        INNER JOIN detail_transaksi AS dtrans ON trans.kode_transaksi = dtrans.kode_transaksi
+                        INNER JOIN DB_AGEN.dbo.transaksi AS trans ON plgn.id = trans.id_pelanggan
+                        INNER JOIN DB_AGEN.dbo.detail_transaksi AS dtrans ON trans.kode_transaksi = dtrans.kode_transaksi
                         WHERE trans.id_agen = '" + idAgen + "' " + str1 + "  GROUP BY plgn.nama_pelanggan, plgn.alamat, plgn.telepon, plgn.email, plgn.nama_instansi, dtrans.nama_paket, trans.tanggal_transaksi, trans.status_sewa ORDER BY trans.tanggal_transaksi DESC";
 
             v_var = db.Database.SqlQuery<Pelanggan>(sql).ToList();
@@ -289,7 +289,13 @@ namespace AgenApps.Controllers
             return Json(res);
         }
 
-
+        public JsonResult doLogout()
+        {
+            response hasil = new response();
+            umum.Session(HttpContext, "user_name", "");
+            hasil.hasil = true;
+            return Json(hasil);
+        }
 
 
 

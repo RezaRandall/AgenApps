@@ -4,127 +4,6 @@
     Layout = "~/Views/Shared/_LayoutUserAgen.cshtml";
 }
 
-@*<div class="container-fluid">*@
-
-<!-- Start Featured Product -->
-@*<header>
-        <div>
-            <section class="bg-light">
-                <div class="container py-8">
-
-                    <div class="row text-center py-3">
-                        <div class="col-lg-6 m-auto">
-                            <h1 class="h1">Featured Product</h1>
-                            <p>
-                                Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="row" id="featureHeader"></div>
-                </div>
-            </section>
-        </div>
-    </header>*@
-
-<!--Main-->
-@*<div>
-    <section style="background-color: #eee;">
-        <div class="container-fluid py-4">
-
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Lebih Hemat dengan Promo Dari Ruwindo</h1>
-                    <h6>
-                        Nikmati berbagai penawaran terbaik dari layanan-layanan Paket Ruwindo yang sesuai dengan kebutuhan Anda
-                    </h6>
-                </div>
-            </div>
-
-            <div class="row" id="featurePaket">
-            </div>
-        </div>*@
-
-<!-- Modal Detail Product Paket-->
-@*<div class="modal fade" id="detailsPacketModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title modalTitleDetailProdukPaket" id="exampleModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body modalBodyDetailProductPakets" id="modalBodyDetailProductPakets">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-<!--Modal Transaksi-->
-<!-- Full screen modal -->
-@*<div class="modal fade" id="transaksiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title " id="exampleModalLabel">Isi Data Pelanggan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body modalBodyDetailPelanggan" id="modalBodyDetailPelanggan">
-                <form id="dataInsert">
-                    <div class="modal-body row">
-                        <div class="row">
-                            <div class="col ms-auto">
-                                <label for="recipient-name" class="col-form-label">Nama Pelanggan :</label>
-                                <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan">
-                            </div>
-                            <div class="col ms-auto">
-                                <label for="recipient-name" class="col-form-label">Nama Instansi :</label>
-                                <input type="text" class="form-control" id="last_name" name="last_name">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col ms-auto">
-                                <label for="recipient-name" class="col-form-label">Alamat :</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat">
-                            </div>
-                            <div class="col ms-auto">
-                                <label for="recipient-name" class="col-form-label">No Tlpn :</label>
-                                <input type="text" class="form-control" id="telepon" name="telepon">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col ms-auto">
-                                <label for="message-text" class="col-form-label">Email :</label>
-                                <input type="email" class="form-control" id="email" name="email">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <input type="hidden" name="command" id="command" value="insert" />
-                        <input type="hidden" name="id" id="id" value="" />
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" onclick="submitOrder()" id="simpan" class="btn btn-primary">Save changes</button>
-                    </div>
-
-                </form>
-            </div>*@
-@*<div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    </div>*@
-@*</div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-    </div>*@
-
 <header>
     <div>
         <section class="bg-light">
@@ -151,23 +30,9 @@
         var dataPaket = [];
         getAllProductList();
         getAllPaketList();
-        //submitOrder();
-        //setFormatCurrency();
 
     });
 
-    //function submitOrder(id) {
-    //    clearforminsert();
-    //    var d = dataPaket.find(function (s) { return s.id == id });
-    //    console.log(d);
-
-    //    if (nama_pelanggan = "" || last_name == "" || alamat == "" || telepon == "")
-    //    {
-    //        swal('Form Tidak Boleh Kosong !');
-    //    }
-
-
-    //}
 
     function getAllProductList() {
         $.post("/Product/getProduct", {},
@@ -188,31 +53,6 @@
                                 </div>
                             </div>
                                     `);
-
-                    //$('#featureHeader').append(`
-                    //        <div class="col-12 col-md-4 mb-4">
-                    //            <div class="card h-100">
-                    //                    <img width="auto" src="`+ imgUrl + `" alt="` + data[i].img_product + `">
-                    //                <div class="card-body">
-                    //                    <ul class="list-unstyled d-flex justify-content-between">
-                    //                        <li>
-                    //                            <i class="text-warning fa fa-star"></i>
-                    //                            <i class="text-warning fa fa-star"></i>
-                    //                            <i class="text-warning fa fa-star"></i>
-                    //                            <i class="text-muted fa fa-star"></i>
-                    //                            <i class="text-muted fa fa-star"></i>
-                    //                        </li>
-                    //                        <li class="text-muted text-right">Rp.  `+ data[i].harga + `</li>
-                    //                    </ul>
-                    //                    <a href="#" class="h2 text-decoration-none text-dark">`+ data[i].nama_product + `</a>
-                    //                    <p class="card-text">
-                    //                        `+ data[i].description + `
-                    //                    </p>
-                    //                    <p class="text-muted">Reviews (24)</p>
-                    //                </div>
-                    //            </div>
-                    //        </div>
-                    //    `);
                 });
             });
     }
@@ -221,8 +61,6 @@
     function getAllPaketList() {
         $.post("/Paket/getPaket", {},
             function (data, status) {
-                //document.getElementById('tbodyListPaket').innerHTML = "";
-                //var isi = "";
                 $.each(data, function (i, item) {
                     dataPaket = data;
                     $('#featurePaket').append(`
@@ -260,8 +98,6 @@
         clearforminsertdetail();
         $("#detailsPacketModal").modal("show");
         var d = dataPaket.find(function (s) { return s.id == id });
-        //var kodePaket = $("#kode_paket").val(d.kode_paket).val();
-        //var idPaket = d.id;
 
         $.post('/Paket/getDetailPaket', { id_paket: id },
             function (data, status) {
@@ -362,29 +198,6 @@
     /*css 2*/
     @@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-    /** {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: 'Roboto', sans-serif
-    }*/
-
-    /*body {
-        margin-top: 30px;
-        background-color:#eee;
-    }
-
-    .container {
-        min-height: 100vh;
-        padding: 20px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center
-    }*/
-
-    /*p {
-        margin: 0px
-    }*/
 
     .card {
         /*width: 280px;*/
@@ -446,52 +259,6 @@
         }
     }
 
-    /*.card .pic {
-        position: relative
-    }
-
-    .card .pic img {
-        width: 100%;
-        height: 280px;
-        object-fit: cover
-    }
-
-    .card .date {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 70px;
-        background-color: #1b9ce3;
-        color: white;
-        position: absolute;
-        bottom: 0px;
-        transition: all ease
-    }
-
-    .card .date .day {
-        font-size: 14px;
-        font-weight: 600
-    }
-
-    .card .date .month,
-    .card .date .year {
-        font-size: 10px
-    }
-
-    .card .text-muted {
-        font-size: 12px
-    }*/
-
-    /*.card:hover .text-muted {
-        color: #fff !important
-    }*/
-
-    /*.card .content {
-        padding: 0 20px
-    }*/
-
     .card .content .btn {
         display: flex;
         align-items: center;
@@ -509,21 +276,9 @@
         box-shadow: #0000001a 0px 3px 5px
     }
 
-    /*.card .content .btn .fas {
-        font-size: 10px;
-        padding-left: 5px
-    }*/
-
     .card .content .foot .admin {
         color: #1b9ce3;
         font-size: 12px
     }
 
-    /*.card:hover .content .foot .admin {
-        color: #fff
-    }*/
-
-    /*.card .content .foot .icon {
-        font-size: 12px
-    }*/
 </style>

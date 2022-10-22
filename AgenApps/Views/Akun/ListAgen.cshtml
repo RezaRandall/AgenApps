@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col ms-auto">
                                     <label for="recipient-name" class="col-form-label">No Tlpn :</label>
-                                    <input type="text" class="form-control" id="mobile_phone" name="mobile_phone">
+                                    <input type="text" class="form-control numberOnly" id="mobile_phone" name="mobile_phone">
                                 </div>
                             </div>
                             <div class="row">
@@ -112,7 +112,6 @@
     var dataagen=[];
     $(document).ready(function () {
         getAllAgenList({});
-        //insertAgen();
         getJenisUser();
 
         // SEARCH AGEN FUNCTION 
@@ -285,52 +284,34 @@
     }
 
 
-    //function insertAgen2() {
-    //    $("#simpan").on('click', function () {
-    //        event.preventDefault();
-
-    //        var namaDepan = $("#namaDepan").val();
-    //        var namaBelakang = $("#namaBelakang").val();
-    //        var userName = $("#userName").val();
-    //        var password = $("#password").val();
-    //        var email = $("#email").val();
-    //        var phone = $("#phone").val();
-    //        var alamat = $("#alamat").val();
-    //        var kabupaten = $("#kabupaten").val();
-    //        var jenisUser = $("#jenisUser").val();
-
-    //        if (userName == "" || password == "" || phone == "" || alamat == "" || kabupaten == "" || jenisUser == "") {
-    //            alert('Form Tidak Boleh Kosong !');
-    //        }
-    //        else {
-    //            var form = $("#dataInsert")[0];
-    //            var data = new FormData(form);
-    //            $.ajax({
-    //                type: "POST",
-    //                enctype: 'multipart/form-data',
-    //                url: "/SuperAdmin/simpanUser",
-    //                data: data,
-    //                processData: false,
-    //                contentType: false,
-    //                cache: false,
-    //                beforeSend: function () {
-    //                    //$.LoadingOverlay("show");
-    //                },
-    //                success: function (msg) {
-    //                    //$.LoadingOverlay("hide");
-    //                    swal("Tambah User Berhasil!", "Klik Tombol OK!", "success").then(function () {
-    //                        location.reload();
-    //                    });
-    //                },
-    //                error: function (e) {
-    //                    //$.LoadingOverlay("hide");
-    //                    swal("Tambah User Gagal!", "Klik Tombol OK!", "error").then(function () {
-    //                        location.reload();
-    //                    });
-    //                    console.log("ERROR : ", e);
-    //                }
-    //            });
-    //        }
-    //    });
-    //}
+    // set number only
+    (function ($) {
+        $.fn.inputFilter = function (callback, errMsg) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function (e) {
+                if (callback(this.value)) {
+                    // Accepted value
+                    if (["keydown", "mousedown", "focusout"].indexOf(e.type) >= 0) {
+                        $(this).removeClass("input-error");
+                        this.setCustomValidity("");
+                    }
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    // Rejected value - restore the previous one
+                    $(this).addClass("input-error");
+                    this.setCustomValidity(errMsg);
+                    this.reportValidity();
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    // Rejected value - nothing to restore
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+    $(".numberOnly").inputFilter(function (value) {
+        return /^-?\d*$/.test(value);
+    }, "Harus Berupa Angka");
 </script>

@@ -32,7 +32,7 @@ namespace AgenApps.Controllers
             string str1 = "";
             if (param != null)
                 str1 += " WHERE nama_paket LIKE '%" + param + "%' OR kode_paket LIKE '%" + param + "%' OR deskripsi LIKE '%" + param + "%' OR harga_paket LIKE '%" + param + "%'";
-            string sql = @"SELECT * FROM paket" + str1 + " ORDER BY create_at ASC";
+            string sql = @"SELECT * FROM DB_AGEN.dbo.paket" + str1 + " ORDER BY create_at ASC";
 
             //return new JsonResult(sql);
 
@@ -60,7 +60,7 @@ namespace AgenApps.Controllers
         {
             List<Product> v_var;
 
-            string sql = @"SELECT * FROM product ORDER BY nama_product ASC";
+            string sql = @"SELECT * FROM DB_AGEN.dbo.product ORDER BY nama_product ASC";
 
             v_var = db.Database.SqlQuery<Product>(sql).ToList();
             return Json(v_var);
@@ -73,7 +73,7 @@ namespace AgenApps.Controllers
             //string str1 = "";
             //if (param != null)
             //    str1 += "WHERE id_product LIKE '%" + param + "%' OR url_product LIKE '%" + param + "%' OR harga LIKE '%" + param + "%' OR nama_product LIKE '%" + param + "%'";
-            string sql = @"SELECT * FROM jenis_satuan ORDER BY id_satuan ASC";
+            string sql = @"SELECT * FROM DB_AGEN.dbo.jenis_satuan ORDER BY id_satuan ASC";
 
             //return new JsonResult(sql);
 
@@ -87,6 +87,12 @@ namespace AgenApps.Controllers
         {
             reponse res = new reponse();
             long total = 0;
+
+            // ESCAPE CHARACTER
+            var namaPaket = data.nama_paket.Replace("'", "''");
+            var deskripsi = data.deskripsi.Replace("'", "''");
+            var kodePaket = data.kode_paket.Replace("'", "''");
+            var satuanPaket = data.satuan_paket.Replace("'", "''");
 
             try
             {
@@ -113,26 +119,31 @@ namespace AgenApps.Controllers
                 if (data.command == "insert")
                 {
                     var id_paket = Guid.NewGuid();
+
                     for (int i = 0; i < data.produk.Count; i++)
                     {
                         var hrg = Convert.ToInt64(data.produk[i].harga);
                         var kuantitas = Convert.ToInt64(data.produk[i].kuantitas);
-                        
+
+                        // ESCAPE CHARACTER
+                        var idProduct = data.produk[i].id_product.Replace("'", "''");
+                        var satuan = data.produk[i].satuan.Replace("'", "''");
+
                         long harga = Convert.ToInt64(hrg);
                         if (kuantitas == 0)
                         {
                             total += harga;
                             string sql = @"INSERT INTO detail_paket (id, id_paket, id_produk, harga, qty, qty_max, addon, create_at, satuan, kuantitas)
-                                        VALUES(NEWID(), '" + id_paket.ToString() + "', '" + data.produk[i].id_product + "', '" + data.produk[i].harga + @"',
-                                        '" + data.produk[i].jumlah_satuan + "', '" + data.produk[i].qty_max + "','" + data.produk[i].addon + "', GETDATE(),'" + data.produk[i].satuan + "', '" + kuantitas + @"'
+                                        VALUES(NEWID(), '" + id_paket.ToString() + "', '" + idProduct + "', '" + data.produk[i].harga + @"',
+                                        '" + data.produk[i].jumlah_satuan + "', '" + data.produk[i].qty_max + "','" + data.produk[i].addon + "', GETDATE(),'" + satuan + "', '" + kuantitas + @"'
                                         )";
                             db.Database.ExecuteSqlCommand(sql);
                         }
                         else {
                             total += harga * kuantitas;
                             string sql = @"INSERT INTO detail_paket (id, id_paket, id_produk, harga, qty, qty_max, addon, create_at, satuan, kuantitas)
-                                        VALUES(NEWID(), '" + id_paket.ToString() + "', '" + data.produk[i].id_product + "', '" + data.produk[i].harga + @"',
-                                        '" + data.produk[i].jumlah_satuan + "', '" + data.produk[i].qty_max + "','" + data.produk[i].addon + "', GETDATE(),'" + data.produk[i].satuan + "', '" + kuantitas + @"'
+                                        VALUES(NEWID(), '" + id_paket.ToString() + "', '" + idProduct + "', '" + data.produk[i].harga + @"',
+                                        '" + data.produk[i].jumlah_satuan + "', '" + data.produk[i].qty_max + "','" + data.produk[i].addon + "', GETDATE(),'" + satuan + "', '" + kuantitas + @"'
                                         )";
                             db.Database.ExecuteSqlCommand(sql);
                         }
@@ -145,8 +156,8 @@ namespace AgenApps.Controllers
 
                         string sqlQuery = @"INSERT INTO paket (id, harga_paket, nama_paket, deskripsi, kode_paket, create_at, img_paket, satuan_paket, diskon) 
                                             VALUES ('" + id_paket.ToString() + "', '" + calculateDiskon + "', " +
-                                                    "'" + data.nama_paket + "','" + data.deskripsi + "', '" + data.kode_paket + "', " +
-                                                    "GETDATE(),'" + str1 + "','" + data.satuan_paket + "', '" + data.diskon + "')";
+                                                    "'" + namaPaket + "','" + deskripsi + "', '" + kodePaket + "', " +
+                                                    "GETDATE(),'" + str1 + "','" + satuanPaket + "', '" + data.diskon + "')";
 
                         db.Database.ExecuteSqlCommand(sqlQuery);
                     }
@@ -154,8 +165,8 @@ namespace AgenApps.Controllers
                         var calculateDiskon = Convert.ToInt32(total - (total * diskon / 100));
                         string sqlQuery = @"INSERT INTO paket (id, harga_paket, nama_paket, deskripsi, kode_paket, create_at, img_paket, satuan_paket, diskon) 
                                             VALUES ('" + id_paket.ToString() + "', '" + calculateDiskon + "', " +
-                                                    "'" + data.nama_paket + "','" + data.deskripsi + "', '" + data.kode_paket + "', " +
-                                                    "GETDATE(),'" + str1 + "','" + data.satuan_paket + "', '" + data.diskon + "')";
+                                                    "'" + namaPaket + "','" + deskripsi + "', '" + kodePaket + "', " +
+                                                    "GETDATE(),'" + str1 + "','" + satuanPaket + "', '" + data.diskon + "')";
 
                         db.Database.ExecuteSqlCommand(sqlQuery);
                     }
@@ -204,12 +215,12 @@ namespace AgenApps.Controllers
                         diskon = 0;
                         var calculateDiskon = Convert.ToInt32(total - (total * diskon / 100));
                         string sqlQuery = @"UPDATE paket 
-                                        SET harga_paket = '" + calculateDiskon + "', nama_paket = '" + data.nama_paket + "', deskripsi = '" + data.deskripsi + "', kode_paket = '" + data.kode_paket + "', satuan_paket = '" + data.satuan_paket + "'" + strimg + ", update_at = GETDATE(), diskon = '" + data.diskon + "' WHERE id = '" + data.id + @"' ";
+                                        SET harga_paket = '" + calculateDiskon + "', nama_paket = '" + namaPaket + "', deskripsi = '" + deskripsi + "', kode_paket = '" + kodePaket + "', satuan_paket = '" + satuanPaket + "'" + strimg + ", update_at = GETDATE(), diskon = '" + data.diskon + "' WHERE id = '" + data.id + @"' ";
                         db.Database.ExecuteSqlCommand(sqlQuery);
                     } else {
                         var calculateDiskon = Convert.ToInt32(total - (total * diskon / 100));
                         string sqlQuery = @"UPDATE paket 
-                                        SET harga_paket = '" + calculateDiskon + "', nama_paket = '" + data.nama_paket + "', deskripsi = '" + data.deskripsi + "', kode_paket = '" + data.kode_paket + "', satuan_paket = '" + data.satuan_paket + "'" + strimg +", update_at = GETDATE(), diskon = '"+ data.diskon +"' WHERE id = '" + data.id + @"' ";
+                                        SET harga_paket = '" + calculateDiskon + "', nama_paket = '" + namaPaket + "', deskripsi = '" + deskripsi + "', kode_paket = '" + kodePaket + "', satuan_paket = '" + satuanPaket + "'" + strimg +", update_at = GETDATE(), diskon = '"+ data.diskon +"' WHERE id = '" + data.id + @"' ";
                         db.Database.ExecuteSqlCommand(sqlQuery);
                     }
                 }
@@ -228,13 +239,22 @@ namespace AgenApps.Controllers
         {
             //var npsn = System.Convert.ToString(Session("npsn"));
 
-            string s = @"DELETE FROM paket WHERE id = '" + id + "' ; DELETE FROM detail_paket WHERE id_paket = '" + id + @"'";
+            string s = @"DELETE FROM DB_AGEN.dbo.paket WHERE id = '" + id + "' ; DELETE FROM DB_AGEN.dbo.detail_paket WHERE id_paket = '" + id + @"'";
             return db.Database.ExecuteSqlCommand(s);
+        }
+
+        public int deleteTransaksi(String trnNumber)
+        {
+            //var npsn = System.Convert.ToString(Session("npsn"));
+
+            string delQuery = @"DELETE FROM DB_AGEN.dbo.transaksi WHERE kode_transaksi = '"+ trnNumber + "'; DELETE FROM DB_AGEN.dbo.detail_transaksi WHERE kode_transaksi = '" + trnNumber + "' ";
+            return db.Database.ExecuteSqlCommand(delQuery);
         }
 
         public JsonResult findPrice(string id_product)
         {
-            var vals = id_product.Split('/')[0];
+            var vals = id_product.Split('/', '\\')[0];
+
 
             string sql = @"SELECT * FROM product WHERE id_product = '" + vals + "'";
 
@@ -242,11 +262,21 @@ namespace AgenApps.Controllers
             return Json(v_var);
         }
 
+        public JsonResult getAdminAccount(int kodePel)
+        {
+            reponse res = new reponse();
+
+            string adminQuery = "SELECT pengguna_email, pengguna_password, pengguna_npsn FROM ujianonline.master.pengguna " +
+                                "INNER JOIN DB_AGEN.dbo.pelanggan ON pengguna.pengguna_npsn = pelanggan.kode_pelanggan " +
+                                "INNER JOIN DB_AGEN.dbo.transaksi ON pelanggan.id = transaksi.id_pelanggan " +
+                                "WHERE pelanggan.kode_pelanggan = '" + kodePel + "' AND pengguna_jenis = 'Sekolah' AND transaksi.status_sewa = 'paid'";
+
+            var v_var = db.Database.SqlQuery<Pelanggan>(adminQuery);
+            return Json(v_var);
+        }
+
         public JsonResult getharga(string id_paket, string id_produk, int qty)
         {
-            //var vals = id_paket;
-            //var diskonRemoveStr = diskon.Substring(9);
-            //var diskonRemovePercent = diskonRemoveStr.Replace(" %", "");
             response res = new response();
 
             double totalProduk = 0;
@@ -268,13 +298,10 @@ namespace AgenApps.Controllers
                 {
                     if (d.addon == 0)
                     {
-                        //totalProduk = totalProduk + (double)d.harga;
-                        //totalProduk += (double)d.harga;
                         totalProduk += (double)d.harga * qty;
                     }
                     else
                     {
-                        //totaladdon = totaladdon + (double)d.harga;
                         totaladdon += (double)d.harga * (double)d.kuantitas;
                     }
 
@@ -284,23 +311,12 @@ namespace AgenApps.Controllers
                 {
                     total = (total / 100 * diskon);
                 }
-                //if (qty == 0)
-                //{
-                //    total = 0;
-                //}
-                //int qtynext = qty - 1;
-                //if (qtynext > 0)
-                //{
-                //    total = total + (total * qtynext);
-                //}
             }
             else {
                 string sql = @"SELECT * FROM DB_AGEN.dbo.product
                     WHERE id ='" + id_produk + "'";
 
                 var produk = db.Database.SqlQuery<DetailPaket>(sql).ToList();
-                //double diskon = Convert.ToDouble(produk[0].diskon);
-                //addon = 1;
 
                 foreach (DetailPaket d in produk)
                 {
@@ -314,10 +330,7 @@ namespace AgenApps.Controllers
                     }
                 }
                 total = totalProduk + totaladdon;
-                //if (diskon != 0)
-                //{
-                //    total = (total / 100 * diskon);
-                //}
+
                 if (qty == 0)
                 {
                     total = 0;
@@ -432,101 +445,13 @@ namespace AgenApps.Controllers
                 var sqltrxDetail = "";
                 var sqltrx = "";
 
-                //Double total_harga_awal = 0;
-                //Double total_harga_diskon = 0;
-                //Double tax = 1.11;
-                //Double totalPPN = 0;
-                ////Double totalPPNs = 0;
-
-                //Double totalHargaAddOn = 0;
-
-                //Double sumTotal = 0;
-                //Double sumTotalPpn = 0;
-
-                //foreach (detailorder item in data.detailorder)
-                //{
-                //    //sql = "SELECT [id_product] ,[detail_paket].[harga],[qty],[detail_paket].[satuan],[id_paket],[addon]" +
-                //    //    ",paket.nama_paket,product.nama_product,paket.satuan_paket,product.description,product.img_product, detail_paket.qty, detail_paket.qty_max, paket.diskon " +
-                //    //    " FROM DB_AGEN.dbo.detail_paket inner join DB_AGEN.dbo.product on product.id_product = detail_paket.id_produk " +
-                //    //    "inner join paket on DB_AGEN.dbo.paket.id = detail_paket.id_paket where detail_paket.id_paket='" + item.id_paket + "'";
-
-                //    var idPaket = item.id_paket.ToString();
-                //    if (idPaket != "")
-                //    {
-                //        sql = "SELECT id_product, detail_paket.harga, qty, detail_paket.satuan, id_paket, addon" +
-                //            ",paket.nama_paket,product.nama_product,paket.satuan_paket,product.description,product.img_product, detail_paket.qty, detail_paket.qty_max, paket.diskon, detail_paket.kuantitas " +
-                //            " FROM DB_AGEN.dbo.detail_paket inner join DB_AGEN.dbo.product on product.id_product = detail_paket.id_produk " +
-                //            "inner join DB_AGEN.dbo.paket on paket.id = detail_paket.id_paket where detail_paket.id_paket='" + item.id_paket + "'";
-                //    }
-                //    else {
-                //        sql = "SELECT * FROM DB_AGEN.dbo.product WHERE id ='" + item.id_produk + "' ";
-                //    }
-                //    List<DetailPaket> pkt = db.Database.SqlQuery<DetailPaket>(sql).ToList();
-
-                //    Double diskon = Convert.ToDouble(pkt[0].diskon);
-
-                //    foreach (DetailPaket itemproduk in pkt)
-                //    {
-                //        if (itemproduk.addon == 1)
-                //        {
-                //            //total_harga_awal = (double)itemproduk.harga;
-                //            totalHargaAddOn = (double)itemproduk.harga;
-                //        }
-                //        else
-                //        {
-                //            total_harga_awal = (double)itemproduk.harga;
-                //        }
-
-                //        if (diskon != 0)
-                //        {
-                //            total_harga_diskon = (total_harga_awal / 100 * diskon);
-                //            totalPPN = Math.Round(total_harga_diskon * tax, MidpointRounding.ToEven); ;
-                //        }
-                //        else {
-                //            total_harga_diskon = total_harga_awal;
-                //            //totalPPNs =  (total_harga_diskon * tax);
-                //            totalPPN = Math.Round(total_harga_diskon * tax, MidpointRounding.ToEven);
-
-                //        }
-
-                //        if (item.qty > 0)
-                //        {
-                //            sumTotal += total_harga_diskon * item.qty;
-                //            sumTotalPpn += totalPPN * item.qty;
-                //        }
-
-                //        if (itemproduk.jenis_sewa == "hakmilik")
-                //        {
-                //            sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (product_id, nama_paket, id_produk, addon, qty, qty_paket, satuan, harga, total_harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, diskon ) " +
-                //        " VALUES ('" + item.id_produk + "','" + itemproduk.nama_product + "','" + itemproduk.id_product + "','" + item.addon + "','" + item.qty + "','" + item.qty + "','" + itemproduk.satuan + "'" +
-                //        ",'" + itemproduk.harga + "','" + total_harga_awal + "','" + FinalTrancastionCode + "','" + itemproduk.nama_product + "'" +
-                //        ",'" + itemproduk.description + "','" + itemproduk.img_product + "', '" + diskon + "'); ";
-                //        }
-                //        else {
-                //            sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket, nama_paket, qty_paket, satuan_paket, id_produk, addon, qty,  satuan, harga, total_harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, qty_min, qty_max, diskon )" +
-                //        " VALUES ('" + item.id_paket + "','" + itemproduk.nama_paket + "','" + item.qty + "','" + itemproduk.satuan_paket + "'" +
-                //        ",'" + itemproduk.id_product + "','" + item.addon + "','" + itemproduk.qty + "','" + itemproduk.satuan + "'" +
-                //        ",'" + itemproduk.harga + "','" + total_harga_awal + "','" + FinalTrancastionCode + "','" + itemproduk.nama_product + "','" + itemproduk.description + "','" + itemproduk.img_product + "', '" + itemproduk.qty + "', '" + itemproduk.qty_max + "', '" + diskon + "'); ";
-                //        }
-
-
-                //        //List<DetailTransaksi> detailTrans = db.Database.SqlQuery<DetailTransaksi>(sqltrxDetail).ToList();
-
-                //        if (sqltrxDetail != "")
-                //        {
-                //            db.Database.ExecuteSqlCommand(sqltrxDetail);
-                //        }
-                //    }
-
-                //}
-
                 Double productPrice = 0;
                 Double addOnPrice = 0;
                 Double tax = 1.11;
                 Double sumAddOnAndProduct = 0;
                 Double discountPrice = 0;
                 Double taxPrice = 0;
-                Double grandTotal = 0;
+                //Double grandTotal = 0;
                 Double grandTotalWithPPN = 0;
 
                 foreach (detailorder item in data.detailorder)
@@ -546,27 +471,54 @@ namespace AgenApps.Controllers
                     List<DetailPaket> pkt = db.Database.SqlQuery<DetailPaket>(sql).ToList();
 
                     Double diskon = Convert.ToDouble(pkt[0].diskon);
+                    Double nilaiDiskon = diskon / 100;
 
                     foreach (DetailPaket itemproduk in pkt)
                     {
                         if (itemproduk.addon == 1)
                         {
+                            //addOnPrice = (double)itemproduk.harga * (double)item.qty;
                             addOnPrice = (double)itemproduk.harga * (double)itemproduk.kuantitas;
-                            //addOnPrice = addOnPrice * item.qty;
-
-                            sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket,product_id, nama_paket, id_produk, addon, qty, qty_paket, satuan, harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, diskon, total_harga ) " +
-                        " VALUES ('" + item.id_paket + "', '" + itemproduk.id + "','" + itemproduk.nama_paket + "','" + itemproduk.id_product + "','" + itemproduk.addon + "','" + item.qty + "', '" + itemproduk.kuantitas + "','" + itemproduk.satuan + "'" +
-                        ",CAST('" + itemproduk.harga + "' AS INT),'" + FinalTrancastionCode + "','" + itemproduk.nama_product + "'" +
-                        ",'" + itemproduk.description + "','" + itemproduk.img_product + "', '" + diskon + "', '"+(itemproduk.harga * itemproduk.kuantitas)+"'); ";
+                            
+                            if (diskon != 0)
+                            {
+                                sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket,product_id, nama_paket, id_produk, addon, qty, qty_paket, satuan, harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, diskon, total_harga ) " +
+                                    " VALUES ('" + item.id_paket + "', '" + itemproduk.id + "','" + itemproduk.nama_paket + "','" + itemproduk.id_product + "','" + itemproduk.addon + "','" + item.qty + "', '" + itemproduk.kuantitas + "','" + itemproduk.satuan + "'" +
+                                    ",CAST('" + itemproduk.harga + "' AS INT),'" + FinalTrancastionCode + "','" + itemproduk.nama_product + "','" + itemproduk.description + "','" + itemproduk.img_product + "', '" + diskon + "', '" + (itemproduk.harga * itemproduk.kuantitas) * nilaiDiskon + "'); ";
+                            }
+                            else 
+                            {
+                                sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket,product_id, nama_paket, id_produk, addon, qty, qty_paket, satuan, harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, diskon, total_harga ) " +
+                                    " VALUES ('" + item.id_paket + "', '" + itemproduk.id + "','" + itemproduk.nama_paket + "','" + itemproduk.id_product + "','" + itemproduk.addon + "','" + item.qty + "', '" + itemproduk.kuantitas + "','" + itemproduk.satuan + "', CAST('" + itemproduk.harga + "' AS INT),'" + FinalTrancastionCode + "','" + itemproduk.nama_product + "','" + itemproduk.description + "','" + itemproduk.img_product + "', '" + diskon + "', '" + (itemproduk.harga * itemproduk.kuantitas) + "'); ";
+                            }
                         }
-                        else
+
+                        if (itemproduk.jenis_sewa == "hakmilik")
+                        {
+                            addOnPrice = (double)itemproduk.harga * (double)item.qty;
+                            
+                            if (diskon != 0)
+                            {
+                                sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (product_id, id_produk, addon, qty, satuan, harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, diskon, total_harga, qty_paket) VALUES('" + itemproduk.id + "', '" + itemproduk.id_product + "', 1, '" + item.qty + "', '" + itemproduk.satuan + "', CAST('" + itemproduk.harga + "' AS INT), '" + FinalTrancastionCode + "', '" + itemproduk.nama_product + "', '" + itemproduk.description + "', '" + itemproduk.img_product + "', '" + diskon + "', '" + (itemproduk.harga * item.qty) * nilaiDiskon + "', '" + item.qty + "');";
+                            }
+                            else
+                            {
+                                sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (product_id, id_produk, addon, qty, satuan, harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, diskon, total_harga, qty_paket) VALUES('" + itemproduk.id + "', '" + itemproduk.id_product + "', 1, '" + item.qty + "', '" + itemproduk.satuan + "', CAST('" + itemproduk.harga + "' AS INT), '" + FinalTrancastionCode + "', '" + itemproduk.nama_product + "', '" + itemproduk.description + "', '" + itemproduk.img_product + "', '" + diskon + "', '" + itemproduk.harga * item.qty + "', '" + item.qty + "');";
+                            }
+                        }
+
+                        if(itemproduk.addon == 0 && idPaket != "")
                         {
                             productPrice = (double)itemproduk.harga * item.qty;
 
-                            sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket, nama_paket, qty_paket, satuan_paket, id_produk, addon, qty,  satuan, harga, total_harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, qty_min, qty_max, diskon, product_id )" +
-                        " VALUES ('" + item.id_paket + "','" + itemproduk.nama_paket + "','" + item.qty + "','" + itemproduk.satuan_paket + "'" +
-                        ",'" + itemproduk.id_product + "','" + itemproduk.addon + "','" + itemproduk.qty + "','" + itemproduk.satuan + "'" +
-                        ",'" + itemproduk.harga + "', '"+ (itemproduk.harga * item.qty) + "','" + FinalTrancastionCode + "','" + itemproduk.nama_product + "','" + itemproduk.description + "','" + itemproduk.img_product + "', '" + itemproduk.qty + "', '" + itemproduk.qty_max + "', '" + diskon + "', '"+ itemproduk.id + "'); ";
+                            if (diskon != 0)
+                            {
+                                sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket, nama_paket, qty_paket, satuan_paket, id_produk, addon, qty,  satuan, harga, total_harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, qty_min, qty_max, diskon, product_id ) VALUES ('" + item.id_paket + "','" + itemproduk.nama_paket + "','" + item.qty + "','" + itemproduk.satuan_paket + "','" + itemproduk.id_product + "','" + itemproduk.addon + "','" + itemproduk.qty + "','" + itemproduk.satuan + "', '" + itemproduk.harga + "', '" + (itemproduk.harga * item.qty) * nilaiDiskon + "','" + FinalTrancastionCode + "','" + itemproduk.nama_product + "','" + itemproduk.description + "','" + itemproduk.img_product + "', '" + itemproduk.qty + "', '" + itemproduk.qty_max + "', '" + diskon + "', '" + itemproduk.id + "'); ";
+                            }
+                            else 
+                            {
+                                sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket, nama_paket, qty_paket, satuan_paket, id_produk, addon, qty,  satuan, harga, total_harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, qty_min, qty_max, diskon, product_id ) VALUES ('" + item.id_paket + "','" + itemproduk.nama_paket + "','" + item.qty + "','" + itemproduk.satuan_paket + "','" + itemproduk.id_product + "','" + itemproduk.addon + "','" + itemproduk.qty + "','" + itemproduk.satuan + "', '" + itemproduk.harga + "', '" + (itemproduk.harga * item.qty) + "','" + FinalTrancastionCode + "','" + itemproduk.nama_product + "','" + itemproduk.description + "','" + itemproduk.img_product + "', '" + itemproduk.qty + "', '" + itemproduk.qty_max + "', '" + diskon + "', '" + itemproduk.id + "'); ";
+                            }
                         }
 
                         if (sqltrxDetail != "")
@@ -578,7 +530,8 @@ namespace AgenApps.Controllers
 
                     if (diskon == 0)
                     {
-                        sumAddOnAndProduct = addOnPrice + productPrice;
+                        //sumAddOnAndProduct = addOnPrice + productPrice;
+                        sumAddOnAndProduct = addOnPrice + discountPrice;
                         grandTotalWithPPN = Math.Round(sumAddOnAndProduct * tax, MidpointRounding.ToEven);
                         taxPrice = grandTotalWithPPN - sumAddOnAndProduct;
                     }
@@ -587,118 +540,38 @@ namespace AgenApps.Controllers
                         sumAddOnAndProduct = addOnPrice + productPrice;
                         discountPrice = (sumAddOnAndProduct / 100) * diskon;
                         grandTotalWithPPN = Math.Round(discountPrice * tax, MidpointRounding.ToEven);
-                        taxPrice = grandTotalWithPPN - sumAddOnAndProduct; 
+                        taxPrice += grandTotalWithPPN - discountPrice; 
                     }
-
-                    sqltrx = "INSERT INTO DB_AGEN.dbo.transaksi([id_agen]" +
-                        ",[tanggal_transaksi]" +
-                        ",[status_sewa]" +
-                        ",[kode_transaksi]" +
-                        ",[nama_instansi]" +
-                        ",[waktu_sewa]" +
-                        ",[kode_lisensi],[jenis_pembayaran],[id_pelanggan] " +
-                        ",[pajak]" +
-                        ",[total_bayar] )" +
-                        "VALUES ('" + id_agen + "'" +
-                        ",getdate()" +
-                        ",'pending'" +
-                        ",'" + FinalTrancastionCode + "'" +
-                        ",'" + data.nama_instansi + "'" +
-                        ",''" +
-                        ",'" + licenseStr + "'" +
-                        ",'Cash'" +
-                        ",'" + idpelanggan.ToString() + "' " +
-                        "," + taxPrice + "" +
-                        //"," + sumTotal + ") ";
-                        "," + grandTotalWithPPN + ") ";
-
-                    if (sqltrx != "")
-                    {
-                        db.Database.ExecuteSqlCommand(sqltrx);
-                    }
-                    hasil.hasil = true;
-                    hasil.kode_transaksi = FinalTrancastionCode;
 
                 }
 
+                sqltrx = "INSERT INTO DB_AGEN.dbo.transaksi([id_agen]" +
+                    ",[tanggal_transaksi]" +
+                    ",[status_sewa]" +
+                    ",[kode_transaksi]" +
+                    ",[nama_instansi]" +
+                    ",[waktu_sewa]" +
+                    ",[kode_lisensi],[jenis_pembayaran],[id_pelanggan] " +
+                    ",[pajak]" +
+                    ",[total_bayar] )" +
+                    "VALUES ('" + id_agen + "'" +
+                    ",getdate()" +
+                    ",'pending'" +
+                    ",'" + FinalTrancastionCode + "'" +
+                    ",'" + data.nama_instansi + "'" +
+                    ",''" +
+                    ",'" + licenseStr + "'" +
+                    ",'Cash'" +
+                    ",'" + idpelanggan.ToString() + "' " +
+                    "," + taxPrice + "" +
+                    "," + grandTotalWithPPN + ") ";
 
-                //sumAddOnAndProduct = addOnPrice + productPrice;
-                //sumAddOnAndProduct = sumAddOnAndProduct * item.qty;
-
-                //if (diskon == 0)
-                //{
-                //    grandTotalWithPPN = Math.Round(sumAddOnAndProduct * tax, MidpointRounding.ToEven);
-                //    taxPrice = grandTotalWithPPN - sumAddOnAndProduct;
-                //}
-                //else
-                //{
-                //    discountPrice = (sumAddOnAndProduct / 100 * diskon);
-                //    grandTotalWithPPN = Math.Round(discountPrice * tax, MidpointRounding.ToEven);
-                //    taxPrice = grandTotalWithPPN - discountPrice;
-                //}
-
-
-
-
-                //if (itemproduk.addon == 1)
-                //{
-                //    sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (product_id, nama_paket, id_produk, addon, qty, qty_paket, satuan, harga, total_harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, diskon ) " +
-                //" VALUES ('" + item.id_produk + "','" + itemproduk.nama_product + "','" + itemproduk.id_product + "','" + item.addon + "','" + item.qty + "','" + item.qty + "','" + itemproduk.satuan + "'" +
-                //",'" + itemproduk.harga + "','" + productPrice + "','" + FinalTrancastionCode + "','" + itemproduk.nama_product + "'" +
-                //",'" + itemproduk.description + "','" + itemproduk.img_product + "', '" + diskon + "'); ";
-                //}
-                //else
-                //{
-                //    sqltrxDetail = "INSERT INTO DB_AGEN.dbo.detail_transaksi (id_paket, nama_paket, qty_paket, satuan_paket, id_produk, addon, qty,  satuan, harga, total_harga, kode_transaksi, nama_produk, deskripsi_produk, img_produk, qty_min, qty_max, diskon )" +
-                //" VALUES ('" + item.id_paket + "','" + itemproduk.nama_paket + "','" + item.qty + "','" + itemproduk.satuan_paket + "'" +
-                //",'" + itemproduk.id_product + "','" + item.addon + "','" + itemproduk.qty + "','" + itemproduk.satuan + "'" +
-                //",'" + itemproduk.harga + "','" + productPrice + "','" + FinalTrancastionCode + "','" + itemproduk.nama_product + "','" + itemproduk.description + "','" + itemproduk.img_product + "', '" + itemproduk.qty + "', '" + itemproduk.qty_max + "', '" + diskon + "'); ";
-                //}
-
-                ////List<DetailTransaksi> detailTrans = db.Database.SqlQuery<DetailTransaksi>(sqltrxDetail).ToList();
-
-                //if (sqltrxDetail != "")
-                //{
-                //    db.Database.ExecuteSqlCommand(sqltrxDetail);
-                //}
-
-                //if (item.qty > 0)
-                //{
-                //    grandTotal += discountPrice * item.qty;
-                //    grandTotalWithPPN += taxPrice * item.qty;
-                //}
-                //Double sumTotalPajak = grandTotalWithPPN - grandTotal;
-                //sumTotalPajak = float.Parse(sumTotalPajak);
-
-                //sqltrx = "INSERT INTO DB_AGEN.dbo.transaksi([id_agen]" +
-                //        ",[tanggal_transaksi]" +
-                //        ",[status_sewa]" +
-                //        ",[kode_transaksi]" +
-                //        ",[nama_instansi]" +
-                //        ",[waktu_sewa]" +
-                //        ",[kode_lisensi],[jenis_pembayaran],[id_pelanggan] " +
-                //        ",[pajak]" +
-                //        ",[total_bayar] )" +
-                //        "VALUES ('" + id_agen + "'" +
-                //        ",getdate()" +
-                //        ",'pending'" +
-                //        ",'" + FinalTrancastionCode + "'" +
-                //        ",'" + data.nama_instansi + "'" +
-                //        ",''" +
-                //        ",'" + licenseStr + "'" +
-                //        ",'Cash'" +
-                //        ",'" + idpelanggan.ToString() + "' " +
-                //        "," + taxPrice + "" +
-                //        //"," + sumTotal + ") ";
-                //        "," + grandTotalWithPPN + ") ";
-
-
-                //if (sqltrx != "")
-                //{
-                //    db.Database.ExecuteSqlCommand(sqltrx);
-                //}
-                //hasil.hasil = true;
-                //hasil.kode_transaksi = FinalTrancastionCode;
+                if (sqltrx != "")
+                {
+                    db.Database.ExecuteSqlCommand(sqltrx);
+                }
+                hasil.hasil = true;
+                hasil.kode_transaksi = FinalTrancastionCode;
             }
 
             catch (Exception ex)
@@ -709,35 +582,7 @@ namespace AgenApps.Controllers
         }
         public List<dataTransaksi> datainvoice(string kode_transaksi)
         {
-            response res = new response();
-
-            //string sql = "SELECT [id_agen] " +
-            //        ",[tanggal_transaksi]" +
-            //        ",case when [status_sewa]='pending' then 'BELUM LUNAS' else case when [status_sewa]='paid' then 'LUNAS' else 'BELUM LUNAS' end end status_sewa" +
-            //        ",detail_transaksi.diskon" +
-            //        ",transaksi.[kode_transaksi]" +
-            //        ",[kode_lisensi]" +
-            //        ",[jenis_pembayaran]" +
-            //        ",[id_pelanggan]" +
-            //        ",[tanggal_bayar]" +
-            //        ",detail_transaksi.addon,detail_transaksi.harga" +
-            //        ",detail_transaksi.id_paket,detail_transaksi.id_produk" +
-            //        ",detail_transaksi.nama_produk + ' '+ convert(varchar,detail_transaksi.qty) + ' '+ detail_transaksi.satuan as deskripsi_produk" +
-            //        ",detail_transaksi.nama_paket" +
-            //        ",detail_transaksi.qty" +
-            //        ",case when detail_transaksi.addon=1 then 1 else detail_transaksi.qty_paket end qty_paket" +
-            //        ",detail_transaksi.satuan" +
-            //        ",case when detail_transaksi.addon=1 then detail_transaksi.satuan else detail_transaksi.satuan_paket end satuan_paket" +
-            //        ",detail_transaksi.total_harga" +
-            //        ", detail_transaksi.total_harga * (11.0 / 100.0 + 1) - (detail_transaksi.total_harga) as ppn " +
-            //        ", detail_transaksi.total_harga + (detail_transaksi.total_harga * (11.0 / 100.0 + 1) - (detail_transaksi.total_harga)) as total" +
-            //        ",pelanggan.alamat, pelanggan.email, pelanggan.kode_pelanggan, pelanggan.nama_instansi, pelanggan.nama_pelanggan" +
-            //        ",pelanggan.register_agen, pelanggan.telepon" +
-            //        " FROM [DB_AGEN].[dbo].[transaksi] " +
-            //        " inner join DB_AGEN.dbo.detail_transaksi on detail_transaksi.kode_transaksi = transaksi.kode_transaksi " +
-            //        " inner join DB_AGEN.dbo.pelanggan on pelanggan.id=transaksi.id_pelanggan " +
-            //        " left join DB_AGEN.dbo.product on product.id_product=detail_transaksi.id_produk" +
-            //        " where transaksi.kode_transaksi='" + kode_transaksi + "'";            
+            response res = new response(); 
             
             string sql = "SELECT [id_agen] " +
                     ",[tanggal_transaksi]" +
@@ -768,102 +613,6 @@ namespace AgenApps.Controllers
                     " where transaksi.kode_transaksi='" + kode_transaksi + "'";
                 var data = db.Database.SqlQuery<dataTransaksi>(sql).ToList();
 
-
-            //double totalharga = 0;
-            //double totaladdon = 0;
-            //double total = 0;
-            //double diskon = 0;
-            //int qty = 0;
-            ////int qtynext = qty - 1;
-            //foreach (dataTransaksi d in data)
-            //{
-            //    if (d.addon != 1)
-            //    {
-            //        totalharga = totalharga + (double)d.harga;
-            //        diskon = Convert.ToDouble(d.discount);
-            //        //total = (totalharga / 100 * diskon);
-            //        qty = qty + d.qty_paket;
-            //        //if (qty > 0)
-            //        //{
-            //        //    total = (total * qty);
-            //        //}
-
-            //    }
-            //    else
-            //    {
-            //        totaladdon = totaladdon + (double)d.harga;
-            //        diskon = Convert.ToDouble(d.discount);
-            //        //total = (totaladdon / 100 * diskon);
-            //        qty = qty + d.qty_paket;
-            //    }
-
-            //}
-            //total = totalharga + totaladdon;
-            //total = (total / 100 * diskon);
-            //int qtynext = qty - 1;
-            //if (qtynext > 0)
-            //{
-            //    total = total + (total * qtynext);
-            //}
-
-            //res.harga = new Harga();
-            //res.harga.harga = total;
-            //res.harga.qty = qty;
-            //res.hasil = true;
-
-            // PEMBATAS
-            //double totalharga = 0;
-            //double totaladdon = 0;
-            //double total = 0;
-            //double diskon = 0;
-            //int qty = 0;
-            ////int qtynext = qty - 1;
-            //foreach (dataTransaksi d in data)
-            //{
-            //    if (d.addon != 1)
-            //    {
-            //        totalharga = totalharga + (double)d.harga;
-            //        diskon = Convert.ToDouble(d.discount);
-            //        //total = (totalharga / 100 * diskon);
-            //        qty = qty + d.qty_paket;
-            //        //if (qty > 0)
-            //        //{
-            //        //    total = (total * qty);
-            //        //}
-
-            //    }
-            //    else
-            //    {
-            //        totaladdon = totaladdon + (double)d.harga;
-            //        diskon = Convert.ToDouble(d.discount);
-            //        //total = (totaladdon / 100 * diskon);
-            //        qty = qty + d.qty_paket;
-            //    }
-
-            //}
-            ////total = totalharga + totaladdon;
-
-            //if (diskon == 0)
-            //{
-            //    total = totalharga + totaladdon;
-            //}
-            //else 
-            //{
-            //    total = (total / 100 * diskon);
-            //}
-            //int qtynext = qty - 1;
-            //if (qtynext > 0)
-            //{
-            //    total = total + (total * qtynext);
-            //}
-
-            //res.harga = new Harga();
-            //res.harga.harga = total;
-            //res.harga.qty = qty;
-            //res.hasil = true;
-
-            // PEMBATAS
-
             double totalHargaPaket = 0;
             double totalHargaAddOn = 0;
             double grandTotal = 0;
@@ -893,7 +642,7 @@ namespace AgenApps.Controllers
                     totalHargaAddOn = totalHargaAddOn + (double)d.harga;
                     if (diskon == 0)
                     {
-                        grandTotal = grandTotal + (totalHargaAddOn * d.qty_paket);
+                        grandTotal = grandTotal + (totalHargaAddOn * (double)d.qty_paket);
                     }
                     else
                     {
@@ -964,6 +713,8 @@ namespace AgenApps.Controllers
             v_var = datainvoice(kode_transaksi);
             return Json(v_var);
         }
+
+
 
     }
 }

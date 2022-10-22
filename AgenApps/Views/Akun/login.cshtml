@@ -47,49 +47,6 @@
 
 </head>
 <body>
-    @*<form class="form-signin" id="formlogin">
-
-            <h1 class="h3 mb-3 font-weight-normal text-center" >Ruwindo Agen</h1>
-
-            <label for="inputUserName" class="sr-only">User Name</label>
-            <input type="text" name="userName" id="inputUserName" class="form-control "
-                   placeholder="User Name" value="" required autofocus>
-
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control "
-                   placeholder="Password" required>
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="doLogin()">Login</button>
-            <p class="mt-5 mb-3 text-muted text-center">Ruwindo&copy; 2017-2022</p>
-        </form>
-
-        <style>
-        </style>
-
-
-        <script>
-            function doLogin() {
-                var username = $("#inputUserName").val();
-                var password = $("#inputPassword").val();
-
-                $.post("/Akun/doLogin", { username: username, password: password },
-                    function (data, status) {
-                        /*console.log(data, status);*/
-                        if (data.id_jenis_user == 1) {
-                            window.location.href = '/Akun/ListAgen/';
-                        }
-                        else if (data.id_jenis_user == 2)
-                        {
-                            window.location.href = '/Agen/AgenPage/';
-                        }
-                    });
-            }
-        </script>*@
-    @*batas*@
     <form class="form-signin" id="formlogin">
 
         <h1 class="h3 mb-3 font-weight-normal text-center">Ruwindo Agen</h1>
