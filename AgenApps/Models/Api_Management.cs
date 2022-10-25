@@ -75,11 +75,9 @@ namespace pkmcore.Models
         public DateTime tanggal_transaksi { get; set; }
         public DateTime? tanggal_bayar { get; set; }
         public Guid id_pelanggan { get; set; }
-        //public int id_pelanggan { get; set; }
         public string status_sewa { get; set; }
         public string kode_transaksi { get; set; }
         public string kode_lisensi { get; set; }
-
         public int addon { get; set; }
         public double harga { get; set; }
         public Guid? id_paket { get; set; }
@@ -113,7 +111,6 @@ namespace pkmcore.Models
         public string tanggal_pesan { get; set; }
         public DateTime? tanggal_expired { get; set; }
         public string tanggal_kadaluarsa { get; set; }
-        //public int id_pelanggan { get; set; }
         public string status_sewa { get; set; }
         public string kode_transaksi { get; set; }
         public Int32 transaksi_kode { get; set; }
@@ -142,7 +139,6 @@ namespace pkmcore.Models
         public Int32? qty { get; set; }
         public Int32? qty_min { get; set; }
         public Int32? qty_max { get; set; }
-        //public Int32? harga { get; set; }
     }
 
     public class TransaksiManagementSchool
@@ -167,7 +163,6 @@ namespace pkmcore.Models
 
     public class reponse
     {
-        //public Guid id { get; internal set; }
         public bool hasil { get; set; }
         public string keterangan { get; set; }
     }
@@ -193,7 +188,6 @@ namespace pkmcore.Models
         public string user_name { get; set; }
         public string email { get; set; }
         public string mobile_phone { get; set; }
-        //public string password { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
         public int id_jenis_user { get;  set; }
@@ -222,7 +216,6 @@ namespace pkmcore.Models
         public int? qty { get; set; }
         public int? qty_max { get; set; }
         public int? kuantitas { get; set; }
-        
         public string description { get; set; }
         public  string nama_paket { get; set; }
         public DateAndTime create_at { get; set; }
@@ -266,7 +259,6 @@ namespace pkmcore.Models
         public string waktu_sewa { get; set; }
         public string command { get; set; }
         public Int32? diskon { get; set; }
-        //public string catatan_diskon { get; set; }
         public List<Product> produk { get; set; }
         public List<DetailPaket> detailPaket { get; set; }
         public List<Product> hargaSatuan { get; set; }
@@ -283,7 +275,6 @@ namespace pkmcore.Models
         public string nama_instansi { get; set; }
         public string kode_pelanggan { get; set; }
         public Guid? register_agen { get; set; }
-
         public Guid id_pelanggan { get; set; }
         public Guid? id_paket { get; set; }
         public string nama_paket { get; set; }
@@ -344,7 +335,6 @@ namespace pkmcore.Models
         public int id_jenis_user { get; internal set; }
         public Harga harga { get; set; }
         public string kode_transaksi { get; set; }
-        //public int id_pokmas { get; internal set; }
     }
     public class Harga
     {

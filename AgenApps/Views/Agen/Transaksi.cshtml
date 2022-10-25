@@ -299,8 +299,8 @@
                     alert('Silahkan Hubungi Pembeli Untuk Melakukan Pembayaran');
                 }
                 $.each(data, function (i, item) {
-                    var penggunaEmail = data[0].pengguna_email;
-                    var penggunaPass = data[0].pengguna_password;
+                    //var penggunaEmail = data[0].pengguna_email;
+                    //var penggunaPass = data[0].pengguna_password;
 
                     $('#admin_user').html(data[0].pengguna_email);
                     $('#admin_password').html(data[0].pengguna_password);
@@ -350,7 +350,6 @@
                 var added = "";
                 $.each(data, function (i, item) {
                     dataTransactions = data;
-                    //var harga = formatRP(data[i].hargaTotal);
                     var harga = formatRP(data[i].total_bayar);
 
                     added += `<tr>
@@ -462,8 +461,6 @@
                 )
             }
         });
-
-        //$.post("/Agen/getAllDataTransactionExp", trnNumber, )
     }
 
 

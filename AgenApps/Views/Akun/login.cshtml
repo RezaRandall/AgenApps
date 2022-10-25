@@ -51,18 +51,17 @@
 
     <script>
         function keyup(event) {
-            //console.log(event.keyCode);
             if (event.keyCode == 13) {
                 doLogin();
             }
         }
+
         function doLogin() {
             var username = $("#inputUserName").val();
             var password = $("#inputPassword").val();
             showloading("Please Wait..");
             $.post("/Akun/doLogin", { username: username, password: password },
                 function (data, status) {
-                    /*console.log(data, status);*/
                     if (data.id_jenis_user == 1) {
                         window.location.href = '/Akun/ListAgen/';
                     }

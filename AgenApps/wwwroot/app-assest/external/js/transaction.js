@@ -28,13 +28,10 @@
     $('#tipeProduk').on('change', function () {
         // get ID by item product
         var id = $(this).val();
-        //console.log(id);
 
         $.get('/Paket/findPrice', { id_product: id },
             function (data, status) {
                 if (status == "success") {
-                    //var rp = "Rp. ";
-                    //$('#harga').val(rp + data[0].harga);
                     $('#harga').val(data[0].harga);
                     $('#satuan').val(data[0].satuan);
                     $('#waktu_sewa').val(data[0].jenis_sewa);
@@ -142,13 +139,10 @@ function getAllDataPaket() {
     $('#nama_paket').on('change', function () {
         // get ID by item product
         var id = $(this).val();
-        //console.log(id);
 
         $.get('/Agen/findAllDataPaket', { id: id },
             function (data, status) {
                 if (status == "success") {
-                    //var rp = "Rp. ";
-                    //$('#harga').val(rp + data[0].harga);
                     $('#harga_paket').val(data[0].harga_paket);
                     $('#deskripsi').val(data[0].deskripsi);
                     $('#id').val(data[0].id);
@@ -254,7 +248,6 @@ function getProduk() {
             })
             $("#tipeProduk").empty();
             $("#tipeProduk").append(isi);
-            //$('select').formSelect();
         });
 }
 
@@ -286,7 +279,6 @@ function addproduk() {
               <input type="hidden" field="waktu_sewa" name="produk[`+ ($('.input-row').length + 0) + `].waktu_sewa" value=` + waktu_sewa + ` readonly />
               <input type="hidden" field="jangka_sewa" name="produk[`+ ($('.input-row').length + 0) + `].jangka_sewa" value=` + jangka_sewa + ` readonly />
           </tr>`);
-    //x += 1;
     $('#tipeProduk').val('');
     $('#satuan').val('');
     $('#qty').val('');

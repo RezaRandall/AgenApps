@@ -165,24 +165,14 @@
     }
 
     function insertAgen() {
-        //clearforminsert();
         if (user_name == "" || password == "" || mobile_phone == "" || alamat == "" || kabupaten == "") {
             swal('Form Tidak Boleh Kosong !');
         }
         else {
-            var form = $("#dataInsert")[0];
-            //var data = FormData(form);
-            //form encoded data
+            //var form = $("#dataInsert")[0];
             var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
             var data = $('form').serialize();
 
-            //JSON data
-            // var dataType = 'application/json; charset=utf-8';
-            //var data = {
-            //    FirstName: 'Andrew',
-            //    LastName: 'Lock',
-            //    Age: 31
-            //}
             $.ajax({
                 type: 'POST',
                 url: '/SuperAdmin/simpanagen',

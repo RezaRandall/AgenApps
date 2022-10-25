@@ -353,13 +353,11 @@
 
     var detailpaket = [];
     function addproduk() {
-        //var idProduk = $('select[id=tipeProduk] option').filter(':selected').val();
         var idProduk = $('#tipeProduk').val();
         var namaProduk = $('select[id=tipeProduk] option').filter(':selected').html();
         var satuan = $('#satuan').val();
         var qty = $('#qty').val();
         var qty_max = $('#qty_max').val();
-        //var kuantitas = $('#kuantitas').val();
         var harga = $('#harga').val();
         var diskon = $("#diskon").val();
         var addon = 0;
@@ -419,7 +417,6 @@
             $('#qty').val('');
             $('#qty_max').val('');
             $('#harga').val('');
-            //$('#kuantitas').val('');
 
             //sumPriceEachRow();
         }
@@ -490,7 +487,6 @@
                     detailpaket = data;
                     $.each(data, function (i, item) {
 
-                        //$('#harga_paket').html(`<span>"` + intHargaPaket + `"</span>`);
                         var addon = 0;
                         var addontext = "";
                         if (data[i].addon == "1") {
@@ -529,7 +525,6 @@
                                     </td>
                                  </tr>
                                 `);
-                            /*sumPriceEachRow();*/
                         }
                         else {
                             $('#tbodyListPilihPaket').append(`
@@ -655,29 +650,6 @@
         frame.src = "";
     }
 
-    // GET TOTAL PRICE
-    //function sumOfColumns() {
-    //    var totalPrice = 0;
-    //    //$('.price').each(function () {
-    //    //    totalPrice += parseInt($(this).html());
-    //    //    $(".allTotalPrice").html(formatRP(totalPrice));
-    //    //});
-    //    detailpaket.forEach(function (data) {
-    //        if (data.diskon == 0 || data.diskon == null || data.diskon == undefined || data.diskon == '') {
-    //            totalPrice += parseInt(data.harga);
-    //            $(".allTotalPrice").html(formatRP(totalPrice));
-    //            $(".subtotal").html(formatRP(totalPrice));
-    //        } else {
-    //            var dec = (data.diskon / 100).toFixed(2);
-    //            var mult = parseInt(data.harga) * dec;
-    //            totalPrice += mult;
-    //            $(".allTotalPrice").html(formatRP(totalPrice));
-    //            $(".subtotal").html(formatRP(totalPrice));
-    //        }
-    //    });
-    //}
-
-
     // DELETE PRODUCT PER ROW
     function delproduk(t) {
         var idx= $(t).attr('idx');
@@ -709,13 +681,11 @@
     }
 
 
-
     // SHOW DETAIL PAKETS
     function showDetailPakets(id) {
         clearforminsertdetail();
         $("#detailsPacketModal").modal("show");
         var d = dataPaket.find(function (s) { return s.id == id });
-        // var kodePaket = $("#id").val(d.kode_paket).val();
 
         $.post('/Paket/getDetailPaket', { id_paket: id },
             function (data, status) {
@@ -855,17 +825,12 @@
     $('#tipeProduk').on('change', function () {
         // get ID by item product
         var id = $(this).val();
-        //console.log(id);
 
         $.get('/Paket/findPrice', { id_product: id },
             function (data, status) {
                 if (status == "success") {
-                    //var rp = "Rp. ";
-                    //$('#harga').val(rp + data[0].harga);
                     $('#harga').val(data[0].harga);
                     $('#satuan').val(data[0].satuan);
-                    
-
                 }
             });
     });
@@ -881,7 +846,6 @@
                 })
                 $("#tipeProduk").empty();
                 $("#tipeProduk").append(isi);
-                //$('select').formSelect();
             });
     }
 
@@ -896,7 +860,6 @@
                 })
                 $("#satuan").empty();
                 $("#satuan").append(isi);
-                //$('select').formSelect();
             });
     }
 

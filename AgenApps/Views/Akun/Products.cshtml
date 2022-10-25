@@ -127,35 +127,26 @@
 
 <script type="text/javascript">
     var dataProducts = [];
-    console.log(dataProducts);
-
-    var allProducts = [];
-    console.log(allProducts);
+    //console.log(dataProducts);
 
     var productHaveTransaction = [];
-    console.log(productHaveTransaction);
+    //console.log(productHaveTransaction);
 
     $(document).ready(function () {
         $('.dropify').dropify();
 
-        $.post("/Product/getIdProdukFromTransaction",
-            function (datas, status) {
-                $.each(datas, function (i, item) {
-                    productHaveTransaction.push(datas[i].id_produk);
-                })
-            });
-
-        $.post("/Product/getProduct",
-            function (datas, status) {
-                $.each(datas, function (i, item) {
-                    allProducts.push(datas[i].id_produk);
-                })
-            });
-
         getAllProductList({});
         clearImage();
-        showEditProduct(id);
-        //disableDelete();
+        //showEditProduct(id);
+
+        // GET ID PRODUCT FROM TRANSACTIONS
+        $.post("/Product/getIdProdukFromTransaction",
+            function (data, status) {
+                $.each(data, function (i, item) {
+                    productHaveTransaction.push(data[i].id_produk);
+                })
+            });
+
 
         // SEARCH PRODUCT FUNCTION
         $("#searchProdukBtn").on('click', function (e) {
@@ -234,48 +225,38 @@
             });
         }
     }
-    function getAllProductList(param) {
-        //var searchParamProduk = $('#txtSearchListProduct').val();
-        //$.LoadingOverlay("show");
 
+    function getAllProductList(param) {
         $.post("/Product/getProduct", param,
             function (data, status) {
                 document.getElementById('tbodyListProduct').innerHTML = "";
                 var isi = "";
                 $.each(data, function (i, item) {
                     dataProducts = data;
-                    //allProducts.push(data[i].id_product);
 
-
-                    //let idProd = $.inArray(allProducts, productHaveTransaction) < -1;
-                    let idProd = $.inArray(data[i].id_product, productHaveTransaction) !== -1;
-
+                    // DISABLED BUTTON EDIT AND DELETE WHEN PRODUCTS ALREADY HAVE TRANSACTIONS
+                    let idProd = $.inArray(dataProducts[i].id_product, productHaveTransaction) !== -1;
                     if (idProd == true) {
-                        $('#btnDisabled').attr('disabled', true);
+                        isi += `<tr>
+                                <td>`+ (i + 1) + `</td>
+                                <td>`+ data[i].id_product + `</td>
+                                <td>`+ data[i].nama_product + `</td>
+                                <td>`+ data[i].url_product + `</td>
+
+                                <td id="descriptionProduk">`+ data[i].description + `</td>
+                                <td style='text-align:center'>
+                                    <button type='button' class='btn btnDisabled' id="btnDisabled" onclick='showEditProduct("` + data[i].id + `") disabled'>
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                        ||
+                                    <button type='button' class="btn btnDisabled" id="btnDisabled" onclick='deleteProduct("` + data[i].id + `", "` + data[i].img_product + `") disabled '>
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+                                </td>
+                            </tr>`;
                     }
                     else {
-                        $('#btnDisabled').attr('disabled', false);
-                    }
-
-                    //$.grep(produkArrTransaction, function (element) {
-                    //    if ($.inArray(element, produkArrAll) !== -1) {
-                    //        $('.btnDel').attr('disabled', true);
-                    //    }
-                    //    else {
-                    //        $('.btnDel').attr('disabled', false);
-                    //    }
-                    //});
-
-                    //$.grep(productAlredyHaveTransaction, function (e) {
-                    //    if ($.inArray(e, allProducts) !== -1) {
-                    //        $('#btnDisabled').removeAttr('disabled', true);
-                    //    }
-                    //    else {
-                    //        $('#btnDisabled').removeAttr('disabled', false);
-                    //    }
-                    //});
-                    
-                    isi += `<tr>
+                        isi += `<tr>
                                 <td>`+ (i + 1) + `</td>
                                 <td>`+ data[i].id_product + `</td>
                                 <td>`+ data[i].nama_product + `</td>
@@ -292,63 +273,19 @@
                                     </button>
                                 </td>
                             </tr>`;
-                    //<td id="number">`+ harga + `</td>
-                })
+                    }
+                });
+
                 if (data != "") {
 
                     document.getElementById('tbodyListProduct').innerHTML += isi;
                 } else {
                     document.getElementById('tbodyListProduct').innerHTML += "<tr><td colspan='8' class='center'>Belum Ada Data Product</td></tr>";
                 }
-                //disableDelete();
                 //$.LoadingOverlay("hide");
             });
 
     }
-
-    //function disableDelete() {
-
-    //    var array3 = allProducts.filter(function (obj) {
-    //        return productAlredyHaveTransaction.indexOf(obj) !== -1;
-    //    });
-    //    console.log(array3);
-
-        //$.each(allProducts, function (key, value) {
-        //    var index = $.inArray(value, productAlredyHaveTransaction);
-        //    if (index != -1) {
-        //        console.log(index);
-        //    }
-        //});
-
-        //function arraysAreIdentical(arr1, arr2) {
-        //if (allProducts.length !== productAlredyHaveTransaction.length) return false;
-        //for (var i = 0, len = allProducts.length; i < len; i++) {
-        //    if (allProducts[i] !== productAlredyHaveTransaction[i]) {
-        //            return false;
-        //        }
-        //    }
-        //    return true;
-
-        //let intersection = productAlredyHaveTransaction.filter(x => allProducts.includes(x));
-        //for (i = 0; intersection.length; i++) {
-        //    $('.btnDisabled').attr('disabled', true);
-        //}
-
-        //$.grep(productAlredyHaveTransaction, function (e) {
-        //    if ($.inArray(e, allProducts) !== -1) {
-        //        $('#btnDisabled').attr('disabled', true);
-        //    }
-        //    else {
-        //        $('#btnDisabled').attr('disabled', false);
-        //    }
-        //});
-        //var allProducts = [];
-        //console.log(allProducts);
-
-        //var productAlredyHaveTransaction = [];
-        //console.log(productAlredyHaveTransaction);
-
-    //}
 
     function deleteProduct(id, img) {
         swal({
@@ -406,28 +343,6 @@
             drEvent.init();
 
             $("#command").val("update");
-            
-            // readonly id product when the product's already have in transaction 
-            var idProdukArray = [];
-            produkArray = idProdukArray
-            $.post("/SuperAdmin/getIdProduk",
-                function (data, status) {
-                    $.each(data, function (i, item) {
-                        idProdukArray.push(item.id_produk);
-
-                        var idProduks = $.inArray(idProduk, idProdukArray) > -1;
-                        console.log("idProduks " + idProduks);
-
-                        if (idProduks == true) {
-                            $('#id_product').attr('readonly', true);
-                            /*$('.btn').attr('disabled', true);*/
-                        }
-                        else {
-                            $('#id_product').attr('readonly', false);
-                            //$('.btn').attr('disabled', false);
-                        }
-                    })
-                });
             $("#tambahModalProduct").modal("show");
         }
     }

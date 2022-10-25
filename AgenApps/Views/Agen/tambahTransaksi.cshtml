@@ -472,24 +472,10 @@
             var totalPPN = tax * fixPriceInt;
             var finalPPN = totalPPN - fixPriceInt;
             $('.ppn').html(formatRP(finalPPN));
-            //console.log(totalPPN);
             var grandTotal = fixPriceInt + finalPPN;
             $('.grandTotal').html(formatRP(grandTotal));
         }
 
-        //function diskon2() {
-        //    //$('#diskon').keyup(function () {
-        //    var price = $('#hargaPaketTotalHidden').val();
-        //    var fixPrice = price.replace('Rp&nbsp;', '');
-        //    var fixPriceInt = parseFloat(fixPrice.replace(/[^0-9,-]+/g, ""));
-        //    var disc = $('#diskon').val();
-        //    var dec = (disc / 100).toFixed(2);
-        //    var mult = fixPriceInt * dec;
-        //    var discont = fixPriceInt - mult;
-        //    $('.totalbelanja').html(formatRP(discont));
-        //    calculatePPN();
-        //    //});
-        //}
         
         function getAllDataAddOn() {
             $.post("/Product/getProduct", {},
@@ -614,7 +600,6 @@
 
         function pilihpaket(id_paket) {
             var item = datapaket.find(function (s) { return s.id == id_paket });
-            //$(".produkdetail").html('');
             if (item != undefined) {
                 var itemorder = orderpaket.find(function (s) { return s.id_paket == id_paket });
                 if (itemorder == undefined) {
@@ -653,7 +638,6 @@
                     $(".produkdetail").append(konten);
                     orderpaket.push({ id_paket: id_paket, qty: 1, total: item.harga_paket });
                     sumtotal();
-                    //diskon2();
                     calculatePPN();
                 }
 
@@ -690,10 +674,8 @@
                         '<div class="row-desc-title"> ' +
                         item.nama_product +
                         '</div> ' +
-                        //'<div class="row-desc-title"> ' +
-                        '<input type="text" value=' + addon + ' class="addon" id="addon" name="addon" readonly />' +
-                        '<input type="text" value=' + item.jenis_sewa + ' class="jenis_sewa" id="jenis_sewa" name="jenis_sewa" readonly />' +
-                        //'</div> ' +
+                        '<input type="hidden" value=' + addon + ' class="addon" id="addon" name="addon" readonly />' +
+                        '<input type="hidden" value=' + item.jenis_sewa + ' class="jenis_sewa" id="jenis_sewa" name="jenis_sewa" readonly />' +
                         '<div class="row-desc-total"> ' +
                         '<div class="total" id="harga-' + id_produk + '">' + formatRP(item.harga) + '/' + item.satuan + '</div> ' +
                         '<div class="pilih" > <button class="btn fa fa-trash" style="color:red;" id_produk="' + id_produk + '" onclick="removeProduk(this)"></button></div> ' +
@@ -705,8 +687,6 @@
                         '<div class="inputjumlah"> <input id="qtyProduk-' + id_produk + '" id_produk="' + id_produk + '" onchange="qtychange(this)" type="number" value="1" /></div > ' +
                         '<div class="jumlahtitle">' + item.satuan + '</div > ' +
                         '<div class="plusminus"> ' +
-                        //<button class="btn fa fa-minus minus" id_produk="' + id_produk + '" onclick="plusMinusProduk(this,-1)" ></button > ' +
-                        //'<button class="btn fa fa-plus plus"  id_produk="' + id_produk + '" onclick="plusMinusProduk(this,1)"></button > ' +
                         '<button class="btn fa fa-minus minus" id_produk="' + id_produk + '" onclick="plusminus(this,-1)" ></button > ' +
                         '<button class="btn fa fa-plus plus"  id_produk="' + id_produk + '" onclick="plusminus(this,1)"></button > ' +
                         '</div> ' +
@@ -715,7 +695,6 @@
                     $(".produkdetail").append(konten);
                     orderpaket.push({ addon: addon, jenis_sewa: item.jenis_sewa, id_produk: id_produk, qty: 1, total: item.harga });
                     sumtotal();
-                    //diskon2();
                     calculatePPN();
                 }
 
@@ -740,14 +719,12 @@
                     if (sqty > 0) {
                         $("#qty-" + id_paket).val(sqty);
                         var el = $("#qty-" + id_paket);
-                        //var elProduk = undefined;
                         qtychange(el, elProduk);
                     }
                 }
                 else {
                     $("#qty-" + id_paket).val(1);
                     var el = $("#qty-" + id_paket);
-                    //var elProduk = undefined;
                     qtychange(el, elProduk);
                 }
             } else {
@@ -756,14 +733,12 @@
                     if (sqty > 0) {
                         $("#qtyProduk-" + id_produk).val(sqty);
                         var elProduk = $("#qtyProduk-" + id_produk);
-                        //var el = undefined;
                         qtychange(el, elProduk);
                     }
                 }
                 else {
                     $("#qtyPoduk-" + id_produk).val(1);
                     var elProduk = $("#qtyProduk-" + id_produk);
-                    //var el = undefined;
                     qtychange(el, elProduk);
                 }
             }
@@ -792,26 +767,19 @@
             }
             
             if (qty >= 0) {
-                //$(el).attr("disabled", "disabled");
-                //$(elProduk).attr("disabled", "disabled");
                 $(".plus").attr("disabled", "disabled");
                 $(".minus").attr("disabled", "disabled");
                 $.get('/Paket/getharga', { id_paket: id_paket, id_produk: id_produk, qty: qty},
                     function (data, status) {
                         if (data.hasil) {
-                            //console.log(data.harga);
-                            var a = $(el).val(data.harga.qty);
-                            //$("#harga-" + id_paket).html(formatRP(data.harga.harga));
-                            console.log(a);
+                            //var a = $(el).val(data.harga.qty);
+
                             var itemorder = orderpaket.find(function (s) { return s.id_paket == id_paket });
                             itemorder.qty = data.harga.qty;
                             itemorder.total = data.harga.harga;
                             sumtotal();
-                            //diskon2();
                             calculatePPN();
                         }
-                        //$(el).removeAttr("disabled");
-                        //$(elProduk).removeAttr("disabled");
                         $(".plus").removeAttr("disabled");
                         $(".minus").removeAttr("disabled");
                     });
@@ -849,9 +817,6 @@
                 , telepon: $('#telepon').val()
                 , email: $('#email').val()
                 , idPaket: $('#idPaket').val()
-                //, idProduk: $('#idProduk').val()
-                //, addon: $('#addon').val()
-                //, jenis_sewa: $('#jenis_sewa').val()
             };
             $.post('/Paket/savetransaksi', data,
                 function (data, status) {

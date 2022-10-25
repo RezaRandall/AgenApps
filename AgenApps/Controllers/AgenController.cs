@@ -44,53 +44,6 @@ namespace AgenApps.Controllers
             return Json(v_var);
         }
 
-        //public JsonResult getPaketNames(Paket data)
-        //{
-        //    response hasil = new response();
-
-        //    try
-        //    {
-        //        string sqlPkt = @"SELECT * FROM paket ORDER BY nama_paket ASC";
-        //        List<Paket> pkt = db.Database.SqlQuery<Paket>(sqlPkt).ToList();
-
-        //        foreach (Paket item in pkt)
-        //        {
-        //            var sqlDetailPkt = "SELECT qty, qty_max FROM detail_paket WHERE id_paket = '" + item.id + "' ";
-        //            List<DetailPaket> detailPkt = db.Database.SqlQuery<DetailPaket>(sqlDetailPkt).ToList();
-        //        }
-        //        hasil.hasil = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        hasil.keterangan = ex.Message;
-        //    }
-
-        //    return Json(hasil);
-        //}
-
-        //public Paket getPaketNames()
-        //{
-        //    Paket paket = new Paket();
-
-        //        string sqlPkt = @"SELECT * FROM paket ORDER BY nama_paket ASC";
-        //        List<Paket> pkt = db.Database.SqlQuery<Paket>(sqlPkt).ToList();
-
-        //    if (pkt.Count > 0)
-        //    {
-        //        paket.detailPaket = pkt[0];
-        //    }
-
-        //        foreach (Paket item in pkt)
-        //        {
-        //            var sqlDetailPkt = "SELECT qty, qty_max FROM detail_paket WHERE id_paket = '" + item.id + "' ";
-        //            List<DetailPaket> detailPkt = db.Database.SqlQuery<DetailPaket>(sqlDetailPkt).ToList();
-        //        }
-
-
-
-        //    return Json(paket);
-        //}
-
         public JsonResult getAllDataTransaction(string param)
         {
             string idAgen = umum.Session(HttpContext, "id");
@@ -158,7 +111,6 @@ namespace AgenApps.Controllers
 
         public JsonResult getDataUserExists(string kode_pelanggan)
         {
-            //string sql = @"SELECT * FROM pelanggan WHERE kode_pelanggan = '" + kode_pelanggan + "'";
             string sql = @"SELECT pel.*, sekolah.jenjang 
                             FROM DB_AGEN.dbo.pelanggan AS pel
                             INNER JOIN ujianonline.master.sekolah AS sekolah ON pel.kode_pelanggan = sekolah.npsn
@@ -270,9 +222,6 @@ namespace AgenApps.Controllers
             try
             {
                 if (data.command == "insert") {
-                    //var strCode = data.id;
-                    //var kodePaketUpper = strCode.ToString().ToUpper();
-
                     string sql = @"INSERT INTO transaksi ( id_agen, tanggal_transaksi, status_sewa, kode_transaksi, nama_instansi, waktu_sewa, kode_lisensi, id_pelanggan)
                                     VALUES( '"+ idUser + "', GETDATE(), 'pending', '"+ FinalTrancastionCode + "', '" + data.nama_instansi + "', '"+ sewa + "', '"+ licenseStr + "', '" + idPelanngan + "'); " +
                                     "INSERT INTO detail_transaksi ( id_paket, total_harga, kode_transaksi) VALUES('"+ data.id + "', '" + data.harga_paket + "', '" + FinalTrancastionCode + "'); " +
